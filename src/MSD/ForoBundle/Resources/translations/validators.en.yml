@@ -1,0 +1,54 @@
+#Itransformer.es is an online application to transform images
+#Copyright (C) 2013  Manolo Salsas
+
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU Affero General Public License as
+#published by the Free Software Foundation, either version 3 of the
+#License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU Affero General Public License for more details.
+
+#You should have received a copy of the GNU Affero General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#Contact: manolez@gmail.com - http://msalsas.com
+
+
+'El correo electrónico ’{{ value }}’ no es una dirección de correo electrónica': 'El correo electrónico ’{{ value }}’ no es una dirección de correo electrónica'   # FIXME
+
+'El mensaje no puede contener símbolos raros (comillas, signo de porcentaje, ':
+    '':
+        '':
+            ):
+                ' Entre 4 y 1000 caracteres': 'El mensaje no puede contener símbolos raros (comillas, signo de porcentaje, ...). Entre 4 y 1000 caracteres'   # FIXME
+
+'El tema puede contener letras, números, guiones y espacios, interrogantes y exclamaciones':
+    ' Entre 4 y 30 caracteres': 'El tema puede contener letras, números, guiones y espacios, interrogantes y exclamaciones. Entre 4 y 30 caracteres'   # FIXME
+
+'Just a little too short':
+    '| ': 'Just a little too short.| '   # FIXME
+
+'Just a little too short| ': 'Just a little too short| '   # FIXME
+'Please write a message': 'Please write a message'   # FIXME
+'Tu nombre puede contener letras, números, guiones y espacios': 'Tu nombre puede contener letras, números, guiones y espacios'   # FIXME
+
+fos_user:
+    email:
+        already_used: fos_user.email.already_used   # FIXME
+        blank: fos_user.email.blank   # FIXME
+        invalid: fos_user.email.invalid   # FIXME
+        long: fos_user.email.long   # FIXME
+        short: fos_user.email.short   # FIXME
+
+    password:
+        blank: fos_user.password.blank   # FIXME
+        short: fos_user.password.short   # FIXME
+
+    username:
+        already_used: fos_user.username.already_used   # FIXME
+        blank: fos_user.username.blank   # FIXME
+        long: fos_user.username.long   # FIXME
+        short: fos_user.username.short   # FIXME

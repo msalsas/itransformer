@@ -1,0 +1,110 @@
+#Itransformer.es is an online application to transform images
+#Copyright (C) 2013  Manolo Salsas
+
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU Affero General Public License as
+#published by the Free Software Foundation, either version 3 of the
+#License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU Affero General Public License for more details.
+
+#You should have received a copy of the GNU Affero General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#Contact: manolez@gmail.com - http://msalsas.com
+
+# Desc: /profile/change-password
+fos_user_change_password: /profile/change-password
+
+# Desc: /profile/edit
+fos_user_profile_edit: /profile/edit
+
+# Desc: /profile/
+fos_user_profile_show: /profile/
+
+# Desc: /register/check-email
+fos_user_registration_check_email: /register/check-email
+
+# Desc: /register/confirm/{token}
+fos_user_registration_confirm: '/register/confirm/{token}'
+
+# Desc: /register/confirmed
+fos_user_registration_confirmed: /register/confirmed
+
+# Desc: /register/
+fos_user_registration_register: /register/
+
+# Desc: /resetting/check-email
+fos_user_resetting_check_email: /resetting/check-email
+
+# Desc: /resetting/request
+fos_user_resetting_request: /resetting/request
+
+# Desc: /resetting/reset/{token}
+fos_user_resetting_reset: '/resetting/reset/{token}'
+
+# Desc: /resetting/send-email
+fos_user_resetting_send_email: /resetting/send-email
+
+# Desc: /login_check
+fos_user_security_check: /login_check
+
+# Desc: /login
+fos_user_security_login: /login
+
+# Desc: /logout
+fos_user_security_logout: /logout
+
+# Desc: /forum/{slug}.{_format}
+herzult_forum_category_show: '/forum/{slug}.{_format}'
+
+# Desc: /forum/{slug}/topic/new
+herzult_forum_category_topic_create: '/forum/{slug}/topic/new'
+
+# Desc: /forum/{slug}/topic/new
+herzult_forum_category_topic_new: '/forum/{slug}/topic/new'
+
+# Desc: /forum/
+herzult_forum_index: /forum/
+
+# Desc: /forum/search
+herzult_forum_search: /forum/search
+
+# Desc: /forum/topic/delete/{id}
+herzult_forum_topic_delete: '/forum/topic/delete/{id}'
+
+# Desc: /forum/{categorySlug}/{slug}/reply
+herzult_forum_topic_post_create: '/forum/{categorySlug}/{slug}/reply'
+
+# Desc: /forum/{categorySlug}/{slug}/reply
+herzult_forum_topic_post_new: '/forum/{categorySlug}/{slug}/reply'
+
+# Desc: /forum/{categorySlug}/{slug}.{_format}
+herzult_forum_topic_show: '/forum/{categorySlug}/{slug}.{_format}'
+
+# Desc: /acercade
+msd_home_acercade: /acercade
+
+# Desc: /atras
+msd_home_atras: /atras
+
+# Desc: /borrar
+msd_home_borrar: /borrar
+
+# Desc: /guardar
+msd_home_guardar: /guardar
+
+# Desc: /
+msd_home_homepage: /
+
+# Desc: /submit
+msd_home_submit: /submit
+
+# Desc: /vercambios
+msd_home_vercambios: /vercambios
+
+# Desc: /verimagen
+msd_home_verimagen: /verimagen

@@ -1,0 +1,59 @@
+#Itransformer.es is an online application to transform images
+#Copyright (C) 2013  Manolo Salsas
+
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU Affero General Public License as
+#published by the Free Software Foundation, either version 3 of the
+#License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU Affero General Public License for more details.
+
+#You should have received a copy of the GNU Affero General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#Contact: manolez@gmail.com - http://msalsas.com
+
+
+msd_home:
+    resource: "@MSDHomeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile
+    
+forum:
+    resource: @HerzultForumBundle/Resources/config/routing/forum.xml
+    prefix:     /forum
+forum_category:
+    resource: @HerzultForumBundle/Resources/config/routing/category.xml
+    prefix:     /forum
+forum_topic:
+    resource: @HerzultForumBundle/Resources/config/routing/topic.xml
+    prefix:     /forum 
+# Internal routing configuration to handle ESI
+# ****** WARNING ******
+# This route should be enabled with caution as it can open a security vulnerability
+# see http://symfony.com/blog/security-release-symfony-2-0-20-and-2-1-5-released for more information
+# ****** WARNING ******
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal

@@ -1,0 +1,36 @@
+#Itransformer.es is an online application to transform images
+#Copyright (C) 2013  Manolo Salsas
+
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU Affero General Public License as
+#published by the Free Software Foundation, either version 3 of the
+#License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU Affero General Public License for more details.
+
+#You should have received a copy of the GNU Affero General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#Contact: manolez@gmail.com - http://msalsas.com
+
+
+'Aplicación de filtros para procesamiento y transformación de imágenes': 'Anwenden von Filtern für die Bildverarbeitung und Transformation'
+'Itransformer.es es una aplicación on-line gratuita de procesamiento y transformación de imagenes. Aplica filtros y transforma imágenes subidas por el usuario.': 'Itransformer.es ist eine kostenlose Online-Anwendung und Bildverarbeitung. Anwenden von Filtern und Transformationen Bilder vom Benutzer hochgeladen.'
+'procesamiento de imágenes, procesar imagen, filtros, transformar imágenes, transformar imagen, transformer, convolución, software, itransformer, ES': 'Bildverarbeitung, Verarbeitung Filter, Filter, Umwandlung Bilder, transformer, Faltung, itransformer, DE'
+'Bienvenido a Itransformer.es': 'Willkommen auf Itransformer.es'
+'Gestión de usuarios': 'User Management'
+'Inicio': 'Zuhause'
+'Foro': 'Forum'
+'Acerca de': 'Über'
+'Mi cuenta': 'Mein Konto'
+'Regístrate': 'Registrieren'
+"Esta web utiliza 'cookies' propias para ofrecerte una mejor experiencia y servicio. Al navegar o utilizar estos servicios, aceptas el uso de las mismas.": "Diese Website benutzt eigene Cookies, um eine bessere Erfahrung und Service zu bieten. Durch den Besuch oder die Nutzung dieser Dienste, deren Nutzung einverstanden."
+"Esta web necesita que Javascript esté habilitado en su navegador para poder funcionar correctamente.": "Diese Website erfordert, dass Javascript in Ihrem Browser aktiviert sein, um richtig zu funktionieren."
+'CONDICIONES DE LAS CUENTAS DE USUARIO': 'BEDINGUNGEN BENUTZERKONTEN'
+'Es necesario crear una cuenta de usuario para poder acceder al foro.': 'Sie müssen ein Benutzerkonto zu erstellen, das Forum zugreifen.'
+'PRIVACIDAD': 'DATENSCHUTZ'
+'Las cuentas de usuario son privadas. Los datos necesarios son un nombre y un correo electrónico. Estos datos no se utilizarán para enviar spam. Únicamente se enviarán las noticias sobre actualizaciones relevantes de la aplicación. El usuario podrá solicitar la eliminación de su cuenta en cualquier momento enviando un correo electrónico a manolez@gmail.com': 'Benutzerkonten sind privat. Die erforderlichen Daten ist ein Name und eine E-Mail. Diese Informationen werden nicht verwendet, um Spam zu versenden. Nur relevante Nachrichten über Anwendungs-Updates werden gesendet. Für eine vollständige Löschung Ihres Accounts jederzeit per E-Mail an manolez@gmail.com anfordern'
+'Estás usando un navegador <strong>obsoleto</strong>. Por favor <a href="http://browsehappy.com/">actualiza tu navegador</a> o <a href="http://www.google.com/chromeframe/?redirect=true">activa Google Chrome Frame</a> para mejorar tu experiencia.': 'Sie verwenden einen <strong>veralteten</strong> Browser. Bitte <a href="http://browsehappy.com/">aktualisieren Sie Ihren Browser</a> oder <a href="http://www.google.com/chromeframe/?redirect=true">aktivieren Sie Google Chrome Frame</a>, um Ihre Erfahrung zu verbessern.'

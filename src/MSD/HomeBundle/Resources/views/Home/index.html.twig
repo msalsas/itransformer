@@ -1,0 +1,82 @@
+{# Itransformer.es is an online application to transform images
+Copyright (C) 2013  Manolo Salsas
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact: manolez@gmail.com - http://msalsas.com
+#}
+
+
+{% extends 'MSDHomeBundle::base.html.twig' %}
+{% block javascripts %}
+	{{ parent() }}
+	
+	<style>
+.progress { position:relative; width:99%; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+.bar { background-color: #B4F5B4; width:0%; height:30px; border-radius: 3px; }
+.percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
+</style>
+	{% javascripts '@MSDHomeBundle/Resources/public/js/adj_img.js' filter='yui_js'
+				   '@MSDHomeBundle/Resources/public/js/efectos_inicio.js' filter='yui_js'
+		           '../app/Resources/public/js/vendor/jquery.form.js' filter='yui_js' 
+
+	%}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+
+{% endblock %}
+{% block sections %}
+		<div class="articulo gradient"><article>
+			<header>
+				<h1>{{ 'Bienvenido a Itransformer.es'|trans|raw }}</h1>
+				<h2>{% trans %}Adjunta una imagen para transformarla{% endtrans %}</h2>
+			</header>
+			<div id="form" class="gradient">
+			<form id="fileupload" class="form" action="{{ path('msd_home_verimagen') }}" method="post" enctype="multipart/form-data" >			
+			<input type="hidden" name="MAX_FILE_SIZE" value="3145728">
+			<input class="in_file" type="file" name="userfile">
+			</form>
+			
+			
+    
+    <div class="progress">
+        <div class="bar"></div >
+        <div class="percent">0%</div >
+    </div>
+    
+    <div id="status"></div>
+    
+			
+    <br>
+		</div>	
+		</article></div>
+{% endblock %}
+{% block aside %}
+
+<h3>{% trans %}Mediante esta aplicación web, podrás aplicar filtros de procesamiento de imágenes a tus propias imágenes. Dispones de muchos tipos de filtros como el de escala de grises, filtro de resaltar bordes, resaltar relieve, filtro de pixelación, corrección gamma, etc. Y sobre todo, el potente filtro de convolución: si eres experto en procesamiento de imágenes podrás hacer casi cualquier cosa.{% endtrans %}</h3>
+	<h3>{% trans %}Se han incluído nuevos efectos recientemente: resaltar o atenuar colores y efectos de dibujo y pintura.{% endtrans %}</h3>
+	<h3>{% trans %}También encontrarás transformaciones básicas de imágenes como cambiar dimensiones, rotar los grados que quieras, recortar imágenes, modificar brillo y cambiar contraste.{% endtrans %}</h3>
+	<h3>{% trans %}Todo ello, utilizando PHP y la librería gd.{% endtrans %}</h3>
+	<h3>{% trans %}Poco a poco iré mejorando la aplicación y añadiendo más funcionalidades de procesamiento y transformación de imágenes.{% endtrans %}</h3>
+	<h3>{% trans %}También hay un foro, donde puedes comentar, sugerir, ... Pero tienes que registrarte antes.{% endtrans %}</h3>
+	<h3>{% trans %}Gracias por visitarme!!{% endtrans %}</h3>
+<br>
+<p>{% trans %}Puedes encontrar más información y ejemplos sobre procesamiento de imágenes en los siguientes enlaces{% endtrans %}: </p><br>
+<ul><li><a target="_blank" href="http://www.imageprocessingbasics.com">{% trans %}Procesamiento de imágenes{% endtrans %}</a></li>
+<li><a target="_blank" href="http://www.imageprocessingbasics.com/image-convolution-filters/">{% trans %}Filtro de convolución{% endtrans %}</a></li></ul>
+
+{% endblock %}
+
+

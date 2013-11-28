@@ -1,0 +1,207 @@
+{# Itransformer.es is an online application to transform images
+Copyright (C) 2013  Manolo Salsas
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact: manolez@gmail.com - http://msalsas.com
+#}
+
+
+{% autoescape %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+<html lang="es">
+    <head>
+{% block head %}
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
+        <title>{% block title %}{% trans %}Aplicación de filtros para procesamiento y transformación de imágenes{% endtrans %}{% endblock %}</title>
+        <meta name="description" content="{% trans %}Itransformer.es es una aplicación on-line gratuita de procesamiento y transformación de imagenes. Aplica filtros y transforma imágenes subidas por el usuario.{% endtrans %}
+">
+		<meta name="keywords" content="{% trans %}procesamiento de imágenes, procesar imagen, filtros, transformar imágenes, transformar imagen, transformer, convolución, software, itransformer, ES{% endtrans %}">
+        <meta name="viewport" content="width=device-width">
+        {% block stylesheets %}
+        {% stylesheets filter='cssrewrite' 'bundles/msdhome/css/jquery-ui-1.10.3.custom.min.css' filter='yui_css'
+											'../app/Resources/public/css/main.css.twig' filter='yui_css'
+        %}
+		<link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all"/>
+		{% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
+<!--        <link href="https://plus.google.com/105898534671325004845" rel="publisher" />	-->
+		<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'> 
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<script type="text/javascript" async="true">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-42495006-1']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		
+		</script>
+{% endblock %}
+	</head>
+    <body>
+        <!--[if lt IE 8]>
+        <h2 class="chromeframe">{% trans %}Estás usando un navegador <strong>obsoleto</strong>. Por favor <a href="http://browsehappy.com/">actualiza tu navegador</a> o <a href="http://www.google.com/chromeframe/?redirect=true">activa Google Chrome Frame</a> para mejorar tu experiencia.{% endtrans %}</h2>
+        <![endif]-->
+        
+        <!-- Add your site or application content here -->
+        <div id="ini_mess">
+        <p style="width: 82%">{% trans %}Esta web utiliza 'cookies' propias para ofrecerte una mejor experiencia y servicio. Al navegar o utilizar estos servicios, aceptas el uso de las mismas.{% endtrans %}</p>
+        <p style="width: 82%">{% trans %}Esta web necesita que Javascript esté habilitado en su navegador para poder funcionar correctamente.{% endtrans %}</p>
+        </div>
+        <button id="buttonCookies" style="position: absolute; top:0px; right: 0%;">Aceptar</button>
+        {% block body %} 
+
+<div id="fb-root"></div>
+<script async="true">
+/*  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '507578676003931',                        // App ID from the app dashboard
+      channelUrl : 'https://www.itransformer.es', // Channel file for x-domain comms
+      status     : true,                                 // Check Facebook Login status
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+  };
+*/
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+       
+        <div id="agrupar">
+		<div id="cabecera" class="gradient">
+		<img id="img_cabecera" src="{{ asset('public/img/logo.png') }}" alt="logo" width=500>
+		<div id="img_cabecera2" style="position: absolute; top: 15px; left: 44%;">
+		<img src="{{ asset('public/img/carrete.svg') }}" alt="logo" width=300>
+		</div>
+		<div id="languages"><ul>{% for locale in ['en', 'fr', 'es', 'de'] %}
+	    <li {% if locale == app.request.locale %}class="active"{% endif %}>
+	       {% if app.request.get('_route_params') %} <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale' : locale})) }}">{{ locale }}</a>{% endif %}
+	    </li>
+			{% endfor %}</ul></div>
+		<div id="menu_auth"><nav>
+		<ul>
+		<li><a href="{{ path('fos_user_profile_show') }}">{% trans %}Mi cuenta{% endtrans %}</a></li>
+		<li><a href="{{ path('fos_user_registration_register') }}">{% trans %}Regístrate{% endtrans %}</a></li>
+		</ul>
+		</nav></div>
+		<div id="menu"><nav>
+		<ul>
+		<li><a href="{{ path('msd_home_homepage') }}">{% trans %}Inicio{% endtrans %}</a></li>
+		<li><a href="{{ path('herzult_forum_index') }}">{% trans %}Foro{% endtrans %}</a></li>
+		<li><a href="{{ path('msd_home_acercade') }}">{% trans %}Acerca de{% endtrans %}</a></li>
+		</ul>
+		</nav></div>
+		</div>
+		
+
+		<div class="seccion"><section>
+		<div class="fb-like" data-href="http://facebook.com/Itransformer.es" data-send="false" data-show-faces="false" data-width="320"></div>
+
+		{% block sections %}
+				
+		{% endblock %}
+		</section></div>
+        <div id="columna"><aside>
+		<div id="googlemas">
+		<div class="g-plusone" style="display: clear" data-annotation="none" data-width="200" data-href="//plus.google.com/105898534671325004845"></div>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-url="itransformer.es" data-lang="en"></a>
+		<script async="true">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		</div>
+		{% block aside %}
+		{% endblock %}		
+		</aside></div>
+		<div id="dibujo" style="position: rerlative; top: 600px; left: 55%;">
+		<img src="{{ asset('public/img/carrete2.png') }}" alt="logo" width=100%>
+		</div>
+		
+	<!--<div id="socialmedia" class="gradient"><footer>	-->
+    <div id="iconos-social">
+    <div id="FLink"><a target="_blank" href="https://www.facebook.com/Itransformer.es"><img src="{{ asset('public/img/fb.png') }}" alt="facebook" width="35px"></a></div> 
+    <div id="TLink"><a target="_blank" href="https://twitter.com/itransformer_es"><img src="{{ asset('public/img/tw.png') }}" alt="twitter" width="35px"></a></div> 
+	<div id="GLink"><a target="_blank" href="https://plus.google.com/105898534671325004845"><img src="{{ asset('public/img/gplus.png') }}" alt="google" width="35px"></a></div> 
+	</div>
+
+	<!--<script type="text/javascript" src="https://apis.google.com/js/plusone.js"  showtagline=false></script>-->
+
+		<!-- Place this tag after the last +1 button tag. -->
+		<script type="text/javascript">
+		  window.___gcfg = {lang: 'es'};
+		
+		  (function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/plusone.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		</script>
+
+		<!--</footer></div>-->
+		<div id="pie"><footer>
+		{% block footer %}
+		<div id="links_footer"><span class="licencia">© 2013 Manolo Salsas   </span><a class="licencia" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html" target="_blank">GNU Affero General Public License</a>
+		<span>   |   </span><a id="firma" href="http://msalsas.com" target="_blank">msalsas.com</a></div>
+		{% endblock %}
+		</footer></div>
+		
+		</div>		   
+		{% endblock %}
+        {% block javascripts %}
+        <script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js') }}"></script>
+
+        <script>
+        if (typeof jQuery == 'undefined') {
+        document.write('{% javascripts "../app/Resources/public/js/vendor/jquery-1.9.1.min.js" %} <script src="{{ asset_url }}"><\/script> {% endjavascripts %}');
+        }
+        </script>
+		{% javascripts '@MSDHomeBundle/Resources/public/js/jquery-ui-1.10.3.custom.js' filter='yui_js' 
+		               '@MSDHomeBundle/Resources/public/js/jquery.easing.min.js'
+		               '../app/Resources/public/js/vendor/prefixfree.min.js'
+		               '../app/Resources/public/js/plugins.js' filter='yui_js' 
+		               '../app/Resources/public/js/vendor/modernizr.custom.02882.js' filter='yui_js' 
+		               '../app/Resources/public/js/efectos_social.js' filter='yui_js'
+		               	%}
+		<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+
+        
+        {% endblock %} 
+
+
+
+    </body>
+</html>
+{% endautoescape %}

@@ -1,0 +1,10 @@
+app/cache/*
+app/logs/*
+app/bootstrap*
+vendor/*
+web/bundles/
+web/js/
+web/css/
+app/config/parameters.yml
+usuarios/*
+

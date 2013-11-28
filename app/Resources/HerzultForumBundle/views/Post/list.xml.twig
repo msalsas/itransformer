@@ -1,0 +1,9 @@
+{% for post in posts %}
+    <entry>
+        <author>
+            <name>{{ post.authorName }}</name>
+        </author>
+        <published>{{ post.createdAt|date('c') }}</published>
+        <link rel="alternate">{{ forum_urlForPost(post, true) }}</link>
+    </entry>
+{% endfor %}

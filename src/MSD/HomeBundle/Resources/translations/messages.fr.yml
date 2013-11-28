@@ -1,0 +1,142 @@
+#Itransformer.es is an online application to transform images
+#Copyright (C) 2013  Manolo Salsas
+
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU Affero General Public License as
+#published by the Free Software Foundation, either version 3 of the
+#License, or (at your option) any later version.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU Affero General Public License for more details.
+
+#You should have received a copy of the GNU Affero General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#Contact: manolez@gmail.com - http://msalsas.com
+
+'Adjunta una imagen para transformarla': 'Joignez une image à transformer'
+'Bienvenido a Itransformer.es': 'Bienvenue à Itransformer.es'
+'Mediante esta aplicación web, podrás aplicar filtros de procesamiento de imágenes a tus propias imágenes. Dispones de muchos tipos de filtros como el de escala de grises, filtro de resaltar bordes, resaltar relieve, filtro de pixelación, corrección gamma, etc. Y sobre todo, el potente filtro de convolución: si eres experto en procesamiento de imágenes podrás hacer casi cualquier cosa.': "Grâce à cette application Web, vous pouvez appliquer des filtres de traitement d'image de vos propres images. Détenir de nombreux types de filtres tels que niveaux de gris bords du filtre de surbrillance, soulagement du stress, pixellisation filtre, correction gamma, etc. Et surtout, le filtre de convolution puissant: si vous êtes un expert dans le traitement de l'image peut faire presque n'importe quoi."
+'Se han incluído nuevos efectos recientemente: resaltar o atenuar colores y efectos de dibujo y pintura.': 'De nouveaux effets ont été inclus récemment: accentuer ou affaiblir couleurs et des effets de dessin et de peinture.'
+'También encontrarás transformaciones básicas de imágenes como cambiar dimensiones, rotar los grados que quieras, recortar imágenes, modificar brillo y cambiar contraste.': 'Vous trouverez également des transformations fondamentales telles que la modification des images de taille, faites tourner le degré que vous voulez, recadrer, modifier la luminosité et le changement de contraste.'
+'Todo ello, utilizando PHP y la librería gd.': 'Tout cela, en utilisant PHP et GD vendeur.'
+'Poco a poco iré mejorando la aplicación y añadiendo más funcionalidades de procesamiento y transformación de imágenes.': "Je vais progressivement améliorer et ajouter plus de fonctionnalités traitement de la demande et de traitement d'image."
+'También hay un foro, donde puedes comentar, sugerir, ... Pero tienes que registrarte antes.': 'Il ya aussi un forum où vous pouvez commenter, suggérer, ... Mais vous devez vous inscrire avant.'
+'Gracias por visitarme!!': 'Merci de votre visite!!'
+'Puedes encontrar más información y ejemplos sobre procesamiento de imágenes en los siguientes enlaces': 'Vous pouvez trouver de plus amples informations et des exemples sur les filtres suivants liens'
+'Procesamiento de imágenes': "Traitement de l'image"
+'Filtro de convolución': 'Filtre à convolution'
+'Desarrollador web': 'Développeur web'
+'Código fuente': 'Code Source'
+'INSTRUCCIONES DE USO': 'INSTRUCTIONS'
+'Mediante esta aplicación web serás capaz de realizar transformaciones sobre tus imágenes. Primero, ves a la página de inicio <a href="http://itransformer.es" target="_blank">Página de inicio</a> y adjunta una imagen. Después de que se halla cargado la imagen aparecerá un mensaje para que aceptes la imagen que acabas de adjuntar.': "Grâce à cette application Web sera en mesure d'effectuer des transformations sur vos images. Tout d'abord, allez à la page d'accueil <a href='http://itransformer.es' target='_blank'>Home page</a> et joindre une photo. Après l'image est chargée sera affiché un message d'accepter l'image que vous venez joindre."
+'Después de adjuntar la imagen elige el tipo de transformación que quieres realizar (<i>básico, filtros o efectos</i>). Selecciona las transformaciones que quieras y haz clic en <i>Aplicar</i>.': "Après avoir fixé l'image sélectionner le type de transformation que vous souhaitez effectuer (<i>de base, filtres ou effets</i>). Sélectionnez les changements que vous souhaitez et cliquez sur <i>Appliquer</i>."
+'Si quieres guardar la imagen modificada, simplemente haz clic en <i>Guardar</i>. Se abrirá una pestaña en tu navegador con tu imagen. Sólo tienes que ir a <i>Menú -> Archivo -> Guardar como...</i> y guardar tu imagen.': "Si vous souhaitez enregistrer l'image modifiée, cliquez simplement sur ​​<i>Enregistrer</i>. Onglet s'ouvrira dans votre navigateur avec votre image. Il suffit d'aller à <i>Menu -> Fichier -> Enregistrer sous...</i> et enregistrez votre image."
+'Para volver a la imagen anterior a la última transformación haz clic en <i>Atrás</i>. Podrás volver atrás hasta cuatro veces.': "Pour revenir à l'image précédente à la transformation finale cliquez sur <i>Retour</i>. Vous pouvez revenir jusqu'à quatre fois."
+'Para volver a adjuntar otra imagen, tienes que eliminar la imagen que estés utilizando haciendo clic en <i>Eliminar</i>. Volverás de nuevo a la página de inicio.': "Pour rattacher une autre image, vous devez supprimer l'image que vous utilisez en cliquant sur ​​<i>Supprimer</i>. Retour à la page d'accueil."
+'PRIVACIDAD DE LAS IMÁGENES': 'VIE PRIVÉE DES IMAGES'
+'Cuando adjuntas una imágen, ésta es guardada temporalmente en el servidor para su tratamiento. Cuando haces clic en <i>Eliminar</i>, la imagen es borrada del servidor.': "Lorsque vous attachez une image, il est stocké temporairement sur ​​le serveur pour traitement. Lorsque vous cliquez sur <i>Supprimer</i> ,l'image est supprimée du serveur."
+'Si cierras el navegador sin eliminar la imagen no te preocupes, la imagen se borrará automáticamente del servidor en media hora aproximadamente.': "Si vous fermez le navigateur sans supprimer la photo ne vous inquiétez pas, l'image est automatiquement supprimé du serveur dans une demi-heure."
+'Aún así, no adjuntes imágenes con datos confidenciales, personales o que puedan dañar la integridad de cualquier persona.': "Pourtant, pas joindre des images avec des données sensibles, personnelles ou qui peuvent nuire à l'intégrité d'une personne."
+'Si quieres ponerte en contacto conmigo puedes hacerlo a través de las redes sociales, el formulario de <a href="http://msalsas.com">msalsas.com</a>, o a través de correo electrónico.': "Si vous voulez me contacter, vous pouvez le faire à travers les réseaux sociaux, le formulaire <a href='http://msalsas.com'>msalsas.com</a>, ou par courriel."
+'¿Quieres usar esta imagen?': "Vous souhaitez utiliser cette image?"
+'ancho': 'largeur'
+'alto': 'hauteur'
+'Aceptar': 'Accepter'
+'Aplicar': 'Appliquer'
+'Atras': 'Retour'
+'Volver': 'OK'
+'Cancelar': 'Résilier'
+'Guardar imagen': "Enregistrer l'image"
+'Eliminar': 'Supprimer'
+'Haz tu elección': 'Faites votre choix'
+'Selecciona las opciones que quieras': 'Sélectionnez les options qui vous intéressent'
+'Basico': 'Basic'
+'Filtros': 'Filtres'
+'Efectos': 'Effets'
+'Cambiar dimensiones': 'Changer dimensions'
+'Mantener proporciones': 'Gardez proportions'
+'Recortar': 'Couper'
+'Izquierda': 'Gauche'
+'Derecha': 'Droite'
+'Arriba': 'Up'
+'Abajo': 'Au-dessous'
+'Cambiar brillo': 'Modifier la luminosité'
+'Cambiar contraste': 'Modifier le contraste'
+'Rotar': 'Tourner'
+'Convertir a grises': 'Niveaux de gris'
+'Convertir a negativo': 'Nier'
+'Resaltar bordes': 'Détection des bords'
+'Resaltar relieve': 'Gaufrer'
+'Eliminación media (ef. superficial)': 'Élimination moyenne'
+'Poner borroso': 'Blur'
+'Poner borroso (ef. Gaussiano)': 'Blur (Gaussian ef.)'
+'Suavizado': 'Lisser'
+'Pixelación': 'Pixelate'
+'Tamaño de bloque en píxeles': 'La taille des blocs en pixels'
+'Convolución': 'Convolution'
+'Matriz de convolución': 'Matrice de convolution'
+'Divisor': 'Diviseur'
+'Divisor automático': 'Automatique divisor'
+'Corrección gamma': 'La correction gamma'
+'Entrada gamma': 'Entrée de Gamma'
+'Salida gamma': 'La production de gamma'
+'Colorear': 'Colorier'
+'Rojo': 'Rouge'
+'Verde': 'Vert'
+'Azul': 'Bleu'
+'Alfa (transparencia)': 'Alfa (transparence)'
+'Resaltar colores': 'Couleurs de surbrillance'
+'Resaltar rojo': 'Mettez en surbrillance rouge'
+'Resaltar verde': 'Mettez en surbrillance verte'
+'Resaltar azul': 'Mettez en surbrillance bleu'
+'Atenuar colores': 'Fade couleurs'
+'Atenuar rojo': 'Fade rouge'
+'Atenuar verde': 'Fade vert'
+'Atenuar azul': 'Fade bleu'
+'Efecto dibujo a lapiz fino': 'Effet de tirage au crayon mince'
+'Efecto dibujo a lápiz grueso': 'Effet de tirage au crayon épais'
+'Efecto pintura': 'Peindre effet'
+'Efecto Che Guevara': 'Che Guevara effet'
+'Volver a adjuntar imagen': 'Fixer une image à nouveau'
+'No se cargó el archivo correctamente': "Le fichier n'a pas été chargé succefully"
+'Las dimensiones de la imagen son demasiado grandes': "Les dimensions de l'image est trop grande"
+'El archivo parece una imagen, pero no lo es o está corrupta': "Le dossier semble une image, mais ce n'est pas"
+'El archivo no tiene formato permitido. Formatos permitidos: gif, jpg, png, wbmp': "Le fichier ne possède pas un format autorisé. Admis formats: GIF, JPG, PNG, WBMP"
+'El nombre de la imagen no se acepta. Se aceptan números, letras, espacios y guiones': "Le nom de l'image n'est pas autorisée. Chiffres, des mots, des espaces et des tirets blancs sont permis"
+'El archivo excede el tamaño máximo de configuración': "Le fichier téléchargé dépasse la taille congiguration d'upload de fichier maximale"
+'El archivo excede el tamaño máximo establecido': "Le fichier téléchargé dépasse la taille de fichier de téléchargement maximale établie"
+'El archivo sólo ha sido subido parcialmente': "Le fichier n'a été que partiellement envoyé"
+'No se ha cargado ningún archivo': "Aucun fichier a été téléchargé"
+'No existe el directorio temporal': "Manquer un dossier temporaire"
+'Falló la escritura del archivo en el disco': "Échec de l'écriture du fichier sur le disque"
+'Error de extensión del archivo': "Une extension PHP a arrêté le téléchargement de fichier"
+'Error desconocido': "Erreur inconnue"
+'No se ha subido la imagen': "L'image n'a pas été téléchargée"
+'Las dimensiones introducidas son demasiado grandes. Máximo 6000 x 6000': "Les dimensions sont introduites trop grand. Max 6000 x 6000"
+'Las dimensiones introducidas son demasiado grandes. Máximo escalas de +1000': "Les dimensions sont introduites trop grand. Échelle Max +1000"
+'Los datos introducidos no son enteros': "Les données introduites ne sont pas des nombres entiers"
+'Los datos introducidos no pueden ser nulos': "Les données introduites ne peuvent pas être null"
+'No se han cargado datos': "Aucune donnée n'a été chargé"
+'Los valores de recorte no son correctos': "Les valeurs des cultures ne sont pas correctes"
+'Los valores de recorte deben ser numéricos': "Les valeurs des cultures doivent être numériques"
+'La rotación no fue realizada': "Pas de rotation fait"
+'El ángulo debe ser un número entre 0 y 360': "L'angle doit être un nombre entre 0 et 360"
+'El contraste debe ser un número entre -1000 y 1000': "La valeur de contraste doit être un nombre entre -1000 et +1000"
+'El suavizado debe ser un número entre -5000 y 5000': "Le bon doit être une valeur comprise entre -5000 et 5000"
+'El tamaño de bloque debe ser un número entre 0 y 1000000': "La taille de bloc doit être un nombre entre 0 et 1000000"
+'Los valores de la matriz deben ser números entre -255 y +255': "Les valeurs de la matrice doivent être des nombres entre -255 et +255"
+'El valor de offset debe ser un número entre -1000 y 1000': "La valeur de décalage doit être un nombre entre -1000 et 1000"
+'El valor del divisor debe ser un número entre -1000 y 1000': "La valeur du diviseur doit être un nombre entre -1000 et 1000"
+'El valor de salida gamma debe ser un número entre -50 y 50': "La valeur gamma de sortie doit être un nombre compris entre -50 et 50"
+'El valor entrada gamma debe ser un número entre -50 y 50': "La valeur gamma d'entrée doit être un nombre compris entre -50 et 50"
+'El nivel de transparencia debe ser un número entre 0 y 127': "La valeur de niveau de transparence doit être un nombre compris entre 0 et 127"
+'El nivel de azul debe ser un número entre 0 y 255': "La valeur du niveau bleu doit être un nombre entre 0 et 255"
+'El nivel de verde debe ser un número entre 0 y 255': "La valeur du niveau vert doit être un nombre entre 0 et 255"
+'El nivel de rojo debe ser un número entre 0 y 255': "La valeur du niveau rouge doit être un nombre entre 0 et 255"
+'No se pudo crear la nueva imagen': "La nouvelle image n'a pas été créée"
+'Has sobrepasado el límite. Recarga la página': "Vous avez dépassé la limite. Recharger la page"
+
+

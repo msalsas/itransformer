@@ -1,0 +1,49 @@
+{# Itransformer.es is an online application to transform images
+Copyright (C) 2013  Manolo Salsas
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact: manolez@gmail.com - http://msalsas.com
+#}
+
+
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/herzultforum/css/forum.css') }}" />
+         {% stylesheets '../app/Resources/HerzultForumBundle/public/css/*.css' filter='cssrewrite' filter='yui_css'%}  
+        <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	{% javascripts '../app/Resources/HerzultForumBundle/public/js/disenio_forms.js' filter='yui_js'%}
+		<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+{% endblock %}
+
+{% block sections %}
+		<div class="articulo gradient"><article>
+			<header>
+			<hgroup>
+				<h1>FORUM</h1>
+				<h2><a href="{{ path('herzult_forum_index') }}">Index</a></h2>
+				<h2><a href="{{ path('herzult_forum_search') }}">Search</a></h2>
+			</hgroup>
+			</header>
+		</article>
+		<article>
+    {% block content %}{% endblock %}
+    </article></div>
+{% endblock %}
