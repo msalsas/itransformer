@@ -49,10 +49,9 @@ Contact: manolez@gmail.com - http://msalsas.com
 		{% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
-<!--        <link href="https://plus.google.com/105898534671325004845" rel="publisher" />	-->
 		<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'> 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-		<script type="text/javascript" async="true">
+		<script type="text/javascript">
 
 		  var _gaq = _gaq || [];
 		  _gaq.push(['_setAccount', 'UA-42495006-1']);
@@ -81,7 +80,7 @@ Contact: manolez@gmail.com - http://msalsas.com
         {% block body %} 
 
 <div id="fb-root"></div>
-<script async="true">
+<script>
 /*  window.fbAsyncInit = function() {
     // init the FB JS SDK
     FB.init({
@@ -138,9 +137,9 @@ Contact: manolez@gmail.com - http://msalsas.com
 		</section></div>
         <div id="columna"><aside>
 		<div id="googlemas">
-		<div class="g-plusone" style="display: clear" data-annotation="none" data-width="200" data-href="//plus.google.com/105898534671325004845"></div>
+		<div class="g-plusone" style="display: clear" data-annotation="none" data-width="200" data-href="https://plus.google.com/+ItransformerEs"></div>
 		<a href="https://twitter.com/share" class="twitter-share-button" data-url="itransformer.es" data-lang="en"></a>
-		<script async="true">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		</div>
 		{% block aside %}
 		{% endblock %}		
@@ -156,15 +155,12 @@ Contact: manolez@gmail.com - http://msalsas.com
 	<div id="GLink"><a target="_blank" href="https://plus.google.com/105898534671325004845"><img src="{{ asset('public/img/gplus.png') }}" alt="google" width="35px"></a></div> 
 	</div>
 
-	<!--<script type="text/javascript" src="https://apis.google.com/js/plusone.js"  showtagline=false></script>-->
 
 		<!-- Place this tag after the last +1 button tag. -->
 		<script type="text/javascript">
-		  window.___gcfg = {lang: 'es'};
-		
 		  (function() {
 		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		    po.src = 'https://apis.google.com/js/plusone.js';
+		    po.src = 'https://apis.google.com/js/platform.js';
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 		  })();
 		</script>
