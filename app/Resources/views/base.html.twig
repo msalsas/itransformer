@@ -77,10 +77,10 @@ Contact: manolez@gmail.com - http://msalsas.com
         
         <!-- Add your site or application content here -->
         <div id="ini_mess">
-        <p style="width: 82%">{% trans %}Esta web utiliza 'cookies' propias para ofrecerte una mejor experiencia y servicio. Al navegar o utilizar estos servicios, aceptas el uso de las mismas.{% endtrans %}</p>
-        <p style="width: 82%">{% trans %}Esta web necesita que Javascript esté habilitado en su navegador para poder funcionar correctamente.{% endtrans %}</p>
+        <p>{% trans %}Esta web utiliza 'cookies' propias para ofrecerte una mejor experiencia y servicio. Al navegar o utilizar estos servicios, aceptas el uso de las mismas.{% endtrans %}</p>
+        <p>{% trans %}Esta web necesita que Javascript esté habilitado en su navegador para poder funcionar correctamente.{% endtrans %}</p>
         </div>
-        <button id="buttonCookies" style="position: absolute; top:0px; right: 0%;">Aceptar</button>
+        <button id="buttonCookies">Aceptar</button>
         {% block body %} 
 
 <div id="fb-root"></div>
@@ -95,7 +95,7 @@ Contact: manolez@gmail.com - http://msalsas.com
         <div id="agrupar">
 		<div id="cabecera" class="gradient">
 		<img id="img_cabecera" src="{{ asset('public/img/logo.png') }}" alt="logo" width=500>
-		<div id="img_cabecera2" style="position: absolute; top: 15px; left: 44%;">
+		<div id="img_cabecera2">
 		<img src="{{ asset('public/img/carrete.png') }}" alt="logo" width=300>
 		</div>
 		<div id="languages"><ul>{% for locale in ['en', 'fr', 'es', 'de'] %}
@@ -140,9 +140,9 @@ Contact: manolez@gmail.com - http://msalsas.com
 		
 	<!--<div id="socialmedia" class="gradient"><footer>	-->
     <div id="iconos-social">
-    <div id="FLink"><a target="_blank" href="https://www.facebook.com/Itransformer.es"><img src="{{ asset('public/img/fb.png') }}" alt="facebook" width="35px"></a></div> 
-    <div id="TLink"><a target="_blank" href="https://twitter.com/itransformer_es"><img src="{{ asset('public/img/tw.png') }}" alt="twitter" width="35px"></a></div> 
-	<div id="GLink"><a target="_blank" href="https://plus.google.com/105898534671325004845"><img src="{{ asset('public/img/gplus.png') }}" alt="google" width="35px"></a></div> 
+    <div id="FLink"><a target="_blank" href="https://www.facebook.com/Itransformer.es"><img src="{{ asset('public/img/fb.png') }}" alt="facebook" width="35"></a></div> 
+    <div id="TLink"><a target="_blank" href="https://twitter.com/itransformer_es"><img src="{{ asset('public/img/tw.png') }}" alt="twitter" width="35"></a></div> 
+	<div id="GLink"><a target="_blank" href="https://plus.google.com/105898534671325004845"><img src="{{ asset('public/img/gplus.png') }}" alt="google" width="35"></a></div> 
 	</div>
 
 
