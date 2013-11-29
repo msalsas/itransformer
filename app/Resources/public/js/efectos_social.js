@@ -29,7 +29,7 @@ $(function(){
 	  if (window_width < 1147) {
 	      $("#img_cabecera2").css({"display":"none"});    
 	  } else {
-		  $("#img_cabecera2 img").attr('width', 300).attr('src', "/public/img/carrete.png");
+		  $("#img_cabecera2 img").attr('width', 300).attr('src', "/public/img/carrete.png").attr('alt', "logo").attr('height','auto');
 	      $("#img_cabecera2").css({"top":"15px","left": "44%","display":"block"});
 	  }
 	}
