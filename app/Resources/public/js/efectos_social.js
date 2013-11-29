@@ -27,11 +27,10 @@ $(function(){
 	function set_src() {
 	  var window_width = $(window).width();
 	  if (window_width < 1147) {
-	      $("#img_cabecera2 img").attr('width', 80).attr('src', "/public/img/carrete_mvl.png");
-	      $("#img_cabecera2").css({"top":"140px","left": "5px"});      
+	      $("#img_cabecera2").css({"display":"none"});    
 	  } else {
 		  $("#img_cabecera2 img").attr('width', 300).attr('src', "/public/img/carrete.png");
-	      $("#img_cabecera2").css({"top":"15px","left": "44%"});
+	      $("#img_cabecera2").css({"top":"15px","left": "44%","display":"block"});
 	  }
 	}
 	
