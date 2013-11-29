@@ -21,13 +21,6 @@ Contact: manolez@gmail.com - http://msalsas.com
 {% extends 'MSDHomeBundle::base.html.twig' %}
 {% block javascripts %}
 	{{ parent() }}
-	
-	<style>
-.progress { position:relative; width:99%; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
-.bar { background-color: #B4F5B4; width:0%; height:30px; border-radius: 3px; }
-.percent { position:absolute; display:inline-block; top:3px; left:48%; }
-
-</style>
 	{% javascripts '@MSDHomeBundle/Resources/public/js/adj_img.js' filter='yui_js'
 				   '@MSDHomeBundle/Resources/public/js/efectos_inicio.js' filter='yui_js'
 		           '../app/Resources/public/js/vendor/jquery.form.js' filter='yui_js' 
