@@ -18,7 +18,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Contact: manolez@gmail.com - http://msalsas.com
 * */
 
+
+
 $(function(){
+
+/* Set image carrete size */
+
+	function set_src() {
+	  var window_width = $(window).width();
+	  if (window_width < 1147) {
+	      $("#img_cabecera2 img").attr('width', 80).attr('src', "/public/img/carrete_mvl.png");
+	      $("#img_cabecera2").css({"top":"140px","left": "5px"});      
+	  } else {
+		  $("#img_cabecera2 img").attr('width', 300).attr('src', "/public/img/carrete.png");
+	      $("#img_cabecera2").css({"top":"15px","left": "44%"});
+	  }
+	}
+	
+
+	   set_src();
+
+	
+	$(window).resize(function() {
+	    set_src();
+	});
+
+/* ************************* */
+
 
 	$("#FLink, #TLink, #GLink").on('mouseenter',function(){
 		
