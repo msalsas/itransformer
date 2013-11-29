@@ -64,6 +64,10 @@ Contact: manolez@gmail.com - http://msalsas.com
 		  })();
 		
 		</script>
+		
+		
+		
+		
 {% endblock %}
 	</head>
     <body>
@@ -80,24 +84,11 @@ Contact: manolez@gmail.com - http://msalsas.com
         {% block body %} 
 
 <div id="fb-root"></div>
-<script>
-/*  window.fbAsyncInit = function() {
-    // init the FB JS SDK
-    FB.init({
-      appId      : '507578676003931',                        // App ID from the app dashboard
-      channelUrl : 'https://www.itransformer.es', // Channel file for x-domain comms
-      status     : true,                                 // Check Facebook Login status
-      xfbml      : true                                  // Look for social plugins on the page
-    });
-
-    // Additional initialization code such as adding Event Listeners goes here
-  };
-*/
-(function(d, s, id) {
+<script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+  js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1&appId=507578676003931";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
        
@@ -129,8 +120,7 @@ Contact: manolez@gmail.com - http://msalsas.com
 		
 
 		<div class="seccion"><section>
-		<div class="fb-like" data-href="http://facebook.com/Itransformer.es" data-send="false" data-show-faces="false" data-width="320"></div>
-
+		<div class="fb-like" data-href="https://www.facebook.com/Itransformer.es" data-width="320" data-layout="standard" data-action="like" data-show-faces="false" data-share="false"></div>
 		{% block sections %}
 				
 		{% endblock %}
