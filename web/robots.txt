@@ -1,1 +1,3 @@
 Sitemap: http://itransformer.es/sitemap.xml
+User-agent:* 
+Disallow:
