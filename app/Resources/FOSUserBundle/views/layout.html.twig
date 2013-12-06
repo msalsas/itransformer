@@ -19,6 +19,7 @@ Contact: manolez@gmail.com - http://msalsas.com
 
 
 {% extends '::base.html.twig' %}
+{% block title %}{% trans %}Gestión de usuarios{% endtrans %}{% endblock %}
 {% block javascripts %}
 	{{ parent() }}
 	{% javascripts '../app/Resources/FOSUserBundle/public/js/disenio_forms.js' filter='yui_js'%}
