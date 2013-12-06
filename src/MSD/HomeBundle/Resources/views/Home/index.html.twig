@@ -30,6 +30,14 @@ Contact: manolez@gmail.com - http://msalsas.com
 	{% endjavascripts %}
 
 {% endblock %}
+{% block body %}
+        <div id="ini_mess">
+        <p>{% trans %}Esta web utiliza 'cookies' propias para ofrecerte una mejor experiencia y servicio. Al navegar o utilizar estos servicios, aceptas el uso de las mismas.{% endtrans %}</p>
+        <p>{% trans %}Esta web necesita que Javascript esté habilitado en su navegador para poder funcionar correctamente.{% endtrans %}</p>
+        </div>
+        <button id="buttonCookies">Aceptar</button>
+{{ parent() }}
+
 {% block sections %}
 		<div class="articulo gradient"><article>
 			<header>
@@ -73,5 +81,5 @@ Contact: manolez@gmail.com - http://msalsas.com
 <li><a target="_blank" href="http://www.imageprocessingbasics.com/image-convolution-filters/">{% trans %}Filtro de convolución{% endtrans %}</a></li></ul>
 
 {% endblock %}
-
+{% endblock %}
 
