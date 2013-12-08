@@ -537,8 +537,26 @@ class HomeController extends Controller
 													
 			}
 			
+			//Efecto dibujo a lápiz super fino
+			if(isset($_POST['convertir_lapiz_super_fino']) && ($_POST['convertir_lapiz_super_fino']=='check')) {
+						
+				imagefilter($lienzo, IMG_FILTER_EDGEDETECT);
+				imagefilter($lienzo, IMG_FILTER_COLORIZE, 150, 150, 150);
+				imagefilter($lienzo, IMG_FILTER_GRAYSCALE);
+	
+			}
+			
 			//Efecto dibujo a lápiz fino
 			if(isset($_POST['convertir_lapiz_fino']) && ($_POST['convertir_lapiz_fino']=='check')) {
+						
+				imagefilter($lienzo, IMG_FILTER_EDGEDETECT);
+				imagefilter($lienzo, IMG_FILTER_COLORIZE, 90, 90, 90);
+				imagefilter($lienzo, IMG_FILTER_GRAYSCALE);
+	
+			}
+			
+			//Efecto dibujo a lápiz normal
+			if(isset($_POST['convertir_lapiz_normal']) && ($_POST['convertir_lapiz_normal']=='check')) {
 						
 				imagefilter($lienzo, IMG_FILTER_EDGEDETECT);
 				$blanco = imagecolorallocate($lienzo, 255,255,255);

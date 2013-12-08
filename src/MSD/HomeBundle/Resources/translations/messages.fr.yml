@@ -98,8 +98,10 @@
 'Atenuar rojo': 'Fade rouge'
 'Atenuar verde': 'Fade vert'
 'Atenuar azul': 'Fade bleu'
-'Efecto dibujo a lapiz fino': 'Effet de tirage au crayon mince'
-'Efecto dibujo a lápiz grueso': 'Effet de tirage au crayon épais'
+'Efecto dibujo a lápiz super fino': 'Effet crayon extrafin dessin'
+'Efecto dibujo a lápiz fino': 'Effet crayon mince dessin'
+'Efecto dibujo a lápiz normal': 'Effet crayon régulière dessin'
+'Efecto dibujo a lápiz grueso': "Effet d'épaisseur dessin au crayon"
 'Efecto pintura': 'Peindre effet'
 'Efecto Che Guevara': 'Che Guevara effet'
 'Volver a adjuntar imagen': 'Fixer une image à nouveau'
