@@ -541,18 +541,55 @@ class HomeController extends Controller
 			if(isset($_POST['convertir_lapiz_super_fino']) && ($_POST['convertir_lapiz_super_fino']=='check')) {
 						
 				imagefilter($lienzo, IMG_FILTER_EDGEDETECT);
-				imagefilter($lienzo, IMG_FILTER_COLORIZE, 150, 150, 150);
-				imagefilter($lienzo, IMG_FILTER_GRAYSCALE);
+				
+				$blanco = imagecolorallocate($lienzo, 255,255,255);
+				$grisMasMasClaro = imagecolorallocate($lienzo, 210, 210, 210);
+				$grisMasClaro = imagecolorallocate($lienzo, 175,175,175);
+				$grisClaro = imagecolorallocate($lienzo, 140,140,140);
+				$grisOscuro = imagecolorallocate($lienzo, 105,105,105);
+				$grisMasOscuro = imagecolorallocate($lienzo, 70,70,70);
+				$grisMasMasOscuro = imagecolorallocate($lienzo, 35,35,35);
+				$negro = imagecolorallocate($lienzo, 0,0,0);
+				for($x=0; $x<$imagen->getAncho(); $x++){
+			        for($y=0; $y<$imagen->getAlto(); $y++){
+			            $color = ImageColorAt($lienzo, $x, $y);
+			            
+						if(($color&0xFF)>80) imagesetpixel($lienzo, $x, $y,$blanco);  
+						elseif(($color&0xFF)>75) imagesetpixel($lienzo, $x, $y,$grisMasMasClaro);
+			            elseif(($color&0xFF)>70) imagesetpixel($lienzo, $x, $y,$grisMasClaro);
+			            elseif(($color&0xFF)>65) imagesetpixel($lienzo, $x, $y,$grisClaro);
+			            elseif(($color&0xFF)>60) imagesetpixel($lienzo, $x, $y,$grisOscuro);
+			            elseif(($color&0xFF)>60) imagesetpixel($lienzo, $x, $y,$grisMasOscuro);	
+			            elseif(($color&0xFF)>55) imagesetpixel($lienzo, $x, $y,$grisMasMasOscuro);					              
+			            else imagesetpixel($lienzo, $x, $y,$negro);  	
 	
+					}
+			    }
 			}
 			
 			//Efecto dibujo a lápiz fino
 			if(isset($_POST['convertir_lapiz_fino']) && ($_POST['convertir_lapiz_fino']=='check')) {
 						
 				imagefilter($lienzo, IMG_FILTER_EDGEDETECT);
-				imagefilter($lienzo, IMG_FILTER_COLORIZE, 90, 90, 90);
-				imagefilter($lienzo, IMG_FILTER_GRAYSCALE);
-	
+				
+				$blanco = imagecolorallocate($lienzo, 255,255,255);
+				$grisMasClaro = imagecolorallocate($lienzo, 200,200,200);
+				$grisClaro = imagecolorallocate($lienzo, 150,150,150);
+				$grisOscuro = imagecolorallocate($lienzo, 120,120,120);
+				$grisMasOscuro = imagecolorallocate($lienzo, 80,80,80);
+				$negro = imagecolorallocate($lienzo, 0,0,0);
+				for($x=0; $x<$imagen->getAncho(); $x++){
+			        for($y=0; $y<$imagen->getAlto(); $y++){
+			            $color = ImageColorAt($lienzo, $x, $y);
+			            
+			            if(($color&0xFF)>100) imagesetpixel($lienzo, $x, $y,$blanco);  
+			            elseif(($color&0xFF)>95) imagesetpixel($lienzo, $x, $y,$grisMasClaro);
+			            elseif(($color&0xFF)>90) imagesetpixel($lienzo, $x, $y,$grisClaro);
+			            elseif(($color&0xFF)>85) imagesetpixel($lienzo, $x, $y,$grisOscuro);
+			            elseif(($color&0xFF)>80) imagesetpixel($lienzo, $x, $y,$grisMasOscuro);					              
+			            else imagesetpixel($lienzo, $x, $y,$negro);  	
+					}
+			    }
 			}
 			
 			//Efecto dibujo a lápiz normal
@@ -560,16 +597,16 @@ class HomeController extends Controller
 						
 				imagefilter($lienzo, IMG_FILTER_EDGEDETECT);
 				$blanco = imagecolorallocate($lienzo, 255,255,255);
-				$grisClaro = imagecolorallocate($lienzo, 200,200,200);
+				$grisClaro = imagecolorallocate($lienzo, 230,230,230);
 				$grisOscuro = imagecolorallocate($lienzo, 100,100,100);
 				$negro = imagecolorallocate($lienzo, 0,0,0);
 				for($x=0; $x<$imagen->getAncho(); $x++){
 			        for($y=0; $y<$imagen->getAlto(); $y++){
 			            $color = ImageColorAt($lienzo, $x, $y);
 			            
-			            if($color>7900000) imagesetpixel($lienzo, $x, $y,$blanco);  
-			            elseif($color>7700000) imagesetpixel($lienzo, $x, $y,$grisClaro);
-			            elseif($color>7400000) imagesetpixel($lienzo, $x, $y,$grisOscuro);					              
+			            if(($color&0xFF)>120) imagesetpixel($lienzo, $x, $y,$blanco);  
+			            elseif(($color&0xFF)>110) imagesetpixel($lienzo, $x, $y,$grisClaro);
+			            elseif(($color&0xFF)>100) imagesetpixel($lienzo, $x, $y,$grisOscuro);					              
 			            else imagesetpixel($lienzo, $x, $y,$negro);  	
 					}
 			    }					
@@ -584,8 +621,8 @@ class HomeController extends Controller
 				for($x=0; $x<$imagen->getAncho(); $x++){
 			        for($y=0; $y<$imagen->getAlto(); $y++){
 			            $color = ImageColorAt($lienzo, $x, $y);
-			            
-			            if($color>8000000) imagesetpixel($lienzo, $x, $y,$blanco);  
+			           // echo ($color&0xFF).'</br>';
+			            if(($color&0xFF)>120) imagesetpixel($lienzo, $x, $y,$blanco);  
 			            else imagesetpixel($lienzo, $x, $y,$negro);  
 		
 			        }
