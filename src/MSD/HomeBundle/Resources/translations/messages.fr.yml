@@ -102,8 +102,10 @@
 'Efecto dibujo a lápiz fino': 'Effet crayon mince dessin'
 'Efecto dibujo a lápiz normal': 'Effet crayon régulière dessin'
 'Efecto dibujo a lápiz grueso': "Effet d'épaisseur dessin au crayon"
-'Efecto pintura': 'Peindre effet'
-'Efecto Che Guevara': 'Che Guevara effet'
+'Efecto pintura': 'Effet Peindre'
+'Efecto Che Guevara': 'Effet Che Guevara'
+'Efecto papel arrugado': 'Effet de papier froissé'
+'Efecto antiguo': 'Effet antique'
 'Volver a adjuntar imagen': 'Fixer une image à nouveau'
 'No se cargó el archivo correctamente': "Le fichier n'a pas été chargé succefully"
 'Las dimensiones de la imagen son demasiado grandes': "Les dimensions de l'image est trop grande"

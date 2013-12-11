@@ -664,7 +664,7 @@ class HomeController extends Controller
 			}
 
 			
-					//Efecto che
+			//Efecto che
 			if(isset($_POST['convertir_che']) && ($_POST['convertir_che']=='check')) {
 				
 						imagefilter($lienzo, IMG_FILTER_EDGEDETECT);
@@ -680,6 +680,52 @@ class HomeController extends Controller
 					        }
 					    }
 		
+			}
+			
+			//Efecto papel arrugado
+			
+				if(isset($_POST['convertir_papel_arr']) && ($_POST['convertir_papel_arr']=='check')) {
+				
+				$lienzo_papel_arr = $this->crearLienzo('public/img/papel_arr2.png', 'png');	
+				
+				//Crear lienzo en blanco con proporciones
+				$lienzo_papel_arr_redim=imagecreatetruecolor($imagen->getAncho(),$imagen->getAlto());
+	
+				// preserve transparency
+				imagecolortransparent($lienzo_papel_arr_redim, imagecolorallocatealpha($lienzo_papel_arr_redim, 0, 0, 0, 127));
+			    imagealphablending($lienzo_papel_arr_redim, false);
+			    imagesavealpha($lienzo_papel_arr_redim, true);
+			
+				
+				//Copiar $original sobre la imagen que acabamos de crear en blanco ($tmp)
+				imagecopyresampled($lienzo_papel_arr_redim,$lienzo_papel_arr,0,0,0,0,$imagen->getAncho(), $imagen->getAlto(),3090,4000);;
+				
+				
+				imagecopy ( $lienzo , $lienzo_papel_arr_redim , 0 , 0 , 0 , 0 , $imagen->getAncho() , $imagen->getAlto() );
+			
+			}
+
+			//Efecto antiguo
+			
+			if(isset($_POST['convertir_antiguo']) && ($_POST['convertir_antiguo']=='check')) {
+			
+				$lienzo_antiguo = $this->crearLienzo('public/img/antiguo.png', 'png');	
+				
+				//Crear lienzo en blanco con proporciones
+				$lienzo_antiguo_redim=imagecreatetruecolor($imagen->getAncho(),$imagen->getAlto());
+	
+				// preserve transparency
+				imagecolortransparent($lienzo_antiguo_redim, imagecolorallocatealpha($lienzo_antiguo_redim, 0, 0, 0, 127));
+			    imagealphablending($lienzo_antiguo_redim, false);
+			    imagesavealpha($lienzo_antiguo_redim, true);
+			
+				
+				//Copiar $original sobre la imagen que acabamos de crear en blanco ($tmp)
+				imagecopyresampled($lienzo_antiguo_redim,$lienzo_antiguo,0,0,0,0,$imagen->getAncho(), $imagen->getAlto(),2332,3212);;
+				
+				
+				imagecopy ( $lienzo , $lienzo_antiguo_redim , 0 , 0 , 0 , 0 , $imagen->getAncho() , $imagen->getAlto() );
+			
 			}
 			
 			
