@@ -683,49 +683,24 @@ class HomeController extends Controller
 			}
 			
 			//Efecto papel arrugado
-			
-				if(isset($_POST['convertir_papel_arr']) && ($_POST['convertir_papel_arr']=='check')) {
-				
-				$lienzo_papel_arr = $this->crearLienzo('public/img/papel_arr2.png', 'png');	
-				
-				//Crear lienzo en blanco con proporciones
-				$lienzo_papel_arr_redim=imagecreatetruecolor($imagen->getAncho(),$imagen->getAlto());
-	
-				// preserve transparency
-				imagecolortransparent($lienzo_papel_arr_redim, imagecolorallocatealpha($lienzo_papel_arr_redim, 0, 0, 0, 127));
-			    imagealphablending($lienzo_papel_arr_redim, false);
-			    imagesavealpha($lienzo_papel_arr_redim, true);
-			
-				
-				//Copiar $original sobre la imagen que acabamos de crear en blanco ($tmp)
-				imagecopyresampled($lienzo_papel_arr_redim,$lienzo_papel_arr,0,0,0,0,$imagen->getAncho(), $imagen->getAlto(),3090,4000);;
-				
-				
-				imagecopy ( $lienzo , $lienzo_papel_arr_redim , 0 , 0 , 0 , 0 , $imagen->getAncho() , $imagen->getAlto() );
-			
+			if(isset($_POST['convertir_papel_arr']) && ($_POST['convertir_papel_arr']=='check')) {			
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/papel_arr2.png' );			
 			}
 
 			//Efecto antiguo
+			if(isset($_POST['convertir_antiguo']) && ($_POST['convertir_antiguo']=='check')) {				
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/antiguo.png' );
+			}
 			
-			if(isset($_POST['convertir_antiguo']) && ($_POST['convertir_antiguo']=='check')) {
+			//Efecto fuego			
+			if(isset($_POST['convertir_fuego']) && ($_POST['convertir_fuego']=='check')) {			
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/fuego.png' );
+			}
 			
-				$lienzo_antiguo = $this->crearLienzo('public/img/antiguo.png', 'png');	
-				
-				//Crear lienzo en blanco con proporciones
-				$lienzo_antiguo_redim=imagecreatetruecolor($imagen->getAncho(),$imagen->getAlto());
-	
-				// preserve transparency
-				imagecolortransparent($lienzo_antiguo_redim, imagecolorallocatealpha($lienzo_antiguo_redim, 0, 0, 0, 127));
-			    imagealphablending($lienzo_antiguo_redim, false);
-			    imagesavealpha($lienzo_antiguo_redim, true);
-			
-				
-				//Copiar $original sobre la imagen que acabamos de crear en blanco ($tmp)
-				imagecopyresampled($lienzo_antiguo_redim,$lienzo_antiguo,0,0,0,0,$imagen->getAncho(), $imagen->getAlto(),2332,3212);;
-				
-				
-				imagecopy ( $lienzo , $lienzo_antiguo_redim , 0 , 0 , 0 , 0 , $imagen->getAncho() , $imagen->getAlto() );
-			
+			//Enmarcar			
+			if((isset($_POST['convertir_marco_horizontal']) && ($_POST['convertir_marco_horizontal']=='check'))  || (isset($_POST['convertir_marco_vertical']) && ($_POST['convertir_marco_vertical']=='check'))) {			
+				$ruta = (isset($_POST['convertir_marco_horizontal']) && ($_POST['convertir_marco_horizontal']=='check')) ? 'public/img/marco_horizontal.png' : 'public/img/marco_vertical.png';		
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), $ruta );
 			}
 			
 			
@@ -949,5 +924,26 @@ public function atrasAction()
 		elseif($formato == 'wbmp')
 		imagewbmp($lienzo,$nueva_ruta,$calidad);
 
+	}
+	
+	function mergeImage( $lienzo, $ancho, $alto, $rutaImagen ) 
+	{
+		$lienzo_2 = $this->crearLienzo($rutaImagen, 'png');	
+		
+		//Crear lienzo en blanco con proporciones
+		$lienzo_2_redim=imagecreatetruecolor($ancho,$alto);
+
+		// preserve transparency
+		imagecolortransparent($lienzo_2_redim, imagecolorallocatealpha($lienzo_2_redim, 0, 0, 0, 127));
+	    imagealphablending($lienzo_2_redim, false);
+	    imagesavealpha($lienzo_2_redim, true);
+	
+		
+		//Copiar $original sobre la imagen que acabamos de crear en blanco ($tmp)
+		imagecopyresampled($lienzo_2_redim,$lienzo_2,0,0,0,0,$ancho, $alto,imagesx($lienzo_2),imagesy($lienzo_2));
+		
+		
+		imagecopy ( $lienzo , $lienzo_2_redim , 0 , 0 , 0 , 0 , $ancho , $alto );
+		return $lienzo;
 	}
 }
