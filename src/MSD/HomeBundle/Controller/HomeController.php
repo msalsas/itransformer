@@ -57,9 +57,8 @@ class HomeController extends Controller
 					{
 						if(list($ancho, $alto, $tipo, $atributos) = @getimagesize($_FILES['userfile']['tmp_name'])) 
 						{
-							if($ancho<10000 && $alto<10000) {
-								//echo $imagen->getRutaImagenes().session_id();
-								//exit;				
+							if($ancho<10000 && $alto<10000) 
+							{		
 								if(!is_dir($imagen->getRutaImagenes().session_id())) mkdir($imagen->getRutaImagenes().session_id(),0700);
 								$imagen->setRuta(str_replace('.'.$imagen->getFormato(),'0.'.$imagen->getFormato(), $imagen->getRutaImagenes().session_id().'/'.session_id().$imagen->getNombre()));
 								if(move_uploaded_file($_FILES['userfile']['tmp_name'], $imagen->getRuta()))
@@ -139,7 +138,7 @@ class HomeController extends Controller
 			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
 			readfile($imagen->getRuta());
 		} else {
-			readfile('public/img/default.png');
+			readfile('../img/default.png');
 		}						 
 	}
 		
@@ -684,37 +683,37 @@ class HomeController extends Controller
 			
 			//Efecto papel arrugado
 			if(isset($_POST['convertir_papel_arr']) && ($_POST['convertir_papel_arr']=='check')) {			
-				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/papel_arr2.png' );			
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), '../img/papel_arr2.png' );			
 			}
 
 			//Efecto antiguo
 			if(isset($_POST['convertir_antiguo']) && ($_POST['convertir_antiguo']=='check')) {				
-				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/antiguo.png' );
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), '../img/antiguo.png' );
 			}
 			
 			//Efecto fuego			
 			if(isset($_POST['convertir_fuego']) && ($_POST['convertir_fuego']=='check')) {			
-				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/fuego.png' );
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), '../img/fuego.png' );
 			}
 			
 			//Efecto luces
 			if(isset($_POST['convertir_luces']) && ($_POST['convertir_luces']=='check')) {				
-				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/luces.png' );
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), '../img/luces.png' );
 			}
 
 			//Efecto gotas
 			if(isset($_POST['convertir_gotas']) && ($_POST['convertir_gotas']=='check')) {				
-				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/gotas.png' );
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), '../img/gotas.png' );
 			}
 
 			//Efecto colores
 			if(isset($_POST['convertir_colores']) && ($_POST['convertir_colores']=='check')) {				
-				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/colores.png' );
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), '../img/colores.png' );
 			}
 			
 			//Efecto molón
 			if(isset($_POST['convertir_molon']) && ($_POST['convertir_molon']=='check')) {				
-				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/molon.png' );
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), '../img/molon.png' );
 			}
 			
 			
