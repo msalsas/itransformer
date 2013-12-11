@@ -697,6 +697,21 @@ class HomeController extends Controller
 				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/fuego.png' );
 			}
 			
+			//Efecto luces
+			if(isset($_POST['convertir_luces']) && ($_POST['convertir_luces']=='check')) {				
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/luces.png' );
+			}
+
+			//Efecto gotas
+			if(isset($_POST['convertir_gotas']) && ($_POST['convertir_gotas']=='check')) {				
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/gotas.png' );
+			}
+
+			//Efecto colores
+			if(isset($_POST['convertir_colores']) && ($_POST['convertir_colores']=='check')) {				
+				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), 'public/img/colores.png' );
+			}
+			
 			//Enmarcar			
 			if((isset($_POST['convertir_marco_horizontal']) && ($_POST['convertir_marco_horizontal']=='check'))  || (isset($_POST['convertir_marco_vertical']) && ($_POST['convertir_marco_vertical']=='check'))) {			
 				$ruta = (isset($_POST['convertir_marco_horizontal']) && ($_POST['convertir_marco_horizontal']=='check')) ? 'public/img/marco_horizontal.png' : 'public/img/marco_vertical.png';		
