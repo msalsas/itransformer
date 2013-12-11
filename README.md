@@ -129,6 +129,7 @@ and add this line:
 
     sudo a2ensite itransformer.conf
     sudo a2enmod rewrite expires
+    sudo service apache2 reload
     
 ###11. And that's all. Search for `itransformer/app_dev.php` in the URL bar to view in development mode. To view in production mode just search for `itransformer`.
 
