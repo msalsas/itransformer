@@ -719,7 +719,7 @@ class HomeController extends Controller
 			
 			//Enmarcar			
 			if((isset($_POST['convertir_marco_horizontal']) && ($_POST['convertir_marco_horizontal']=='check'))  || (isset($_POST['convertir_marco_vertical']) && ($_POST['convertir_marco_vertical']=='check'))) {			
-				$ruta = (isset($_POST['convertir_marco_horizontal']) && ($_POST['convertir_marco_horizontal']=='check')) ? 'public/img/marco_horizontal.png' : 'public/img/marco_vertical.png';		
+				$ruta = (isset($_POST['convertir_marco_horizontal']) && ($_POST['convertir_marco_horizontal']=='check')) ? '../img/marco_horizontal.png' : '../img/marco_vertical.png';		
 				$lienzo = $this->mergeImage( $lienzo, $imagen->getAncho(), $imagen->getAlto(), $ruta );
 			}
 			
