@@ -286,17 +286,9 @@ class HomeController extends Controller
 			//Rotar imagen
 			if(isset($_POST['rotar']) && ($_POST['rotar']=='check')) {		
 				if(isset($_POST['rotacion']) && is_numeric($_POST['rotacion']) && $_POST['rotacion']<=360 && $_POST['rotacion']>=0 ) {	
-					//cambiar las dimensiones de la imagen
-									
-					//$x = abs(floor(($imagen->getAlto() * cos(deg2rad(90 - $_POST['rotacion']))) + abs($imagen->getAncho() * cos(deg2rad($_POST['rotacion']))))-2);
-					//$y = abs(floor(($imagen->getAlto() * cos(deg2rad($_POST['rotacion']))) + abs($imagen->getAncho() * cos(deg2rad(90 - $_POST['rotacion']))))-2);
-					$x = floor( abs($imagen->getAncho() * cos(deg2rad($_POST['rotacion']))) - 2 + abs($imagen->getAlto() * sin(deg2rad($_POST['rotacion']))) - 2);
-					$y = floor( abs($imagen->getAncho() * sin(deg2rad($_POST['rotacion']))) - 2 + abs($imagen->getAlto() * cos(deg2rad($_POST['rotacion']))) - 2);
-					
-					$imagen->setAlto($y+2);
-					$imagen->setAncho($x+2);
 					if($lienzo = imagerotate ($lienzo, $_POST['rotacion'], 0)){
-							
+					$imagen->setAlto(imagesy($lienzo));
+					$imagen->setAncho(imagesx($lienzo));		
 					}else $imagen->setError('La rotación no fue realizada');
 				} else $imagen->setError('El ángulo debe ser un número entre 0 y 360');
 			}
