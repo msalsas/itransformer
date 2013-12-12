@@ -288,8 +288,11 @@ class HomeController extends Controller
 				if(isset($_POST['rotacion']) && is_numeric($_POST['rotacion']) && $_POST['rotacion']<=360 && $_POST['rotacion']>=0 ) {	
 					//cambiar las dimensiones de la imagen
 									
-					$x = abs(floor(($imagen->getAlto() * cos(deg2rad(90 - $_POST['rotacion']))) + abs($imagen->getAncho() * cos(deg2rad($_POST['rotacion']))))-2);
-					$y = abs(floor(($imagen->getAlto() * cos(deg2rad($_POST['rotacion']))) + abs($imagen->getAncho() * cos(deg2rad(90 - $_POST['rotacion']))))-2);
+					//$x = abs(floor(($imagen->getAlto() * cos(deg2rad(90 - $_POST['rotacion']))) + abs($imagen->getAncho() * cos(deg2rad($_POST['rotacion']))))-2);
+					//$y = abs(floor(($imagen->getAlto() * cos(deg2rad($_POST['rotacion']))) + abs($imagen->getAncho() * cos(deg2rad(90 - $_POST['rotacion']))))-2);
+					$x = floor( abs($imagen->getAncho() * cos(deg2rad($_POST['rotacion']))) - 2 + abs($imagen->getAlto() * sin(deg2rad($_POST['rotacion']))) - 2);
+					$y = floor( abs($imagen->getAncho() * sin(deg2rad($_POST['rotacion']))) - 2 + abs($imagen->getAlto() * cos(deg2rad($_POST['rotacion']))) - 2);
+					
 					$imagen->setAlto($y);
 					$imagen->setAncho($x);
 					if($lienzo = imagerotate ($lienzo, $_POST['rotacion'], 0)){
