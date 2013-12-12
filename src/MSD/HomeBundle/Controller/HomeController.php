@@ -293,8 +293,8 @@ class HomeController extends Controller
 					$x = floor( abs($imagen->getAncho() * cos(deg2rad($_POST['rotacion']))) - 2 + abs($imagen->getAlto() * sin(deg2rad($_POST['rotacion']))) - 2);
 					$y = floor( abs($imagen->getAncho() * sin(deg2rad($_POST['rotacion']))) - 2 + abs($imagen->getAlto() * cos(deg2rad($_POST['rotacion']))) - 2);
 					
-					$imagen->setAlto($y);
-					$imagen->setAncho($x);
+					$imagen->setAlto($y+2);
+					$imagen->setAncho($x+2);
 					if($lienzo = imagerotate ($lienzo, $_POST['rotacion'], 0)){
 							
 					}else $imagen->setError('La rotación no fue realizada');
