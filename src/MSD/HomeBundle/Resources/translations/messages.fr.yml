@@ -19,13 +19,13 @@
 'Adjunta una imagen para transformarla': 'Joignez une image à transformer'
 'Bienvenido a Itransformer.es': 'Bienvenue à Itransformer.es'
 'Mediante esta aplicación web, podrás aplicar filtros de procesamiento de imágenes a tus propias imágenes.': "Grâce à cette application Web, vous pouvez appliquer des filtres de traitement d'image de vos propres images."
-'Dispones de muchos tipos de filtros, efectos y transformaciones.': 'Détenir de nombreux types de filtres, effets et transformations.'
-'Transformaciones básicas: cambiar dimensiones, recortar, cambiar brillo, cambiar contraste y rotar.': "Transformations: changement dimensions, la culture, le changement de luminosité, le contraste et le changement tournent."
-'Filtros: convertir a grises, convertir a negativo, filtro de resaltar bordes, filtro de resaltar relieve, filtro de eliminación media, poner borroso, poner borroso (efecto Gaussiano), filtro de suavizado, filtro de pixelación, filtro de convolución y corrección gamma.': "Filtres: niveaux de gris, la négation, filtre de détection de bord, gaufrer, l'enlèvement, le flou, flou (effet de Gauss), lisse, pixelate, convolution et la correction gamma signifient."
+'Dispones de muchos tipos de filtros, efectos y transformaciones.': 'Ont de nombreux types de filtres, effets et transformations.'
+'Transformaciones básicas: cambiar dimensiones, recortar, cambiar brillo, cambiar contraste y rotar.': "Transformations: changement dimensions, garniture, le changement de luminosité, le contraste et le changement tournent."
+'Filtros: convertir a grises, convertir a negativo, filtro de resaltar bordes, filtro de resaltar relieve, filtro de eliminación media, poner borroso, poner borroso (efecto Gaussiano), filtro de suavizado, filtro de pixelación, filtro de convolución y corrección gamma.': "Filtres: niveaux de gris, negatif, filtre de détection de bord, gaufrer, l'enlèvement, le flou, flou (effet de Gauss), lisse, pixelate, convolution et la correction gamma signifient."
 'Efectos: colorear, resaltar colores, atenuar colores, efecto lápiz fino, efecto lápiz grueso, efecto pintura, efecto Che Guevara, efecto papel arrugado, efecto antiguo, efecto fuego, efecto gotas, efecto luces, efecto colores, efecto molón y enmarcar.': "Effets: coloriser, mettre en évidence les couleurs, la décoloration des couleurs, crayon mince attirer effet, crayon gras dessiner, effet de peinture , effet de Che Guevara, effet de papier froissé, effet antique, effet feu, effet gouttes, effet lumières, effet couleurs, effet frais et cadre."
 'Todo ello, utilizando PHP y la librería gd.': 'Tout cela, en utilisant PHP et GD vendeur.'
 'Poco a poco iré mejorando la aplicación y añadiendo más funcionalidades de procesamiento y transformación de imágenes.': "Je vais progressivement améliorer et ajouter plus de fonctionnalités traitement de la demande et de traitement d'image."
-'También hay un foro, donde puedes comentar, sugerir, ... Pero tienes que registrarte antes.': 'Il ya aussi un forum où vous pouvez commenter, suggérer, ... Mais vous devez vous inscrire avant.'
+'También hay un foro, donde puedes comentar, sugerir, ... Pero tienes que registrarte antes.': 'Il y a aussi un forum où vous pouvez commenter, suggérer, ... Mais vous devez vous inscrire avant.'
 'Gracias por visitarme!!': 'Merci de votre visite!!'
 'Puedes encontrar más información y ejemplos sobre procesamiento de imágenes en los siguientes enlaces': 'Vous pouvez trouver de plus amples informations et des exemples sur les filtres suivants liens'
 'Procesamiento de imágenes': "Traitement de l'image"
@@ -39,7 +39,7 @@
 'Para volver a la imagen anterior a la última transformación haz clic en <i>Atrás</i>. Podrás volver atrás hasta cuatro veces.': "Pour revenir à l'image précédente à la transformation finale cliquez sur <i>Retour</i>. Vous pouvez revenir jusqu'à quatre fois."
 'Para volver a adjuntar otra imagen, tienes que eliminar la imagen que estés utilizando haciendo clic en <i>Eliminar</i>. Volverás de nuevo a la página de inicio.': "Pour rattacher une autre image, vous devez supprimer l'image que vous utilisez en cliquant sur ​​<i>Supprimer</i>. Retour à la page d'accueil."
 'PRIVACIDAD DE LAS IMÁGENES': 'VIE PRIVÉE DES IMAGES'
-'Cuando adjuntas una imágen, ésta es guardada temporalmente en el servidor para su tratamiento. Cuando haces clic en <i>Eliminar</i>, la imagen es borrada del servidor.': "Lorsque vous attachez une image, il est stocké temporairement sur ​​le serveur pour traitement. Lorsque vous cliquez sur <i>Supprimer</i> ,l'image est supprimée du serveur."
+'Cuando adjuntas una imágen, ésta es guardada temporalmente en el servidor para su tratamiento. Cuando haces clic en <i>Eliminar</i>, la imagen es borrada del servidor.': "Si vous attachez une image, il est stocké temporairement sur ​​le serveur pour leur traitement. Si vous cliquez sur <i>Supprimer</i> ,l'image est supprimée du serveur."
 'Si cierras el navegador sin eliminar la imagen no te preocupes, la imagen se borrará automáticamente del servidor en media hora aproximadamente.': "Si vous fermez le navigateur sans supprimer la photo ne vous inquiétez pas, l'image est automatiquement supprimé du serveur dans une demi-heure."
 'Aún así, no adjuntes imágenes con datos confidenciales, personales o que puedan dañar la integridad de cualquier persona.': "Pourtant, pas joindre des images avec des données sensibles, personnelles ou qui peuvent nuire à l'intégrité d'une personne."
 'Si quieres ponerte en contacto conmigo puedes hacerlo a través de las redes sociales, el formulario de <a href="http://msalsas.com">msalsas.com</a>, o a través de correo electrónico.': "Si vous voulez me contacter, vous pouvez le faire à travers les réseaux sociaux, le formulaire <a href='http://msalsas.com'>msalsas.com</a>, ou par courriel."
@@ -128,17 +128,17 @@
 'Error de extensión del archivo': "Une extension PHP a arrêté le téléchargement de fichier"
 'Error desconocido': "Erreur inconnue"
 'No se ha subido la imagen': "L'image n'a pas été téléchargée"
-'Las dimensiones introducidas son demasiado grandes. Máximo 6000 x 6000': "Les dimensions sont introduites trop grand. Max 6000 x 6000"
-'Las dimensiones introducidas son demasiado grandes. Máximo escalas de +1000': "Les dimensions sont introduites trop grand. Échelle Max +1000"
+'Las dimensiones introducidas son demasiado grandes. Máximo 6000 x 6000': "Les dimensions introduites sont trop grandes. Max 6000 x 6000"
+'Las dimensiones introducidas son demasiado grandes. Máximo escalas de +1000': "Les dimensions introduites sont trop grandes. Échelle Max +1000"
 'Los datos introducidos no son enteros': "Les données introduites ne sont pas des nombres entiers"
 'Los datos introducidos no pueden ser nulos': "Les données introduites ne peuvent pas être null"
 'No se han cargado datos': "Aucune donnée n'a été chargé"
-'Los valores de recorte no son correctos': "Les valeurs des cultures ne sont pas correctes"
-'Los valores de recorte deben ser numéricos': "Les valeurs des cultures doivent être numériques"
+'Los valores de recorte no son correctos': "Les valeurs de coupure ne sont pas correctes"
+'Los valores de recorte deben ser numéricos': "Les valeurs de coupure doivent être numériques"
 'La rotación no fue realizada': "Pas de rotation fait"
 'El ángulo debe ser un número entre 0 y 360': "L'angle doit être un nombre entre 0 et 360"
 'El contraste debe ser un número entre -1000 y 1000': "La valeur de contraste doit être un nombre entre -1000 et +1000"
-'El suavizado debe ser un número entre -5000 y 5000': "Le bon doit être une valeur comprise entre -5000 et 5000"
+'El suavizado debe ser un número entre -5000 y 5000': "Le atténué doit être une valeur comprise entre -5000 et 5000"
 'El tamaño de bloque debe ser un número entre 0 y 1000000': "La taille de bloc doit être un nombre entre 0 et 1000000"
 'Los valores de la matriz deben ser números entre -255 y +255': "Les valeurs de la matrice doivent être des nombres entre -255 et +255"
 'El valor de offset debe ser un número entre -1000 y 1000': "La valeur de décalage doit être un nombre entre -1000 et 1000"
