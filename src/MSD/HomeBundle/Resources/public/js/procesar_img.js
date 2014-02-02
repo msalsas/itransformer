@@ -52,58 +52,7 @@ $("#img_cargada").attr("display","none")
 		
 	})
 
-	//**********************************************************
-	//************* Pasar datos por AJAX ***********************
-	//**********************************************************
-	
-	formularioAjax($("#form_basico"));	
-	formularioAjax($("#form_filtros"));
-	formularioAjax($("#form_efectos"));
-	
 
-	//************** Ir a la imagen anterior ***************************
-	
-	var enlace = $(".atras");
-	enlace.on("click", function(e){	
-	
-		e.preventDefault();
-		$("#error_ajax").text("");
-		var offsetImg = $("#columna").offset(); 
-		$(document).scrollTop(offsetImg.top);
-		var nombre = $("#img_cargada").attr("src")
-			var img_cargando = $("#img_cargando");
-			var img_cargada = $("#img_cargada");
-			img_cargada.data("height",$("#img_cargada").attr("height"))
-			img_cargando.css("margin-top",($("#img_cargada").data("height")-40)/2);
-			img_cargando.show()
-			//ocultar imagen
-			img_cargada.hide(500);
-			objAjax = $.ajax ({
-			type: "POST",
-			url: enlace.attr("formaction"),
-			success: function(res){
-				$("#imagen").html(res);
-				var img_cargada = $("#img_cargada");
-				var res = redimensionarImagen();
-				var alto_orig = res[1]
-				var ancho_orig = res[0]
-				var nuevaRuta = img_cargada.attr("src")
-				rangosRecorte(ancho_orig,alto_orig)
-				},
-			error: function(objAjax,estado,excepcion){
-				$("#error_ajax").text("Error: Try again").css("color","red");
-				},
-			timeout: 10000,
-			cache: false
-			})
-			objAjax.always(function(){
-				img_cargando.hide()
-			})
-	});
-
-	$("#form_borrar").on("submit", function(e){
-			$("#img_cargada").effect("explode",500)			
-	})
 });
 
 /**
@@ -114,13 +63,25 @@ $("#img_cargada").attr("display","none")
 $(function() {
 	
 	var res = redimensionarImagen();
-	var alto_orig = res[1]
-	var ancho_orig = res[0]	
+	var alto_orig = res[1];
+	var ancho_orig = res[0];	
 	$(".mostrar-ocultar").mostrarOcultar();
 	$(".mostrar-ocultar").on("change", function(){
 		$(this).mostrarOcultar()
 		});
-	
+	$(".directo").on("change", function(){
+		if($(this).is(":checked"))	formularioAjax($(this).closest("form"), "action");
+		else formularioAjax($(".atras").first(), "formaction");
+		});
+	$(".aplicar").on("click", function(e) {
+		e.preventDefault();
+		formularioAjax($(this).closest("form"), "action");
+		});
+	$(".atras").on("click", function(e){
+		e.preventDefault();
+		formularioAjax($(this), "formaction");
+		});
+			
 	$("input[type=number]").each(function(index, elem) {
 		var input = $(this);
 		input.attr("title","MIN: " + input.attr("min") + " , MAX: " + input.attr("max"))		
@@ -141,24 +102,37 @@ $(function() {
 	
 	//Canvas para recorte
 	
-
-	$("#recortar_izq, #recortar_der, #recortar_arr, #recortar_aba").spinner({
-	start: function() {
-		img=$("img_cargada")
+	$("#recortar").on("change", function(){
 		
-		$("#lienzo").offset({ left:$("#img").offset().left+margen_izquierdo_canvas, top: $("#img").offset().top });
-		iniciarCanvas();
-		lienzo.clearRect(0,0,$("#lienzo").attr("width"),$("#lienzo").attr("height"))
+		if($(this).is(":checked")) {
 			
-			},
-	stop: function() {	
-				var izquierda = $("#recortar_izq").val()*$("#img_cargada").attr("width")/$("#img_cargada").data("ancho_orig");
-				var derecha = $("#recortar_der").val()*$("#img_cargada").attr("width")/$("#img_cargada").data("ancho_orig");
-				var arriba = $("#recortar_arr").val()*$("#img_cargada").attr("height")/$("#img_cargada").data("alto_orig");
-				var abajo = $("#recortar_aba").val()*$("#img_cargada").attr("height")/$("#img_cargada").data("alto_orig");
-				lienzo.strokeRect(izquierda, arriba, $("#lienzo").attr("width")-izquierda-derecha, $("#lienzo").attr("height")-abajo-arriba)
-			}
+			$("#recortar_izq, #recortar_der, #recortar_arr, #recortar_aba").spinner({
+			start: function() {
+				img=$("img_cargada")
+				
+				$("#lienzo").offset({ left:$("#img").offset().left+margen_izquierdo_canvas, top: $("#img").offset().top });
+				iniciarCanvas();
+				lienzo.clearRect(0,0,$("#lienzo").attr("width"),$("#lienzo").attr("height"))
+					
+					},
+			stop: function() {	
+						var izquierda = $("#recortar_izq").val()*$("#img_cargada").attr("width")/$("#img_cargada").data("ancho_orig");
+						var derecha = $("#recortar_der").val()*$("#img_cargada").attr("width")/$("#img_cargada").data("ancho_orig");
+						var arriba = $("#recortar_arr").val()*$("#img_cargada").attr("height")/$("#img_cargada").data("alto_orig");
+						var abajo = $("#recortar_aba").val()*$("#img_cargada").attr("height")/$("#img_cargada").data("alto_orig");
+						lienzo.strokeRect(izquierda, arriba, $("#lienzo").attr("width")-izquierda-derecha, $("#lienzo").attr("height")-abajo-arriba)
+					}
+			});
+		
+		} else {
+		
+			iniciarCanvas();
+			lienzo.clearRect(0,0,$("#lienzo").attr("width"),$("#lienzo").attr("height"))
+			
+		}
+		
 	});
+	
 });	
 
 /***********************************************************************
@@ -215,12 +189,8 @@ function redimensionarImagen() {
 	return res
 }
 
-function formularioAjax(formulario) {
-	
-	//Aplicar formulario 
-	formulario.on("submit", function(e){
-	
-		e.preventDefault();
+function formularioAjax(formulario, action) {
+
 		$("#error_ajax").text("");
 		var offsetImg = $("#columna").offset(); 
 		$(document).scrollTop(offsetImg.top);
@@ -233,7 +203,7 @@ function formularioAjax(formulario) {
 		img_cargada.hide(500);
 		objAjax = $.ajax ({
 		type: "POST",
-		url: formulario.attr("action"),
+		url: formulario.attr(action),
 		data: formulario.serialize(),
 		success: function(res){
 			$("#imagen").html(res);
@@ -244,7 +214,6 @@ function formularioAjax(formulario) {
 			$("#dimensionesX").val(ancho_orig)
 			mantenerProporciones("dimensionesX", ancho_orig, alto_orig)	
 			var nuevaRuta = img_cargada.attr("src")
-			$("input[type=checkbox]").attr('checked', false);
 			$(".mostrar-ocultar").mostrarOcultar();
 			rangosRecorte(ancho_orig,alto_orig)
 			$("#recortar_izq, #recortar_der, #recortar_arr, #recortar_aba").val(0);
@@ -257,8 +226,7 @@ function formularioAjax(formulario) {
 		})
 		objAjax.always(function(){
 			img_cargando.hide()
-			
-		})
+
 	});
 } 
 

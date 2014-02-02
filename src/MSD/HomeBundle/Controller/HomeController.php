@@ -24,6 +24,7 @@ namespace MSD\HomeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use MSD\HomeBundle\Entity\Imagen as Imagen;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {
@@ -176,10 +177,913 @@ class HomeController extends Controller
 	
 		} else {
 				return $this->render('MSDHomeBundle:Home:index.html.twig');
-			}
+		}
 		
 	}
 	
+	public function cambiarDimensionesAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			if ($request->getMethod() == 'POST') {
+					$iNewWidth = $request->request->get('dimensionesX');
+					$iNewHeight = $request->request->get('dimensionesY');
+				  
+				$canvas = $imagen->changeDimensions( $iNewWidth, $iNewHeight, 10000, 10000 );
+				
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+				
+			} 
+		} 
+		
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+		
+		
+	}
+	
+	public function recortarAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+				if ($request->getMethod() == 'POST') {
+					$cropLeft = $request->request->get('recortar_izq');
+					$cropRight = $request->request->get('recortar_der');
+					$cropTop = $request->request->get('recortar_arr');
+					$cropBottom = $request->request->get('recortar_aba');
+					
+					$canvas = $imagen->cropImage( $cropLeft, $cropRight, $cropTop, $cropBottom );
+					
+					if( $imagen->getError() == "" )
+					{
+						$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+					} 
+					
+					return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+					
+				} 
+			 
+		}	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}		
+
+
+	public function cambiarBrilloAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			if ($request->getMethod() == 'POST') {
+				$brightness = $request->request->get('brillo');
+
+				$canvas = $imagen->filterImage( $brightness, IMG_FILTER_BRIGHTNESS, 255, -255 );	
+													
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+				
+			} 
+			 
+		}	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}		
+
+	public function cambiarContrasteAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			if ($request->getMethod() == 'POST') {
+				$contraste = $request->request->get('contraste');
+				
+				$canvas = $imagen->filterImage( $contraste, IMG_FILTER_CONTRAST, 1000, -1000 );
+									
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+				
+			} 
+			 
+		}	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}			
+
+	public function rotarAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			if ($request->getMethod() == 'POST') {
+				$rotacion = $request->request->get('rotacion');
+				
+				$canvas = $imagen->rotateImage( $rotacion );
+										
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+				
+			} 
+			 
+		}	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function cambiarAGrisesAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->filterImage( 0, IMG_FILTER_GRAYSCALE );
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+		
+	
+	public function cambiarANegativoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->filterImage( 0, IMG_FILTER_NEGATE );
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+									
+	public function resaltarBordesAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->filterImage( 0, IMG_FILTER_EDGEDETECT );
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function resaltarRelieveAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->filterImage( 0, IMG_FILTER_EMBOSS );
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function eliminacionMediaAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->filterImage( 0, IMG_FILTER_MEAN_REMOVAL );
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+
+	public function borrosoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->filterImage( 0, IMG_FILTER_SELECTIVE_BLUR );
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function borrosogaussAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->filterImage( 0, IMG_FILTER_GAUSSIAN_BLUR );
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function suavizadoAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+			if ($request->getMethod() == 'POST') {
+				
+				$suavizado = $request->request->get('suavizado');
+					
+				$canvas = $imagen->filterImage( $suavizado, IMG_FILTER_SMOOTH, 5000, -5000 );
+									
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			}
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function pixelacionAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+			if ($request->getMethod() == 'POST') {
+				
+				$pixelacion = $request->request->get('pixelacion');
+					
+				$canvas = $imagen->filterImage( $pixelacion, IMG_FILTER_PIXELATE, 1000000, 0 );
+									
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			}
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function convolucionAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+			if ($request->getMethod() == 'POST') {
+				
+				$matriz= array(array(3), array(3), array(3));
+				for($i=0;$i<=8;$i++) {
+					$value = $request->request->get('convolucion_matriz_'.$i);
+
+					if($i<3) $matriz[0][$i] = $value;
+					elseif($i<6) $matriz[1][$i-3] = $value;
+					elseif($i<9) $matriz[2][$i-6] = $value;
+				}
+				
+				$divisor = $request->request->get('convolucion_divisor');
+				$offset = $request->request->get('convolucion_offset');
+				
+				$canvas = $imagen->convolutionFilterImage( $matriz, $divisor, $offset );
+
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			}
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+
+	public function correcciongammaAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+			if ($request->getMethod() == 'POST') {
+				
+				$entrada = $request->request->get('entrada_gamma');				
+				$salida = $request->request->get('salida_gamma');
+					
+				$canvas = $imagen->gammaCorrectionImage( $entrada, $salida );
+									
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			}
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+
+	public function colorearAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+			if ($request->getMethod() == 'POST') {
+				
+				$rojo = $request->request->get('colorear_r');				
+				$verde = $request->request->get('colorear_g');
+				$azul = $request->request->get('colorear_b');
+				$alfa = $request->request->get('alfa');
+					
+				$canvas = $imagen->colorizeImage( $rojo, $verde, $azul, $alfa );
+									
+				if( $imagen->getError() == "" )
+				{
+					$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+				} 
+				
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			}
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function resaltarcoloresAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+			if ($request->getMethod() == 'POST') {
+				
+				$inputRojo = $request->request->get('resaltar_colores_r');				
+				$inputVerde = $request->request->get('resaltar_colores_g');
+				$inputAzul = $request->request->get('resaltar_colores_b');
+				
+				
+				if( $inputRojo == 'check' ) {
+					$canvas = $imagen->highlightRedImage();
+					if( $imagen->getError() == "" )
+					{
+						$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+					} 
+				}
+				
+				if(  $inputVerde == 'check' ) {
+					$canvas = $imagen->highlightGreenImage();
+					if( $imagen->getError() == "" )
+					{
+						$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+					} 
+				}
+				
+				if(  $inputAzul == 'check' ) {
+					$canvas = $imagen->highlightBlueImage();
+					if( $imagen->getError() == "" )
+					{
+						$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+					} 
+				}
+									
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());	
+			}
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}	
+	
+	public function atenuarcoloresAction(Request $request)
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+			
+			if ($request->getMethod() == 'POST') {
+				
+				$inputRojo = $request->request->get('atenuar_colores_r');				
+				$inputVerde = $request->request->get('atenuar_colores_g');
+				$inputAzul = $request->request->get('atenuar_colores_b');
+				
+				
+				if( $inputRojo == 'check' ) {
+					$canvas = $imagen->attenuateRedImage();
+					if( $imagen->getError() == "" )
+					{
+						$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+					} 
+				}
+				
+				if(  $inputVerde == 'check' ) {
+					$canvas = $imagen->attenuateGreenImage();
+					if( $imagen->getError() == "" )
+					{
+						$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+					} 
+				}
+				
+				if(  $inputAzul == 'check' ) {
+					$canvas = $imagen->attenuateBlueImage();
+					if( $imagen->getError() == "" )
+					{
+						$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+					} 
+				}
+									
+				return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());	
+			}
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}	
+	
+	public function lapizsuperfinoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->superthinpencilEffect();
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function lapizfinoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->thinpencilEffect();
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function lapiznormalAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->regularpencilEffect();
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	
+	public function lapizgruesoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->thickpencilEffect();
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function efectopinturaAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->paintEffect();
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function efectoCheAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->cheGuevaraEffect();
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+
+	public function papelarrugadoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('wrinkledPaper');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function antiguoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('old');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function fuegoAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('fire');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function gotasAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('drops');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function lucesAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('lights');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function coloresAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('colors');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function molonAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('cool');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function marcohorizontalAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('horizontal_frame');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	public function marcoverticalAction()
+	{
+		if( isset($_SESSION['id']) )
+		{		
+			$em = $this->getDoctrine()->getEntityManager();
+			$imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id']);
+
+			$canvas = $imagen->overlapEffect('vertical_frame');
+								
+			if( $imagen->getError() == "" )
+			{
+				$imagen = $this->createDeletePersistImage($imagen, $canvas, $em);
+			} 
+			
+			return $this->renderTemplateVerCambios($imagen->getAncho(), $imagen->getAlto(), $imagen->getError());
+			
+		} 
+			 	
+		return $this->renderTemplateVerCambios(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+	}
+	
+	
+	
+	protected function renderTemplateVerCambios($ancho, $alto, $error) 
+	{
+		return $this->render(
+					'MSDHomeBundle:Home:vercambios.html.twig',
+					array(
+					'imagen' => array('dimx' => $ancho,
+									  'dimy' => $alto,
+									  'error' => $error
+					)
+					)
+					);
+	}
+	
+	protected function createDeletePersistImage($imagen, $lienzo, $em)
+	{
+		/***********************************************************
+		 ***************** CREAR NUEVA IMAGEN **********************
+		 * *************** Y BORRAR ANTIGUAS ***********************
+		 * ********************************************************/
+		
+		if($imagen->getError()==='') {
+			$imagen->setNumeroImagen($imagen->getNumeroImagen() + 1);			
+			if($imagen->getNumeroImagen() < 11) {
+				$rempl = substr($imagen->getRuta(),strrpos($imagen->getRuta(),'.')-1);
+			} elseif ($imagen->getNumeroImagen() >=11 && $imagen->getNumeroImagen() <101) {
+				$rempl = substr($imagen->getRuta(),strrpos($imagen->getRuta(),'.')-2);
+			} elseif ($imagen->getNumeroImagen() >=101 && $imagen->getNumeroImagen() <1001) {
+				$rempl = substr($imagen->getRuta(),strrpos($imagen->getRuta(),'.')-3);
+			} elseif ($imagen->getNumeroImagen() >=1001 && $$imagen->getNumeroImagen() <5001) {
+				$rempl = substr($imagen->getRuta(),strrpos($imagen->getRuta(),'.')-4);
+			} else {
+				$imagen->setError('Has sobrepasado el límite. Recarga la página');
+				$rempl = substr($imagen->getRuta(),strrpos($imagen->getRuta(),'.')-4);
+				for($i=0;$i<=5;$i++) {
+					if(file_exists(str_replace($imagen->getNumeroImagen().'.'.$imagen->getFormato(),($imagen->getNumeroImagen()-$i).'.'.$imagen->getFormato(),$imagen->getRuta())))
+						unlink(str_replace($imagen->getNumeroImagen().'.'.$imagen->getFormato(),($imagen->getNumeroImagen()-$i).'.'.$imagen->getFormato(),$imagen->getRuta()));
+					}
+				exit();
+			}
+			
+			
+			$imagen->setRuta(str_replace($rempl,$imagen->getNumeroImagen().'.'.$imagen->getFormato(),$imagen->getRuta()));
+			$this->crearImagen($lienzo, $imagen->getRuta(), $imagen->getFormato());
+						
+			//Borramos imagen anterior a la anterior
+			if($imagen->getNumeroImagen() >= 5) {
+				if(file_exists(str_replace($imagen->getNumeroImagen().'.'.$imagen->getFormato(),($imagen->getNumeroImagen()-5).'.'.$imagen->getFormato(),$imagen->getRuta())))
+					unlink(str_replace($imagen->getNumeroImagen().'.'.$imagen->getFormato(),($imagen->getNumeroImagen()-5).'.'.$imagen->getFormato(),$imagen->getRuta()));		
+			}
+			
+			$em->flush();
+		}	
+			
+			return $imagen;
+	}	
+
+	
+	protected function getImageManager() 
+	{		
+		if(isset($_SESSION['id'])) 
+		{					
+			$em = $this->getDoctrine()->getEntityManager();
+			 return $em;
+		} 
+		return false;
+	}
+	
+	protected function getImageRepository($em)
+	{ 
+		if($imagen = $em->getRepository('MSDHomeBundle:Imagen')->find($_SESSION['id'])) return $imagen;
+		else return false;
+	}
+	
+	protected function createOriginalCanvas($imagen) 
+	{
+		if($original = $this->crearLienzo($imagen->getRuta(), $imagen->getFormato())) return $original;
+		else return false;
+	}
+	
+
 	public function vercambiosAction()
 	{		
 		//$imagen->setError('');
@@ -198,7 +1102,7 @@ class HomeController extends Controller
 			/***********************************************************
 			/***************** CAMBIAR DIMENSIONES *********************
 			 * ********************************************************/	
-		
+	/*	
 			//Comprobar que checkbox cambiar dimensiones está activado
 			if(isset($_POST['cambiar_dim']) && $_POST['cambiar_dim']=='check') {						
 				//Comprobar que los datos recibidos son correctos
@@ -236,14 +1140,14 @@ class HomeController extends Controller
 				} else $imagen->setError('No se han cargado datos');
 			}
 			
-			
+	*/		
 			
 			/***********************************************************
 			/***************** RECORTAR IMAGEN ****************************
 			 * ********************************************************/
 			
 			//Recortar imagen
-			
+		/*	
 			if(isset($_POST['modif_recortar']) && ($_POST['modif_recortar']=='check')) {		
 				if(isset($_POST['recortar_izq']) && isset($_POST['recortar_der'])  && isset($_POST['recortar_arr'])  && isset($_POST['recortar_aba'])) {
 					if(is_numeric($_POST['recortar_izq']) && is_numeric($_POST['recortar_der']) && is_numeric($_POST['recortar_arr']) && is_numeric($_POST['recortar_aba'])) { 
@@ -278,13 +1182,13 @@ class HomeController extends Controller
 				
 			if(!isset($lienzo))
 			$lienzo=$original;
-			
+	*/		
 			/***********************************************************
 			/***************** ROTAR IMAGEN ****************************
 			 * ********************************************************/
 			
 			//Rotar imagen
-			if(isset($_POST['rotar']) && ($_POST['rotar']=='check')) {		
+	/*		if(isset($_POST['rotar']) && ($_POST['rotar']=='check')) {		
 				if(isset($_POST['rotacion']) && is_numeric($_POST['rotacion']) && $_POST['rotacion']<=360 && $_POST['rotacion']>=0 ) {	
 					if($lienzo = imagerotate ($lienzo, $_POST['rotacion'], 0)){
 					$imagen->setAlto(imagesy($lienzo));
@@ -292,12 +1196,12 @@ class HomeController extends Controller
 					}else $imagen->setError('La rotación no fue realizada');
 				} else $imagen->setError('El ángulo debe ser un número entre 0 y 360');
 			}
-				
+	*/			
 			
 			/***********************************************************
 			/***************** CAMBIAR BRILLO Y CONTRASTE **************
 			 * ********************************************************/	
-			
+	/*		
 			//Cambiar brillo
 			if(isset($_POST['modif_brillo']) && ($_POST['modif_brillo']=='check')) {		
 				if(isset($_POST['brillo']) && is_numeric($_POST['brillo']) && $_POST['brillo']<256 && $_POST['brillo']>-256) {
@@ -312,13 +1216,13 @@ class HomeController extends Controller
 				} else $imagen->setError('El contraste debe ser un número entre -1000 y 1000');
 			}
 			
-			
+		*/	
 			/***********************************************************
 			/***************** APLICAR FILTROS *********************
 			 * ********************************************************/
 			
 			//Filtro grises
-			if(isset($_POST['convertir_grises']) && ($_POST['convertir_grises']=='check')) {		
+			/*if(isset($_POST['convertir_grises']) && ($_POST['convertir_grises']=='check')) {		
 				imagefilter($lienzo, IMG_FILTER_GRAYSCALE);
 			}
 			
@@ -415,7 +1319,7 @@ class HomeController extends Controller
 			/***************** EFECTOS ********************************
 			 * ********************************************************/
 			
-							
+			/*				
 			//Filtro colorear
 			if(isset($_POST['convertir_colorear']) && ($_POST['convertir_colorear']=='check')) {		
 				if(isset($_POST['colorear_r']) && is_numeric($_POST['colorear_r']) && $_POST['colorear_r']<=255 && $_POST['colorear_r']>=0 ) {
@@ -478,10 +1382,10 @@ class HomeController extends Controller
 					}
 				}
 													
-			}
+			}*/
 		
 			//Atenuar colores
-			if(isset($_POST['convertir_atenuar_colores']) && ($_POST['convertir_atenuar_colores']=='check')) {		
+			/*if(isset($_POST['convertir_atenuar_colores']) && ($_POST['convertir_atenuar_colores']=='check')) {		
 				
 				if(isset($_POST['atenuar_colores_r'])  && ($_POST['atenuar_colores_r']=='check')) {
 					
@@ -530,7 +1434,7 @@ class HomeController extends Controller
 				}
 													
 			}
-			
+			*/
 			//Efecto dibujo a lápiz super fino
 			if(isset($_POST['convertir_lapiz_super_fino']) && ($_POST['convertir_lapiz_super_fino']=='check')) {
 						

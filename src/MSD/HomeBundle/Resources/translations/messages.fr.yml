@@ -138,6 +138,7 @@
 'La rotación no fue realizada': "Pas de rotation fait"
 'El ángulo debe ser un número entre 0 y 360': "L'angle doit être un nombre entre 0 et 360"
 'El contraste debe ser un número entre -1000 y 1000': "La valeur de contraste doit être un nombre entre -1000 et +1000"
+'El brillo debe ser un número entre -255 y 255': "La valeur de luminosité doit être un nombre entre -255 et +255"
 'El suavizado debe ser un número entre -5000 y 5000': "Le atténué doit être une valeur comprise entre -5000 et 5000"
 'El tamaño de bloque debe ser un número entre 0 y 1000000': "La taille de bloc doit être un nombre entre 0 et 1000000"
 'Los valores de la matriz deben ser números entre -255 y +255': "Les valeurs de la matrice doivent être des nombres entre -255 et +255"

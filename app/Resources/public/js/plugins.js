@@ -35,5 +35,4 @@ Contact: manolez@gmail.com - http://msalsas.com
 	   return this;
     };
 })(jQuery);
-	  
-	  
+

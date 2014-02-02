@@ -18,8 +18,13 @@
 
 parameters:
 #    msd_home.example.class: MSD\HomeBundle\Example
+     msd.controller.imagetrans.class: MSD\HomeBundle\Controller\ImageTransController
 
 services:
 #    msd_home.example:
 #        class: %msd_home.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+  msd.imagetrans.controller:
+    class:  "%msd.controller.imagetrans.class%"
+    arguments: [ @doctrine.orm.entity_manager  ]
+    #EntityManager: "@doctrine.orm.entity_manager"
