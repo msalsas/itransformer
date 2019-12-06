@@ -1,6 +1,0 @@
-[submodule "src/Bundle/ForumBundle"]
-	path = src/Bundle/ForumBundle
-	url = git://github.com/Herzult/ForumBundle.git
-[submodule "src/MSD/ForumBundle"]
-	path = src/MSD/ForumBundle
-	url = git://github.com/Herzult/ForumBundle.git

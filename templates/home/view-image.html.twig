@@ -1,0 +1,38 @@
+{# Itransformer.es is an online application to transform images
+Copyright (C) 2013  Manolo Salsas
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Contact: manolez@gmail.com - http://msalsas.com
+#}
+
+
+<div id="todo" style="position: absolute; top: 0; left: 0; width: 100%; height: 150%; background-color: rgba(20,20,20,0.5)">
+</div>
+<div id=cajaFoto style="position: absolute; top: 0%; left: 10%; width: 80%; height: auto; background-color: grey;">
+<div id="error">{{ imagen.error }}</div>
+<div id="img"><img id="img_cargada" src="{{ path('viewImageSample') }}" width="{{ imagen.ancho }}" height="{{ imagen.alto }}" data-alto_orig="{{ imagen.alto }}" data-ancho_orig="{{ imagen.ancho }}"></div>
+<figcaption>
+{% trans %}ancho{% endtrans %}: {{ imagen.ancho }} {% trans %}alto{% endtrans %}: {{ imagen.alto }}
+</figcaption>
+</div>
+<div id="botones" style="position: absolute; top: 10%; left: 15%; width: 40%; margin-top: 0; marginLeft: 0; font-size: 1.5em; border: 1px solid #999999; background-color: rgba(200,200,200,0.5); padding: 2%;">
+<p>{% trans %}¿Quieres usar esta imagen?{% endtrans %}</p>
+<form id="form_basico" action="{{ path('submitImage') }}" method="post">
+<input class="enviar" type="submit" value="{% trans %}Aceptar{% endtrans %}">
+</form>
+<form id="form_borrar" action="{{ path('index') }}" method="post">
+<input id="borrar" type="submit" value="{% trans %}Cancelar{% endtrans %}">
+</form>
+</div>
