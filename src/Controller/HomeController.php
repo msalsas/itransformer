@@ -258,7 +258,7 @@ class HomeController extends AbstractController
             $image = $entityManager->getRepository(Image::class)->find($session->getId());
 
             if ($request->getMethod() == 'POST') {
-                $contrast = (int) $request->request->get('brillo');
+                $contrast = (int) $request->request->get('contraste');
 
                 $image = $imageTransformer->changeContrast($image, $contrast);
 
