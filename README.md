@@ -1,7 +1,5 @@
-Itransformer.es
+Itransformer.es [![Build Status](https://travis-ci.org/msalsas/itransformer.svg?branch=big-refactor)](https://travis-ci.org/msalsas/itransformer)
 ===========
-
-[![Build Status](https://travis-ci.org/msalsas/itransformer.svg?branch=big-refactor)](https://travis-ci.org/msalsas/itransformer)
 
 Itransformer.es is an online free application made for image processing and transforming. The application lets you to apply several kind of basic transformations, filters and effects.
 
