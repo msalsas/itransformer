@@ -1,5 +1,5 @@
 {
-    "name": "itransformer",
+    "name": "msalsas/itransformer",
     "description": "Symfony application for image processing and transforming",
     "keywords": ["Image", "Processing"],
     "homepage": "https://github.com/msalsas/itransformer",
