@@ -82,9 +82,17 @@ class ImageTransformer
      * @param $image ImageInterface
      * @param $contrast integer
      * @return ImageInterface
+     * @throws ImageTransformerException
      */
     public function changeContrast(ImageInterface $image, $contrast)
     {
+        if (!is_int($contrast)) {
+            throw new ImageTransformerException("Contrast must be integers.");
+        }
+        if ($contrast < -1000 || $contrast > 1000) {
+            throw new ImageTransformerException("Contrast must be greater than -256 and less than 256.");
+        }
+
         $canvas = $this->createCanvas($image);
 
         imagefilter($canvas, IMG_FILTER_CONTRAST, $contrast);
@@ -100,10 +108,39 @@ class ImageTransformer
      * @param $right integer
      * @param $bottom integer
      * @param $left integer
+     * @return ImageInterface
+     * @throws \Exception
      */
     public function crop(ImageInterface $image, $top, $right, $bottom, $left)
     {
-        // TODO: Crop image
+        if (!is_int($top) || !is_int($right) || !is_int($bottom) || !is_int($left)) {
+            throw new ImageTransformerException("Top, right, bottom and left must be integers.");
+        }
+        if ($top < 0 || $right < 0 || $top < 0 || $bottom < 0) {
+            throw new ImageTransformerException("Top, right, bottom and left must be greater than 0.");
+        }
+        if (($left + $right) >= $image->getWidth() || ($top + $bottom) >= $image->getHeight()) {
+            throw new ImageTransformerException("Invalid parameters.");
+        }
+
+        $originalCanvas = $this->createCanvas($image);
+
+        $newWidth = $image->getWidth() - $left - $right;
+        $newHeight = $image->getHeight() - $top - $bottom;
+        $newCanvas = imagecreatetruecolor($newWidth, $newHeight);
+
+        $newCanvas = $this->preserveTransparencyIfPng($image, $newCanvas);
+
+        imagecopyresampled($newCanvas, $originalCanvas, 0, 0, $left, $top, $newWidth, $newHeight, $newWidth, $newHeight);
+
+        $image->setWidth(floor($newWidth));
+        $image->setHeight(floor($newHeight));
+        $this->setNewPath($image);
+        $this->imageUploader->save($image);
+
+        imagedestroy($originalCanvas);
+
+        return self::createImage($image, $newCanvas);
     }
 
     /**

@@ -24,6 +24,8 @@ class ImageTransformerTest extends WebTestCase
     const CHANGED_DIMENSION_1_NAME_WITH_EXTENSION = "changedDimension1.png";
     const CHANGED_BRIGHTNESS_1_NAME_WITH_EXTENSION = "changedBrightness1.png";
     const CHANGED_CONTRAST_1_NAME_WITH_EXTENSION = "changedContrast1.png";
+    const CROPPED_1_NAME_WITH_EXTENSION = "cropped1.png";
+
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
     const ORIGINAL_HEIGHT = 5;
@@ -98,32 +100,16 @@ class ImageTransformerTest extends WebTestCase
 
     public function testChangeDimensions()
     {
-        $image = new Image();
-        $image->setSessionId($this->session->getId());
-        $image->setPath(self::TARGET_PATH . "/" . self::ORIGINAL_NAME_WITH_EXTENSION);
-        $image->setExtension(self::ORIGINAL_EXTENSION);
-        $image->setHeight(self::ORIGINAL_HEIGHT);
-        $image->setWidth(self::ORIGINAL_WIDTH);
-        $image->setName(self::ORIGINAL_NAME);
-        $image->setNumber(0);
-        $image->setSize(self::ORIGINAL_SIZE);
+        $image = $this->createImage();
 
         $imageTransformed = $this->imageTransformer->changeDimensions($image, 3, 2);
 
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CHANGED_DIMENSION_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
-    public function testChangeDimensionsWithNumericValueShouldThrowError()
+    public function testChangeDimensionsWithNonNumericValueShouldThrowError()
     {
-        $image = new Image();
-        $image->setSessionId($this->session->getId());
-        $image->setPath(self::TARGET_PATH . "/" . self::ORIGINAL_NAME_WITH_EXTENSION);
-        $image->setExtension(self::ORIGINAL_EXTENSION);
-        $image->setHeight(self::ORIGINAL_HEIGHT);
-        $image->setWidth(self::ORIGINAL_WIDTH);
-        $image->setName(self::ORIGINAL_NAME);
-        $image->setNumber(0);
-        $image->setSize(self::ORIGINAL_SIZE);
+        $image = $this->createImage();
 
         $this->expectException(ImageTransformerException::class);
 
@@ -132,15 +118,7 @@ class ImageTransformerTest extends WebTestCase
 
     public function testChangeDimensionsWithOutOfRangeValueShouldThrowError()
     {
-        $image = new Image();
-        $image->setSessionId($this->session->getId());
-        $image->setPath(self::TARGET_PATH . "/" . self::ORIGINAL_NAME_WITH_EXTENSION);
-        $image->setExtension(self::ORIGINAL_EXTENSION);
-        $image->setHeight(self::ORIGINAL_HEIGHT);
-        $image->setWidth(self::ORIGINAL_WIDTH);
-        $image->setName(self::ORIGINAL_NAME);
-        $image->setNumber(0);
-        $image->setSize(self::ORIGINAL_SIZE);
+        $image = $this->createImage();
 
         $this->expectException(ImageTransformerException::class);
 
@@ -149,15 +127,7 @@ class ImageTransformerTest extends WebTestCase
 
     public function testChangeBright()
     {
-        $image = new Image();
-        $image->setSessionId($this->session->getId());
-        $image->setPath(self::TARGET_PATH . "/" . self::ORIGINAL_NAME_WITH_EXTENSION);
-        $image->setExtension(self::ORIGINAL_EXTENSION);
-        $image->setHeight(self::ORIGINAL_HEIGHT);
-        $image->setWidth(self::ORIGINAL_WIDTH);
-        $image->setName(self::ORIGINAL_NAME);
-        $image->setNumber(0);
-        $image->setSize(self::ORIGINAL_SIZE);
+        $image = $this->createImage();
 
         $imageTransformed = $this->imageTransformer->changeBright($image, 3);
 
@@ -165,24 +135,79 @@ class ImageTransformerTest extends WebTestCase
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CHANGED_BRIGHTNESS_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
-    public function testChangeBrightnessWithNumericValueShouldThrowError()
+    public function testChangeBrightnessWithNonNumericValueShouldThrowError()
     {
-        $image = new Image();
-        $image->setSessionId($this->session->getId());
-        $image->setPath(self::TARGET_PATH . "/" . self::ORIGINAL_NAME_WITH_EXTENSION);
-        $image->setExtension(self::ORIGINAL_EXTENSION);
-        $image->setHeight(self::ORIGINAL_HEIGHT);
-        $image->setWidth(self::ORIGINAL_WIDTH);
-        $image->setName(self::ORIGINAL_NAME);
-        $image->setNumber(0);
-        $image->setSize(self::ORIGINAL_SIZE);
+        $image = $this->createImage();
 
         $this->expectException(ImageTransformerException::class);
 
         $this->imageTransformer->changeBright($image, "foo");
     }
 
+    public function testChangeBrightnessWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->changeBright($image, 256);
+    }
+
     public function testChangeContrast()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->changeContrast($image, 10);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CHANGED_CONTRAST_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testChangeContrastWithNonNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->changeContrast($image, "foo");
+    }
+
+    public function testChangeContrastWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->changeContrast($image, 1001);
+    }
+
+    public function testCrop()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->crop($image, 1, 2, 1, 1);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CROPPED_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testCropWithNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->crop($image, "foo", 2, 1, 1);
+    }
+
+    public function testCropWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->crop($image, -1, 2, 1, 1);
+    }
+
+    protected function createImage()
     {
         $image = new Image();
         $image->setSessionId($this->session->getId());
@@ -194,10 +219,7 @@ class ImageTransformerTest extends WebTestCase
         $image->setNumber(0);
         $image->setSize(self::ORIGINAL_SIZE);
 
-        $imageTransformed = $this->imageTransformer->changeContrast($image, 10);
-
-
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CHANGED_CONTRAST_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        return $image;
     }
 
     protected static function createUploadedFile()
