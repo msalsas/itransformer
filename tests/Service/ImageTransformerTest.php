@@ -125,11 +125,11 @@ class ImageTransformerTest extends WebTestCase
         $this->imageTransformer->changeDimensions($image, 6001, 2);
     }
 
-    public function testChangeBright()
+    public function testChangeBrightness()
     {
         $image = $this->createImage();
 
-        $imageTransformed = $this->imageTransformer->changeBright($image, 3);
+        $imageTransformed = $this->imageTransformer->changeBrightness($image, 3);
 
 
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CHANGED_BRIGHTNESS_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
@@ -141,7 +141,7 @@ class ImageTransformerTest extends WebTestCase
 
         $this->expectException(ImageTransformerException::class);
 
-        $this->imageTransformer->changeBright($image, "foo");
+        $this->imageTransformer->changeBrightness($image, "foo");
     }
 
     public function testChangeBrightnessWithOutOfRangeValueShouldThrowError()
@@ -150,7 +150,7 @@ class ImageTransformerTest extends WebTestCase
 
         $this->expectException(ImageTransformerException::class);
 
-        $this->imageTransformer->changeBright($image, 256);
+        $this->imageTransformer->changeBrightness($image, 256);
     }
 
     public function testChangeContrast()

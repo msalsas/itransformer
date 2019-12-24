@@ -218,13 +218,13 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("change-bright", name="changeBright", methods={"POST"})
+     * @Route("change-brightness", name="changeBrightness", methods={"POST"})
      * @param $request Request
      * @param $session SessionInterface
      * @param $entityManager EntityManagerInterface
      * @param $imageTransformer ImageTransformer
      */
-    public function changeBright(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, ImageTransformer $imageTransformer)
+    public function changeBrightness(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, ImageTransformer $imageTransformer)
     {
         if($session->getId())
         {
@@ -234,7 +234,7 @@ class HomeController extends AbstractController
             if ($request->getMethod() == 'POST') {
                 $brightness = (int) $request->request->get('brillo');
 
-                $image = $imageTransformer->changeBright($image, $brightness);
+                $image = $imageTransformer->changeBrightness($image, $brightness);
 
                 return $this->renderTemplateViewChanges($image->getWidth(), $image->getHeight(), $image->getError());
             }

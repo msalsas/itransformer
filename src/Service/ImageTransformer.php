@@ -61,7 +61,7 @@ class ImageTransformer
      * @return ImageInterface
      * @throws ImageTransformerException
      */
-    public function changeBright(ImageInterface $image, $brightness)
+    public function changeBrightness(ImageInterface $image, $brightness)
     {
         if (!is_int($brightness)) {
             throw new ImageTransformerException("Brightness must be integers.");

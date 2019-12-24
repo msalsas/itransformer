@@ -70,7 +70,7 @@ Contact: manolez@gmail.com - http://msalsas.com
                             <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
                         </div></div>
                 </form>
-                <form action="{{ path('changeBright') }}" method="post">
+                <form action="{{ path('changeBrightness') }}" method="post">
                     <div id="cambiar_brillo" class="accion"><span class="titulo_accion">{% trans %}Cambiar brillo{% endtrans %}</span><input id="brillo" class="mostrar-ocultar" name="modif_brillo" type="checkbox" value="check">
                         <div id="val_brillo" style="display:none;"><hr><br><input id="num_brillo" name="brillo" type="number" min="-255" max="255" value="0"></div>
                         <div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">
