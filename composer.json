@@ -1,6 +1,16 @@
 {
+    "name": "itransformer",
+    "description": "Symfony application for image processing and transforming",
+    "keywords": ["Image", "Processing"],
+    "homepage": "https://github.com/msalsas/itransformer",
     "type": "project",
-    "license": "proprietary",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Manolo Salsas",
+            "email": "manolez@gmail.com"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "ext-ctype": "*",
@@ -37,6 +47,9 @@
         "symfony/web-server-bundle": "4.3.*"
     },
     "config": {
+	"platform": {
+	    "php": "7.1.3"
+	}
         "preferred-install": {
             "*": "dist"
         },
@@ -80,5 +93,7 @@
             "allow-contrib": false,
             "require": "4.3.*"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
