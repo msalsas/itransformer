@@ -4,7 +4,7 @@ namespace Test\Service;
 
 use App\Repository\ImageRepositoryInterface;
 use App\Service\NameGenerator;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class NameGeneratorTest extends WebTestCase
 {

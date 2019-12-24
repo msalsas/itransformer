@@ -103,11 +103,12 @@ class HomeController extends AbstractController
     {
 		if($id = $session->getId()) {
             /** @var Image $image */
-			$image = $entityManager->getRepository(Image::class)->find($id);
-            return $imageReader->read($image->getPath());
-		} else {
-            return $imageReader->readDefault();
+			if ($image = $entityManager->getRepository(Image::class)->find($id)) {
+                return $imageReader->read($image->getPath());
+            }
 		}
+
+        return $imageReader->readDefault();
 	}
 
     /**
