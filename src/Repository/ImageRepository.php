@@ -15,7 +15,7 @@ class ImageRepository extends ServiceEntityRepository implements ImageRepository
 
     public function find($sessionId, $lockMode = NULL, $lockVersion = NULL)
     {
-        return $this->findOneBy(array('sessionId' => $sessionId));
+        return $this->findOneBy(array('sessionId' => $sessionId), array('number' => 'DESC'));
     }
 
     public function findByName($name)

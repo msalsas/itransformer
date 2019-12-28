@@ -45,14 +45,15 @@ class ImageTransformer
 
         imagecopyresampled($newCanvas, $originalCanvas, 0, 0, 0, 0, $width, $height, $image->getWidth(), $image->getHeight());
 
-        $image->setWidth($width);
-        $image->setHeight($height);
-        $this->setNewPath($image);
-        $this->imageUploader->save($image);
+        $newImage = clone $image;
+        $newImage->setWidth($width);
+        $newImage->setHeight($height);
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
 
         imagedestroy($originalCanvas);
 
-        return self::createImage($image, $newCanvas);
+        return self::createImage($newImage, $newCanvas);
     }
 
     /**
@@ -73,9 +74,11 @@ class ImageTransformer
 
         imagefilter($canvas, IMG_FILTER_BRIGHTNESS, $brightness);
 
-        $this->setNewPath($image);
+        $newImage = clone $image;
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
 
-        return self::createImage($image, $canvas);
+        return self::createImage($newImage, $canvas);
     }
 
     /**
@@ -97,9 +100,11 @@ class ImageTransformer
 
         imagefilter($canvas, IMG_FILTER_CONTRAST, $contrast);
 
-        $this->setNewPath($image);
+        $newImage = clone $image;
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
 
-        return self::createImage($image, $canvas);
+        return self::createImage($newImage, $canvas);
     }
 
     /**
@@ -133,14 +138,15 @@ class ImageTransformer
 
         imagecopyresampled($newCanvas, $originalCanvas, 0, 0, $left, $top, $newWidth, $newHeight, $newWidth, $newHeight);
 
-        $image->setWidth(floor($newWidth));
-        $image->setHeight(floor($newHeight));
-        $this->setNewPath($image);
-        $this->imageUploader->save($image);
+        $newImage = clone $image;
+        $newImage->setWidth(floor($newWidth));
+        $newImage->setHeight(floor($newHeight));
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
 
         imagedestroy($originalCanvas);
 
-        return self::createImage($image, $newCanvas);
+        return self::createImage($newImage, $newCanvas);
     }
 
     /**
@@ -212,6 +218,7 @@ class ImageTransformer
         $currentNameWithExtension = $image->getName() . '.' . $image->getExtension();
         $currentDir = substr($currentPath, 0, strpos($currentPath, $currentNameWithExtension));
         $name = $this->nameGenerator->generate();
+        $image->setName($name);
 
         return $currentDir . $name . '.' . $image->getExtension();
     }
