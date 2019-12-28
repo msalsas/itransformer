@@ -100,9 +100,9 @@ Contact: manolez@gmail.com - http://msalsas.com
                 <form action="{{ path('grayScale') }}" method="post">
                     <div class="accion"><span class="titulo_accion">{% trans %}Convertir a grises{% endtrans %}</span><input class="directo" name="convertir_grises" type="checkbox" value="check"></div>
                 </form>
-                {#<form action="{{ path('msd_home_cambiaranegativo') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Convertir a negativo{% endtrans %}</span><input class="directo" name="convertir_negativo" type="checkbox" value="check"></div>#}
-                {#</form>#}
+                <form action="{{ path('negate') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Convertir a negativo{% endtrans %}</span><input class="directo" name="convertir_negativo" type="checkbox" value="check"></div>
+                </form>
                 {#<form action="{{ path('msd_home_resaltarbordes') }}" method="post">#}
                     {#<div class="accion"><span class="titulo_accion">{% trans %}Resaltar bordes{% endtrans %}</span><input class="directo" name="resaltar_bordes" type="checkbox" value="check"></div>#}
                 {#</form>#}

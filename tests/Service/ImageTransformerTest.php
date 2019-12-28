@@ -27,6 +27,7 @@ class ImageTransformerTest extends WebTestCase
     const CROPPED_1_NAME_WITH_EXTENSION = "cropped1.png";
     const ROTATED_1_NAME_WITH_EXTENSION = "rotated1.png";
     const GRAY_SCALE_NAME_WITH_EXTENSION = "grayScale1.png";
+    const NEGATE_NAME_WITH_EXTENSION = "negate1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -243,6 +244,15 @@ class ImageTransformerTest extends WebTestCase
         $imageTransformed = $this->imageTransformer->grayScale($image);
 
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::GRAY_SCALE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testNegate()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->negate($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::NEGATE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     protected function createImage()
