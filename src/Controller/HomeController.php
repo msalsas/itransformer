@@ -163,6 +163,8 @@ class HomeController extends AbstractController
         //TODO
     }
 
+    // *************** BASIC ***************//
+
     /**
      * @Route("change-dimensions", name="changeDimensions", methods={"POST"})
      * @param $request Request
@@ -295,6 +297,37 @@ class HomeController extends AbstractController
         }
         return $this->renderTemplateViewChanges(0, 0, 'tu sesión ha caducado. Vuelve a probar');
     }
+
+    // ************ END BASIC ***************//
+
+    // ************* FILTERS *************** //
+
+    /**
+     * @Route("gray-scale", name="grayScale", methods={"POST"})
+     * @param $request Request
+     * @param $session SessionInterface
+     * @param $entityManager EntityManagerInterface
+     * @param $imageTransformer ImageTransformer
+     */
+    public function grayScale(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, ImageTransformer $imageTransformer)
+    {
+        if($session->getId())
+        {
+            /** @var Image $image */
+            $image = $entityManager->getRepository(Image::class)->find($session->getId());
+
+            if ($request->getMethod() == 'POST') {
+
+                $image = $imageTransformer->grayScale($image);
+
+                return $this->renderTemplateViewChanges($image->getWidth(), $image->getHeight(), $image->getError());
+            }
+
+        }
+        return $this->renderTemplateViewChanges(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+    }
+
+    // *********** END FILTERS ************* //
 
     protected function renderTemplateViewChanges($width, $height, $error)
 	{

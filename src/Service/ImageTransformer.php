@@ -181,6 +181,24 @@ class ImageTransformer
         return self::createImage($newImage, $newCanvas);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function grayScale(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        imagefilter($canvas, IMG_FILTER_GRAYSCALE, 0);
+
+        $newImage = clone $image;
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
+
+        return self::createImage($newImage, $canvas);
+    }
+
     protected function preserveTransparencyIfPng(ImageInterface $image, $canvas)
     {
         if (self::isPng($image)) {
