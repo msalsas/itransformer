@@ -45,15 +45,12 @@ class ImageTransformer
 
         imagecopyresampled($newCanvas, $originalCanvas, 0, 0, 0, 0, $width, $height, $image->getWidth(), $image->getHeight());
 
-        $newImage = clone $image;
-        $newImage->setWidth($width);
-        $newImage->setHeight($height);
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
         imagedestroy($originalCanvas);
 
-        return self::createImage($newImage, $newCanvas);
+        $image->setWidth($width);
+        $image->setHeight($height);
+
+        return $this->createAndSaveNewImage($image, $newCanvas);
     }
 
     /**
@@ -70,15 +67,12 @@ class ImageTransformer
         if ($brightness < -255 || $brightness > 255) {
             throw new ImageTransformerException("Brightness must be greater than -256 and less than 256.");
         }
+
         $canvas = $this->createCanvas($image);
 
         imagefilter($canvas, IMG_FILTER_BRIGHTNESS, $brightness);
 
-        $newImage = clone $image;
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
-        return self::createImage($newImage, $canvas);
+        return $this->createAndSaveNewImage($image, $canvas);
     }
 
     /**
@@ -100,11 +94,7 @@ class ImageTransformer
 
         imagefilter($canvas, IMG_FILTER_CONTRAST, $contrast);
 
-        $newImage = clone $image;
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
-        return self::createImage($newImage, $canvas);
+        return $this->createAndSaveNewImage($image, $canvas);
     }
 
     /**
@@ -138,15 +128,12 @@ class ImageTransformer
 
         imagecopyresampled($newCanvas, $originalCanvas, 0, 0, $left, $top, $newWidth, $newHeight, $newWidth, $newHeight);
 
-        $newImage = clone $image;
-        $newImage->setWidth(floor($newWidth));
-        $newImage->setHeight(floor($newHeight));
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
         imagedestroy($originalCanvas);
 
-        return self::createImage($newImage, $newCanvas);
+        $image->setWidth(floor($newWidth));
+        $image->setHeight(floor($newHeight));
+
+        return $this->createAndSaveNewImage($image, $newCanvas);
     }
 
     /**
@@ -170,15 +157,12 @@ class ImageTransformer
 
         $newCanvas = $this->preserveTransparencyIfPng($image, $newCanvas);
 
-        $newImage = clone $image;
-        $newImage->setWidth(floor(imagesx($newCanvas)));
-        $newImage->setHeight(floor(imagesy($newCanvas)));
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
         imagedestroy($originalCanvas);
 
-        return self::createImage($newImage, $newCanvas);
+        $image->setWidth(floor(imagesx($newCanvas)));
+        $image->setHeight(floor(imagesy($newCanvas)));
+
+        return $this->createAndSaveNewImage($image, $newCanvas);
     }
 
     /**
@@ -192,11 +176,7 @@ class ImageTransformer
 
         imagefilter($canvas, IMG_FILTER_GRAYSCALE, 0);
 
-        $newImage = clone $image;
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
-        return self::createImage($newImage, $canvas);
+        return $this->createAndSaveNewImage($image, $canvas);
     }
 
     /**
@@ -210,11 +190,7 @@ class ImageTransformer
 
         imagefilter($canvas, IMG_FILTER_NEGATE, 0);
 
-        $newImage = clone $image;
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
-        return self::createImage($newImage, $canvas);
+        return $this->createAndSaveNewImage($image, $canvas);
     }
 
     /**
@@ -228,11 +204,7 @@ class ImageTransformer
 
         imagefilter($canvas, IMG_FILTER_EDGEDETECT, 0);
 
-        $newImage = clone $image;
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
-
-        return self::createImage($newImage, $canvas);
+        return $this->createAndSaveNewImage($image, $canvas);
     }
 
     /**
@@ -246,11 +218,21 @@ class ImageTransformer
 
         imagefilter($canvas, IMG_FILTER_EMBOSS, 0);
 
-        $newImage = clone $image;
-        $this->setNewPath($newImage);
-        $this->imageUploader->save($newImage);
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
 
-        return self::createImage($newImage, $canvas);
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function meanRemoval(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        imagefilter($canvas, IMG_FILTER_MEAN_REMOVAL, 0);
+
+        return $this->createAndSaveNewImage($image, $canvas);
     }
 
     protected function preserveTransparencyIfPng(ImageInterface $image, $canvas)
@@ -273,6 +255,15 @@ class ImageTransformer
         imagesavealpha($canvas, true);
 
         return $canvas;
+    }
+
+    protected function createAndSaveNewImage(ImageInterface $image, $canvas)
+    {
+        $newImage = clone $image;
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
+
+        return self::createImage($newImage, $canvas);
     }
 
     /**

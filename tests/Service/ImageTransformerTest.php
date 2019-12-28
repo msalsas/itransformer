@@ -30,6 +30,7 @@ class ImageTransformerTest extends WebTestCase
     const NEGATE_NAME_WITH_EXTENSION = "negate1.png";
     const EDGE_DETECTION_NAME_WITH_EXTENSION = "edgeDetection1.png";
     const EMBOSS_NAME_WITH_EXTENSION = "emboss1.png";
+    const MEAN_REMOVAL_NAME_WITH_EXTENSION = "meanRemoval1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -273,6 +274,15 @@ class ImageTransformerTest extends WebTestCase
         $imageTransformed = $this->imageTransformer->emboss($image);
 
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::EMBOSS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testMeanRemoval()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->meanRemoval($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::MEAN_REMOVAL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     protected function createImage()

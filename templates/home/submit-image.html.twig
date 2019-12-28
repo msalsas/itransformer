@@ -109,9 +109,9 @@ Contact: manolez@gmail.com - http://msalsas.com
                 <form action="{{ path('emboss') }}" method="post">
                     <div class="accion"><span class="titulo_accion">{% trans %}Resaltar relieve{% endtrans %}</span><input class="directo" name="resaltar_relieve" type="checkbox" value="check"></div>
                 </form>
-                {#<form action="{{ path('msd_home_eliminacionmedia') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Eliminación media (ef. superficial){% endtrans %}</span><input class="directo" name="elimin_media" type="checkbox" value="check"></div>#}
-                {#</form>#}
+                <form action="{{ path('meanRemoval') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Eliminación media (ef. superficial){% endtrans %}</span><input class="directo" name="elimin_media" type="checkbox" value="check"></div>
+                </form>
                 {#<form action="{{ path('msd_home_borroso') }}" method="post">#}
                     {#<div class="accion"><span class="titulo_accion">{% trans %}Poner borroso{% endtrans %}</span><input class="directo" name="convertir_borroso" type="checkbox" value="check"></div>#}
                 {#</form>#}

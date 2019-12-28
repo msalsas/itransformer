@@ -402,6 +402,31 @@ class HomeController extends AbstractController
         return $this->renderTemplateViewChanges(0, 0, 'tu sesión ha caducado. Vuelve a probar');
     }
 
+    /**
+     * @Route("mean-removal", name="meanRemoval", methods={"POST"})
+     * @param $request Request
+     * @param $session SessionInterface
+     * @param $entityManager EntityManagerInterface
+     * @param $imageTransformer ImageTransformer
+     */
+    public function meanRemoval(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, ImageTransformer $imageTransformer)
+    {
+        if($session->getId())
+        {
+            /** @var Image $image */
+            $image = $entityManager->getRepository(Image::class)->find($session->getId());
+
+            if ($request->getMethod() == 'POST') {
+
+                $image = $imageTransformer->meanRemoval($image);
+
+                return $this->renderTemplateViewChanges($image->getWidth(), $image->getHeight(), $image->getError());
+            }
+
+        }
+        return $this->renderTemplateViewChanges(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+    }
+
     // *********** END FILTERS ************* //
 
     protected function renderTemplateViewChanges($width, $height, $error)
