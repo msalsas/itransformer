@@ -217,6 +217,42 @@ class ImageTransformer
         return self::createImage($newImage, $canvas);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function edgeDetection(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        imagefilter($canvas, IMG_FILTER_EDGEDETECT, 0);
+
+        $newImage = clone $image;
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
+
+        return self::createImage($newImage, $canvas);
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function reliefDetection(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        imagefilter($canvas, IMG_FILTER_EMBOSS, 0);
+
+        $newImage = clone $image;
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
+
+        return self::createImage($newImage, $canvas);
+    }
+
     protected function preserveTransparencyIfPng(ImageInterface $image, $canvas)
     {
         if (self::isPng($image)) {

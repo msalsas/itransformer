@@ -28,6 +28,8 @@ class ImageTransformerTest extends WebTestCase
     const ROTATED_1_NAME_WITH_EXTENSION = "rotated1.png";
     const GRAY_SCALE_NAME_WITH_EXTENSION = "grayScale1.png";
     const NEGATE_NAME_WITH_EXTENSION = "negate1.png";
+    const EDGE_DETECTION_NAME_WITH_EXTENSION = "edgeDetection1.png";
+    const RELIEF_DETECTION_NAME_WITH_EXTENSION = "reliefDetection1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -253,6 +255,24 @@ class ImageTransformerTest extends WebTestCase
         $imageTransformed = $this->imageTransformer->negate($image);
 
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::NEGATE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testEdgeDetection()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->edgeDetection($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::EDGE_DETECTION_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testReliefDetection()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->reliefDetection($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::RELIEF_DETECTION_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     protected function createImage()
