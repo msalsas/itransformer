@@ -378,13 +378,13 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("relief-detection", name="reliefDetection", methods={"POST"})
+     * @Route("emboss", name="emboss", methods={"POST"})
      * @param $request Request
      * @param $session SessionInterface
      * @param $entityManager EntityManagerInterface
      * @param $imageTransformer ImageTransformer
      */
-    public function reliefDetection(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, ImageTransformer $imageTransformer)
+    public function emboss(Request $request, SessionInterface $session, EntityManagerInterface $entityManager, ImageTransformer $imageTransformer)
     {
         if($session->getId())
         {
@@ -393,7 +393,7 @@ class HomeController extends AbstractController
 
             if ($request->getMethod() == 'POST') {
 
-                $image = $imageTransformer->reliefDetection($image);
+                $image = $imageTransformer->emboss($image);
 
                 return $this->renderTemplateViewChanges($image->getWidth(), $image->getHeight(), $image->getError());
             }

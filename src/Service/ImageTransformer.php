@@ -240,7 +240,7 @@ class ImageTransformer
      * @return ImageInterface
      * @throws ImageTransformerException
      */
-    public function reliefDetection(ImageInterface $image)
+    public function emboss(ImageInterface $image)
     {
         $canvas = $this->createCanvas($image);
 
