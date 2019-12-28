@@ -152,10 +152,33 @@ class ImageTransformer
     /**
      * @param $image ImageInterface
      * @param $degrees integer
+     * @return ImageInterface
+     * @throws ImageTransformerException
      */
     public function rotate(ImageInterface $image, $degrees)
     {
-        // TODO: Rotate image
+        if (!is_int($degrees)) {
+            throw new ImageTransformerException("Degrees must be integer.");
+        }
+        if ($degrees < 0 || $degrees > 360) {
+            throw new ImageTransformerException("Degrees must be greater or equal than 0 and lower or equal than 360.");
+        }
+
+        $originalCanvas = $this->createCanvas($image);
+
+        $newCanvas = imagerotate($originalCanvas, $degrees, 0);
+
+        $newCanvas = $this->preserveTransparencyIfPng($image, $newCanvas);
+
+        $newImage = clone $image;
+        $newImage->setWidth(floor(imagesx($newCanvas)));
+        $newImage->setHeight(floor(imagesy($newCanvas)));
+        $this->setNewPath($newImage);
+        $this->imageUploader->save($newImage);
+
+        imagedestroy($originalCanvas);
+
+        return self::createImage($newImage, $newCanvas);
     }
 
     protected function preserveTransparencyIfPng(ImageInterface $image, $canvas)

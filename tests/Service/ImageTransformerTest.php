@@ -25,6 +25,7 @@ class ImageTransformerTest extends WebTestCase
     const CHANGED_BRIGHTNESS_1_NAME_WITH_EXTENSION = "changedBrightness1.png";
     const CHANGED_CONTRAST_1_NAME_WITH_EXTENSION = "changedContrast1.png";
     const CROPPED_1_NAME_WITH_EXTENSION = "cropped1.png";
+    const ROTATED_1_NAME_WITH_EXTENSION = "rotated1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -205,6 +206,33 @@ class ImageTransformerTest extends WebTestCase
         $this->expectException(ImageTransformerException::class);
 
         $this->imageTransformer->crop($image, -1, 2, 1, 1);
+    }
+
+    public function testRotate()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->rotate($image, 270);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::ROTATED_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testRotateWithNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->rotate($image, "foo");
+    }
+
+    public function testRotateWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->rotate($image, 361);
     }
 
     protected function createImage()
