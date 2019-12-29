@@ -68,11 +68,7 @@ class ImageTransformer
             throw new ImageTransformerException("Brightness must be greater than -256 and less than 256.");
         }
 
-        $canvas = $this->createCanvas($image);
-
-        imagefilter($canvas, IMG_FILTER_BRIGHTNESS, $brightness);
-
-        return $this->createAndSaveNewImage($image, $canvas);
+        return $this->applyFilter($image, IMG_FILTER_BRIGHTNESS, $brightness);
     }
 
     /**
@@ -90,11 +86,7 @@ class ImageTransformer
             throw new ImageTransformerException("Contrast must be greater than -256 and less than 256.");
         }
 
-        $canvas = $this->createCanvas($image);
-
-        imagefilter($canvas, IMG_FILTER_CONTRAST, $contrast);
-
-        return $this->createAndSaveNewImage($image, $canvas);
+        return $this->applyFilter($image, IMG_FILTER_CONTRAST, $contrast);
     }
 
     /**
@@ -172,11 +164,7 @@ class ImageTransformer
      */
     public function grayScale(ImageInterface $image)
     {
-        $canvas = $this->createCanvas($image);
-
-        imagefilter($canvas, IMG_FILTER_GRAYSCALE, 0);
-
-        return $this->createAndSaveNewImage($image, $canvas);
+        return $this->applyFilter($image, IMG_FILTER_GRAYSCALE);
     }
 
     /**
@@ -186,11 +174,7 @@ class ImageTransformer
      */
     public function negate(ImageInterface $image)
     {
-        $canvas = $this->createCanvas($image);
-
-        imagefilter($canvas, IMG_FILTER_NEGATE, 0);
-
-        return $this->createAndSaveNewImage($image, $canvas);
+        return $this->applyFilter($image, IMG_FILTER_NEGATE);
     }
 
     /**
@@ -200,11 +184,7 @@ class ImageTransformer
      */
     public function edgeDetection(ImageInterface $image)
     {
-        $canvas = $this->createCanvas($image);
-
-        imagefilter($canvas, IMG_FILTER_EDGEDETECT, 0);
-
-        return $this->createAndSaveNewImage($image, $canvas);
+        return $this->applyFilter($image, IMG_FILTER_EDGEDETECT);
     }
 
     /**
@@ -214,11 +194,7 @@ class ImageTransformer
      */
     public function emboss(ImageInterface $image)
     {
-        $canvas = $this->createCanvas($image);
-
-        imagefilter($canvas, IMG_FILTER_EMBOSS, 0);
-
-        return $this->createAndSaveNewImage($image, $canvas);
+        return $this->applyFilter($image, IMG_FILTER_EMBOSS);
     }
 
     /**
@@ -228,9 +204,24 @@ class ImageTransformer
      */
     public function meanRemoval(ImageInterface $image)
     {
+        return $this->applyFilter($image, IMG_FILTER_MEAN_REMOVAL);
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function blur(ImageInterface $image)
+    {
+        return $this->applyFilter($image, IMG_FILTER_SELECTIVE_BLUR);
+    }
+
+    protected function applyFilter(ImageInterface $image, $filterType, $value = 0)
+    {
         $canvas = $this->createCanvas($image);
 
-        imagefilter($canvas, IMG_FILTER_MEAN_REMOVAL, 0);
+        imagefilter($canvas, $filterType, $value);
 
         return $this->createAndSaveNewImage($image, $canvas);
     }

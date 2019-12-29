@@ -55,4 +55,14 @@ class FiltersController extends BaseImageController
             return $this->imageTransformer->meanRemoval($image);
         });
     }
+
+    /**
+     * @Route("blur", name="blur", methods={"POST"})
+     */
+    public function blur()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->blur($image);
+        });
+    }
 }
