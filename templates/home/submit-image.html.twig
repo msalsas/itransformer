@@ -158,14 +158,14 @@ Contact: manolez@gmail.com - http://msalsas.com
                             <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
                         </div></div>
                 </form>
-                {#<form action="{{ path('msd_home_correcciongamma') }}" method="post">#}
-                    {#<div id="cambiar_gamma" class="accion"><span class="titulo_accion">{% trans %}Corrección gamma{% endtrans %}</span><input id="correccion_gamma" class="mostrar-ocultar" name="convertir_gamma" type="checkbox" value="check">#}
-                        {#<div id="val_entrada_gamma"><hr><span class="titulo_opcion"> {% trans %}Entrada gamma{% endtrans %} </span><input id="num_entrada_gamma" name="entrada_gamma" type="number" min="-50" max="50" value="0"></div>#}
-                        {#<div id="val_salida_gamma"><span class="titulo_opcion"> {% trans %}Salida gamma{% endtrans %} </span><input id="num_salida_gamma" name="salida_gamma" type="number" min="-50" max="50" value="0"></div>#}
-                        {#<div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">#}
-                            {#<button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>#}
-                        {#</div></div>#}
-                {#</form>#}
+                <form action="{{ path('gammaCorrection') }}" method="post">
+                    <div id="cambiar_gamma" class="accion"><span class="titulo_accion">{% trans %}Corrección gamma{% endtrans %}</span><input id="correccion_gamma" class="mostrar-ocultar" name="convertir_gamma" type="checkbox" value="check">
+                        <div id="val_entrada_gamma"><hr><span class="titulo_opcion"> {% trans %}Entrada gamma{% endtrans %} </span><input id="num_entrada_gamma" name="entrada_gamma" type="number" min="0" max="50" value="0"></div>
+                        <div id="val_salida_gamma"><span class="titulo_opcion"> {% trans %}Salida gamma{% endtrans %} </span><input id="num_salida_gamma" name="salida_gamma" type="number" min="0" max="50" value="0"></div>
+                        <div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">
+                            <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
+                        </div></div>
+                </form>
 
                 {#<form id="form_guardar" action="{{ path('msd_home_guardar') }}" method="post">#}
                     {#<input class="guardar" type="submit" value="{% trans %}Guardar imagen{% endtrans %}">#}

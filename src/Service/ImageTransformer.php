@@ -308,6 +308,36 @@ class ImageTransformer
         return $this->createAndSaveNewImage($image, $canvas);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @param $output integer
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function gammaCorrection(ImageInterface $image, $input, $output)
+    {
+        if (!is_int($input)) {
+            throw new ImageTransformerException("Input must be integer.");
+        }
+        if ($input < 0 || $input > 50) {
+            throw new ImageTransformerException("Input must be greater or equal than 0 and less than 51.");
+        }
+        if (!is_int($output)) {
+            throw new ImageTransformerException("Output must be integer.");
+        }
+        if ($output < 0 || $output > 50) {
+            throw new ImageTransformerException("Output must be greater or equal than 0 and less than 51.");
+        }
+
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        imagegammacorrect($canvas ,$input, $output);
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
     protected function applyFilter(ImageInterface $image, $filterType, $value = 0)
     {
         $canvas = $this->createCanvas($image);

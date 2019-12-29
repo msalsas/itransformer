@@ -36,6 +36,7 @@ class ImageTransformerTest extends WebTestCase
     const SMOOTH_NAME_WITH_EXTENSION = "smooth1.png";
     const PIXELATE_NAME_WITH_EXTENSION = "pixelate1.png";
     const CONVOLUTION_NAME_WITH_EXTENSION = "convolution1.png";
+    const GAMMA_CORRECTION_NAME_WITH_EXTENSION = "gammaCorrection1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -390,6 +391,33 @@ class ImageTransformerTest extends WebTestCase
 
         $matrix = self::getConvolutionOutOfRangeMatrix();
         $this->imageTransformer->convolution($image, $matrix, 100, 100);
+    }
+
+    public function testGammaCorrection()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->gammaCorrection($image, 20, 10);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::GAMMA_CORRECTION_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testGammaCorrectionWithNonNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->gammaCorrection($image, "foo", 50);
+    }
+
+    public function testGammaCorrectionWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->gammaCorrection($image, 51, 50);
     }
 
     protected function createImage()

@@ -114,6 +114,19 @@ class FiltersController extends BaseImageController
         });
     }
 
+    /**
+     * @Route("gamma-correction", name="gammaCorrection", methods={"POST"})
+     */
+    public function gammaCorrection()
+    {
+        return $this->findAndRenderImage(function($image) {
+            $input = (int) $this->request->request->get('entrada_gamma');
+            $output = (int) $this->request->request->get('salida_gamma');
+
+            return $this->imageTransformer->gammaCorrection($image, $input, $output);
+        });
+    }
+
     protected function getConvolutionMatrixFromRequest()
     {
         $matrix = array(array(3), array(3), array(3));
