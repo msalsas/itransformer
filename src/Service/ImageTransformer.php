@@ -227,6 +227,24 @@ class ImageTransformer
         return $this->applyFilter($image, IMG_FILTER_GAUSSIAN_BLUR);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @param $smooth integer
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function smooth(ImageInterface $image, $smooth)
+    {
+        if (!is_int($smooth)) {
+            throw new ImageTransformerException("Smooth must be integer.");
+        }
+        if ($smooth < -5000 || $smooth > 5000) {
+            throw new ImageTransformerException("Smooth must be greater or equal than -5000 and less or equal than 5000.");
+        }
+
+        return $this->applyFilter($image, IMG_FILTER_SMOOTH, $smooth);
+    }
+
     protected function applyFilter(ImageInterface $image, $filterType, $value = 0)
     {
         $canvas = $this->createCanvas($image);

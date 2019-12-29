@@ -33,6 +33,7 @@ class ImageTransformerTest extends WebTestCase
     const MEAN_REMOVAL_NAME_WITH_EXTENSION = "meanRemoval1.png";
     const BLUR_NAME_WITH_EXTENSION = "blur1.png";
     const GAUSSIAN_BLUR_NAME_WITH_EXTENSION = "blurGauss1.png";
+    const SMOOTH_NAME_WITH_EXTENSION = "smooth1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -197,7 +198,7 @@ class ImageTransformerTest extends WebTestCase
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CROPPED_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
-    public function testCropWithNumericValueShouldThrowError()
+    public function testCropWithNonNumericValueShouldThrowError()
     {
         $image = $this->createImage();
 
@@ -224,7 +225,7 @@ class ImageTransformerTest extends WebTestCase
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::ROTATED_1_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
-    public function testRotateWithNumericValueShouldThrowError()
+    public function testRotateWithNonNumericValueShouldThrowError()
     {
         $image = $this->createImage();
 
@@ -303,6 +304,33 @@ class ImageTransformerTest extends WebTestCase
         $imageTransformed = $this->imageTransformer->gaussianBlur($image);
 
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::GAUSSIAN_BLUR_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testSmooth()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->smooth($image, 500);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::SMOOTH_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testSmoothWithNonNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->smooth($image, "foo");
+    }
+
+    public function testSmoothWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->smooth($image, 5001);
     }
 
     protected function createImage()

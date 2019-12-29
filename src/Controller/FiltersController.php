@@ -75,4 +75,16 @@ class FiltersController extends BaseImageController
             return $this->imageTransformer->gaussianBlur($image);
         });
     }
+
+    /**
+     * @Route("smooth", name="smooth", methods={"POST"})
+     */
+    public function smooth()
+    {
+        return $this->findAndRenderImage(function($image) {
+            $smooth = (int) $this->request->request->get('suavizado');
+
+            return $this->imageTransformer->smooth($image, $smooth);
+        });
+    }
 }
