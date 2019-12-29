@@ -263,6 +263,51 @@ class ImageTransformer
         return $this->applyFilter($image, IMG_FILTER_PIXELATE, $pixelate);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @param $matrix array
+     * @param $divisor integer
+     * @param $offset integer
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function convolution(ImageInterface $image, $matrix, $divisor, $offset)
+    {
+        if (!is_array($matrix)) {
+            throw new ImageTransformerException("Matrix must be an array.");
+        }
+        foreach ($matrix as $array) {
+            foreach ($array as $value) {
+                if (!is_int($value)) {
+                    throw new ImageTransformerException("All matrix values must be integers.");
+                }
+                if ($value < -255 || $value > 255) {
+                    throw new ImageTransformerException("All matrix values must be greater than -256 and less than 256.");
+                }
+            }
+        }
+        if (!is_int($divisor)) {
+            throw new ImageTransformerException("Divisor must be integer.");
+        }
+        if ($divisor < -255 || $divisor > 1000) {
+            throw new ImageTransformerException("Divisor must be greater than -256 and less than 1001.");
+        }
+        if (!is_int($offset)) {
+            throw new ImageTransformerException("Offset must be integer.");
+        }
+        if ($offset < -1000 || $offset > 1000) {
+            throw new ImageTransformerException("Offset must be greater than -1001 and less than 1001.");
+        }
+
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        imageconvolution($canvas , $matrix,  $divisor,  $offset);
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
     protected function applyFilter(ImageInterface $image, $filterType, $value = 0)
     {
         $canvas = $this->createCanvas($image);

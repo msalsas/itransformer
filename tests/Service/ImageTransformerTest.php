@@ -35,6 +35,7 @@ class ImageTransformerTest extends WebTestCase
     const GAUSSIAN_BLUR_NAME_WITH_EXTENSION = "blurGauss1.png";
     const SMOOTH_NAME_WITH_EXTENSION = "smooth1.png";
     const PIXELATE_NAME_WITH_EXTENSION = "pixelate1.png";
+    const CONVOLUTION_NAME_WITH_EXTENSION = "convolution1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -361,6 +362,36 @@ class ImageTransformerTest extends WebTestCase
         $this->imageTransformer->pixelate($image, 5001);
     }
 
+    public function testConvolution()
+    {
+        $image = $this->createImage();
+
+        $matrix = self::getConvolutionMatrix();
+        $imageTransformed = $this->imageTransformer->convolution($image, $matrix, 50, 100);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CONVOLUTION_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testConvolutionWithNonNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $matrix = self::getConvolutionMatrix();
+        $this->imageTransformer->convolution($image, $matrix, "foo", 100);
+    }
+
+    public function testConvolutionWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $matrix = self::getConvolutionOutOfRangeMatrix();
+        $this->imageTransformer->convolution($image, $matrix, 100, 100);
+    }
+
     protected function createImage()
     {
         $image = new Image();
@@ -379,5 +410,23 @@ class ImageTransformerTest extends WebTestCase
     protected static function createUploadedFile()
     {
         return new UploadedFile(self::ORIGINAL_PATH . self::ORIGINAL_NAME_WITH_EXTENSION, self::ORIGINAL_NAME, self::MIME_TYPE, null, true);
+    }
+
+    protected static function getConvolutionMatrix()
+    {
+        return array(
+            array(100, 100, 100),
+            array(100, 100, 100),
+            array(100, 100, 100),
+        );
+    }
+
+    protected static function getConvolutionOutOfRangeMatrix()
+    {
+        return array(
+            array(100, 100, 100),
+            array(100, 100, 100),
+            array(100, 100, 256),
+        );
     }
 }

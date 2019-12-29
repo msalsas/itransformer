@@ -99,4 +99,35 @@ class FiltersController extends BaseImageController
             return $this->imageTransformer->pixelate($image, $pixelate);
         });
     }
+
+    /**
+     * @Route("convolution", name="convolution", methods={"POST"})
+     */
+    public function convolution()
+    {
+        return $this->findAndRenderImage(function($image) {
+            $matrix = $this->getConvolutionMatrixFromRequest();
+            $divisor = (int) $this->request->request->get('convolucion_divisor');
+            $offset = (int) $this->request->request->get('convolucion_offset');
+
+            return $this->imageTransformer->convolution($image, $matrix, $divisor, $offset);
+        });
+    }
+
+    protected function getConvolutionMatrixFromRequest()
+    {
+        $matrix = array(array(3), array(3), array(3));
+        for ($i=0; $i<=8; $i++) {
+            $value = (int) $this->request->request->get('convolucion_matriz_'.$i);
+            if ($i < 3) {
+                $matrix[0][$i] = $value;
+            } elseif ($i < 6) {
+                $matrix[1][$i - 3] = $value;
+            } elseif ($i < 9) {
+                $matrix[2][$i - 6] = $value;
+            }
+        }
+
+        return $matrix;
+    }
 }

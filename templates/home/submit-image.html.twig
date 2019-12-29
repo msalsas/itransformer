@@ -132,32 +132,32 @@ Contact: manolez@gmail.com - http://msalsas.com
                             <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
                         </div></div>
                 </form>
-                {#<form action="{{ path('msd_home_convolucion') }}" method="post">#}
-                    {#<div id="cambiar_convolucion" class="accion"><span class="titulo_accion">{% trans %}Convolución{% endtrans %}</span><input id="convolucion" class="mostrar-ocultar" name="convertir_convolucion" type="checkbox" value="check">#}
-                        {#<div id="val_convolucion_matriz"><hr><span class="titulo_opcion"> {% trans %}Matriz de convolución{% endtrans %} </span><br>#}
-                            {#<table><tr>#}
-                                    {#<td><input id="num_convolucion_matriz_0" name="convolucion_matriz_0" type="number" min="-255" max="255" value="1"></td>#}
-                                    {#<td><input id="num_convolucion_matriz_1" name="convolucion_matriz_1" type="number" min="-255" max="255" value="1"></td>#}
-                                    {#<td><input id="num_convolucion_matriz_2" name="convolucion_matriz_2" type="number" min="-255" max="255" value="1"></td>#}
-                                {#</tr><tr>#}
-                                    {#<td><input id="num_convolucion_matriz_3" name="convolucion_matriz_3" type="number" min="-255" max="255" value="1"></td>#}
-                                    {#<td><input id="num_convolucion_matriz_4" name="convolucion_matriz_4" type="number" min="-255" max="255" value="1"></td>#}
-                                    {#<td><input id="num_convolucion_matriz_5" name="convolucion_matriz_5" type="number" min="-255" max="255" value="1"></td>#}
-                                {#</tr>#}
-                                {#</tr><tr>#}
-                                    {#<td><input id="num_convolucion_matriz_6" name="convolucion_matriz_6" type="number" min="-255" max="255" value="1"></td>#}
-                                    {#<td><input id="num_convolucion_matriz_7" name="convolucion_matriz_7" type="number" min="-255" max="255" value="1"></td>#}
-                                    {#<td><input id="num_convolucion_matriz_8" name="convolucion_matriz_8" type="number" min="-255" max="255" value="1"></td>#}
-                                {#</tr>#}
-                            {#</table></div>#}
-                        {#<div id="val_convolucion_divisor"><br><span class="titulo_opcion"> {% trans %}Divisor{% endtrans %} </span><input id="num_convolucion_divisor" name="convolucion_divisor" type="number" min="-255" max="1000" value="1000"><br>#}
-                            {#<span class="titulo_accion"> {% trans %}Divisor automático{% endtrans %} </span><input id="divisor_conv_auto" name="divisor_convolucion_auto" type="checkbox" value="check">#}
-                        {#</div>#}
-                        {#<div id="val_convolucion_offset"><span class="titulo_opcion"> Offset </span><input id="num_convolucion_offset" name="convolucion_offset" type="number" min="-1000" max="1000" value="0"></div>#}
-                        {#<div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">#}
-                            {#<button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>#}
-                        {#</div></div>#}
-                {#</form>#}
+                <form action="{{ path('convolution') }}" method="post">
+                    <div id="cambiar_convolucion" class="accion"><span class="titulo_accion">{% trans %}Convolución{% endtrans %}</span><input id="convolucion" class="mostrar-ocultar" name="convertir_convolucion" type="checkbox" value="check">
+                        <div id="val_convolucion_matriz"><hr><span class="titulo_opcion"> {% trans %}Matriz de convolución{% endtrans %} </span><br>
+                            <table><tr>
+                                    <td><input id="num_convolucion_matriz_0" name="convolucion_matriz_0" type="number" min="-255" max="255" value="1"></td>
+                                    <td><input id="num_convolucion_matriz_1" name="convolucion_matriz_1" type="number" min="-255" max="255" value="1"></td>
+                                    <td><input id="num_convolucion_matriz_2" name="convolucion_matriz_2" type="number" min="-255" max="255" value="1"></td>
+                                </tr><tr>
+                                    <td><input id="num_convolucion_matriz_3" name="convolucion_matriz_3" type="number" min="-255" max="255" value="1"></td>
+                                    <td><input id="num_convolucion_matriz_4" name="convolucion_matriz_4" type="number" min="-255" max="255" value="1"></td>
+                                    <td><input id="num_convolucion_matriz_5" name="convolucion_matriz_5" type="number" min="-255" max="255" value="1"></td>
+                                </tr>
+                                </tr><tr>
+                                    <td><input id="num_convolucion_matriz_6" name="convolucion_matriz_6" type="number" min="-255" max="255" value="1"></td>
+                                    <td><input id="num_convolucion_matriz_7" name="convolucion_matriz_7" type="number" min="-255" max="255" value="1"></td>
+                                    <td><input id="num_convolucion_matriz_8" name="convolucion_matriz_8" type="number" min="-255" max="255" value="1"></td>
+                                </tr>
+                            </table></div>
+                        <div id="val_convolucion_divisor"><br><span class="titulo_opcion"> {% trans %}Divisor{% endtrans %} </span><input id="num_convolucion_divisor" name="convolucion_divisor" type="number" min="-255" max="1000" value="1000"><br>
+                            <span class="titulo_accion"> {% trans %}Divisor automático{% endtrans %} </span><input id="divisor_conv_auto" name="divisor_convolucion_auto" type="checkbox" value="check">
+                        </div>
+                        <div id="val_convolucion_offset"><span class="titulo_opcion"> Offset </span><input id="num_convolucion_offset" name="convolucion_offset" type="number" min="-1000" max="1000" value="0"></div>
+                        <div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">
+                            <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
+                        </div></div>
+                </form>
                 {#<form action="{{ path('msd_home_correcciongamma') }}" method="post">#}
                     {#<div id="cambiar_gamma" class="accion"><span class="titulo_accion">{% trans %}Corrección gamma{% endtrans %}</span><input id="correccion_gamma" class="mostrar-ocultar" name="convertir_gamma" type="checkbox" value="check">#}
                         {#<div id="val_entrada_gamma"><hr><span class="titulo_opcion"> {% trans %}Entrada gamma{% endtrans %} </span><input id="num_entrada_gamma" name="entrada_gamma" type="number" min="-50" max="50" value="0"></div>#}
