@@ -125,13 +125,13 @@ Contact: manolez@gmail.com - http://msalsas.com
                             <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
                         </div></div>
                 </form>
-                {#<form action="{{ path('msd_home_pixelacion') }}" method="post">#}
-                    {#<div id="cambiar_pixelacion" class="accion"><span class="titulo_accion">{% trans %}Pixelación{% endtrans %}</span><input id="pixelacion" class="mostrar-ocultar" name="convertir_pixelacion" type="checkbox" value="check">#}
-                        {#<div id="val_pixelacion" style="display:none;"><hr><br><span class="titulo_opcion"> {% trans %}Tamaño de bloque en píxeles{% endtrans %} </span><input id="num_pixelacion" name="pixelacion" type="number" min="0" max="5000" value="1000000"></div>#}
-                        {#<div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">#}
-                            {#<button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>#}
-                        {#</div></div>#}
-                {#</form>#}
+                <form action="{{ path('pixelate') }}" method="post">
+                    <div id="cambiar_pixelacion" class="accion"><span class="titulo_accion">{% trans %}Pixelación{% endtrans %}</span><input id="pixelacion" class="mostrar-ocultar" name="convertir_pixelacion" type="checkbox" value="check">
+                        <div id="val_pixelacion" style="display:none;"><hr><br><span class="titulo_opcion"> {% trans %}Tamaño de bloque en píxeles{% endtrans %} </span><input id="num_pixelacion" name="pixelacion" type="number" min="0" max="5000" value="1000000"></div>
+                        <div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">
+                            <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
+                        </div></div>
+                </form>
                 {#<form action="{{ path('msd_home_convolucion') }}" method="post">#}
                     {#<div id="cambiar_convolucion" class="accion"><span class="titulo_accion">{% trans %}Convolución{% endtrans %}</span><input id="convolucion" class="mostrar-ocultar" name="convertir_convolucion" type="checkbox" value="check">#}
                         {#<div id="val_convolucion_matriz"><hr><span class="titulo_opcion"> {% trans %}Matriz de convolución{% endtrans %} </span><br>#}

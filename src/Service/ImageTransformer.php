@@ -245,6 +245,24 @@ class ImageTransformer
         return $this->applyFilter($image, IMG_FILTER_SMOOTH, $smooth);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @param $pixelate integer
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function pixelate(ImageInterface $image, $pixelate)
+    {
+        if (!is_int($pixelate)) {
+            throw new ImageTransformerException("Pixelate must be integer.");
+        }
+        if ($pixelate < 0 || $pixelate > 5000) {
+            throw new ImageTransformerException("Pixelate must be greater or equal than 0 and less or equal than 5000.");
+        }
+
+        return $this->applyFilter($image, IMG_FILTER_PIXELATE, $pixelate);
+    }
+
     protected function applyFilter(ImageInterface $image, $filterType, $value = 0)
     {
         $canvas = $this->createCanvas($image);

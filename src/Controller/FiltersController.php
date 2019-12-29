@@ -87,4 +87,16 @@ class FiltersController extends BaseImageController
             return $this->imageTransformer->smooth($image, $smooth);
         });
     }
+
+    /**
+     * @Route("pixelate", name="pixelate", methods={"POST"})
+     */
+    public function pixelate()
+    {
+        return $this->findAndRenderImage(function($image) {
+            $pixelate = (int) $this->request->request->get('pixelacion');
+
+            return $this->imageTransformer->pixelate($image, $pixelate);
+        });
+    }
 }

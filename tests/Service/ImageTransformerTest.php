@@ -34,6 +34,7 @@ class ImageTransformerTest extends WebTestCase
     const BLUR_NAME_WITH_EXTENSION = "blur1.png";
     const GAUSSIAN_BLUR_NAME_WITH_EXTENSION = "blurGauss1.png";
     const SMOOTH_NAME_WITH_EXTENSION = "smooth1.png";
+    const PIXELATE_NAME_WITH_EXTENSION = "pixelate1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -331,6 +332,33 @@ class ImageTransformerTest extends WebTestCase
         $this->expectException(ImageTransformerException::class);
 
         $this->imageTransformer->smooth($image, 5001);
+    }
+
+    public function testPixelate()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->pixelate($image, 100);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::PIXELATE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testPixelateWithNonNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->pixelate($image, "foo");
+    }
+
+    public function testPixelateWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->pixelate($image, 5001);
     }
 
     protected function createImage()
