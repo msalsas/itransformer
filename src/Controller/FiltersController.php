@@ -65,4 +65,14 @@ class FiltersController extends BaseImageController
             return $this->imageTransformer->blur($image);
         });
     }
+
+    /**
+     * @Route("gaussian-blur", name="gaussianBlur", methods={"POST"})
+     */
+    public function gaussianBlur()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->gaussianBlur($image);
+        });
+    }
 }

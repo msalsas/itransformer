@@ -115,9 +115,9 @@ Contact: manolez@gmail.com - http://msalsas.com
                 <form action="{{ path('blur') }}" method="post">
                     <div class="accion"><span class="titulo_accion">{% trans %}Poner borroso{% endtrans %}</span><input class="directo" name="convertir_borroso" type="checkbox" value="check"></div>
                 </form>
-                {#<form action="{{ path('msd_home_borrosogauss') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Poner borroso (ef. Gaussiano){% endtrans %}</span><input class="directo" name="convertir_borroso_Gauss" type="checkbox" value="check"></div>#}
-                {#</form>#}
+                <form action="{{ path('gaussianBlur') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Poner borroso (ef. Gaussiano){% endtrans %}</span><input class="directo" name="convertir_borroso_Gauss" type="checkbox" value="check"></div>
+                </form>
                 {#<form action="{{ path('msd_home_suavizado') }}" method="post">#}
                     {#<div id="cambiar_suavizado" class="accion"><span class="titulo_accion">{% trans %}Suavizado{% endtrans %}</span><input id="suavizado" class="mostrar-ocultar" name="convertir_suavizado" type="checkbox" value="check">#}
                         {#<div id="val_suavizado" style="display:none;"><hr><br><input id="num_suavizado" name="suavizado" type="number" min="-5000" max="5000" value="0"></div>#}

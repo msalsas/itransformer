@@ -32,6 +32,7 @@ class ImageTransformerTest extends WebTestCase
     const EMBOSS_NAME_WITH_EXTENSION = "emboss1.png";
     const MEAN_REMOVAL_NAME_WITH_EXTENSION = "meanRemoval1.png";
     const BLUR_NAME_WITH_EXTENSION = "blur1.png";
+    const GAUSSIAN_BLUR_NAME_WITH_EXTENSION = "blurGauss1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -293,6 +294,15 @@ class ImageTransformerTest extends WebTestCase
         $imageTransformed = $this->imageTransformer->blur($image);
 
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::BLUR_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testGaussianBlur()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->gaussianBlur($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::GAUSSIAN_BLUR_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     protected function createImage()

@@ -217,6 +217,16 @@ class ImageTransformer
         return $this->applyFilter($image, IMG_FILTER_SELECTIVE_BLUR);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function gaussianBlur(ImageInterface $image)
+    {
+        return $this->applyFilter($image, IMG_FILTER_GAUSSIAN_BLUR);
+    }
+
     protected function applyFilter(ImageInterface $image, $filterType, $value = 0)
     {
         $canvas = $this->createCanvas($image);
