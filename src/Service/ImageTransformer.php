@@ -31,12 +31,9 @@ class ImageTransformer
      */
     public function changeDimensions(ImageInterface $image, $width, $height)
     {
-        if (!is_int($width) || !is_int($height)) {
-            throw new ImageTransformerException("Width and height must be integers.");
-        }
-        if ($width <= 0 || $width > 6000 || $height <= 0 || $height > 6000) {
-            throw new ImageTransformerException("Width and height must be greater than 0 and less or equal than 6000.");
-        }
+        $this->throwErrorUnlessInteger($width, 1, 6000, "width");
+        $this->throwErrorUnlessInteger($height, 1, 6000, "height");
+
         $originalCanvas = $this->createCanvas($image);
 
         $newCanvas = imagecreatetruecolor($width, $height);
@@ -61,12 +58,7 @@ class ImageTransformer
      */
     public function changeBrightness(ImageInterface $image, $brightness)
     {
-        if (!is_int($brightness)) {
-            throw new ImageTransformerException("Brightness must be integers.");
-        }
-        if ($brightness < -255 || $brightness > 255) {
-            throw new ImageTransformerException("Brightness must be greater than -256 and less than 256.");
-        }
+        $this->throwErrorUnlessInteger($brightness, -255, 255, "brightness");
 
         return $this->applyFilter($image, IMG_FILTER_BRIGHTNESS, $brightness);
     }
@@ -79,12 +71,7 @@ class ImageTransformer
      */
     public function changeContrast(ImageInterface $image, $contrast)
     {
-        if (!is_int($contrast)) {
-            throw new ImageTransformerException("Contrast must be integers.");
-        }
-        if ($contrast < -1000 || $contrast > 1000) {
-            throw new ImageTransformerException("Contrast must be greater than -256 and less than 256.");
-        }
+        $this->throwErrorUnlessInteger($contrast, -1000, 1000, "contrast");
 
         return $this->applyFilter($image, IMG_FILTER_CONTRAST, $contrast);
     }
@@ -136,12 +123,7 @@ class ImageTransformer
      */
     public function rotate(ImageInterface $image, $degrees)
     {
-        if (!is_int($degrees)) {
-            throw new ImageTransformerException("Degrees must be integer.");
-        }
-        if ($degrees < 0 || $degrees > 360) {
-            throw new ImageTransformerException("Degrees must be greater or equal than 0 and lower or equal than 360.");
-        }
+        $this->throwErrorUnlessInteger($degrees, 0, 360, "degrees");
 
         $originalCanvas = $this->createCanvas($image);
 
@@ -235,12 +217,7 @@ class ImageTransformer
      */
     public function smooth(ImageInterface $image, $smooth)
     {
-        if (!is_int($smooth)) {
-            throw new ImageTransformerException("Smooth must be integer.");
-        }
-        if ($smooth < -5000 || $smooth > 5000) {
-            throw new ImageTransformerException("Smooth must be greater or equal than -5000 and less or equal than 5000.");
-        }
+        $this->throwErrorUnlessInteger($smooth, -5000, 5000, "smooth");
 
         return $this->applyFilter($image, IMG_FILTER_SMOOTH, $smooth);
     }
@@ -253,12 +230,7 @@ class ImageTransformer
      */
     public function pixelate(ImageInterface $image, $pixelate)
     {
-        if (!is_int($pixelate)) {
-            throw new ImageTransformerException("Pixelate must be integer.");
-        }
-        if ($pixelate < 0 || $pixelate > 5000) {
-            throw new ImageTransformerException("Pixelate must be greater or equal than 0 and less or equal than 5000.");
-        }
+        $this->throwErrorUnlessInteger($pixelate, 0, 5000, "pixelate");
 
         return $this->applyFilter($image, IMG_FILTER_PIXELATE, $pixelate);
     }
@@ -278,26 +250,11 @@ class ImageTransformer
         }
         foreach ($matrix as $array) {
             foreach ($array as $value) {
-                if (!is_int($value)) {
-                    throw new ImageTransformerException("All matrix values must be integers.");
-                }
-                if ($value < -255 || $value > 255) {
-                    throw new ImageTransformerException("All matrix values must be greater than -256 and less than 256.");
-                }
+                $this->throwErrorUnlessInteger($value, -255, 255, "all matrix values");
             }
         }
-        if (!is_int($divisor)) {
-            throw new ImageTransformerException("Divisor must be integer.");
-        }
-        if ($divisor < -255 || $divisor > 1000) {
-            throw new ImageTransformerException("Divisor must be greater than -256 and less than 1001.");
-        }
-        if (!is_int($offset)) {
-            throw new ImageTransformerException("Offset must be integer.");
-        }
-        if ($offset < -1000 || $offset > 1000) {
-            throw new ImageTransformerException("Offset must be greater than -1001 and less than 1001.");
-        }
+        $this->throwErrorUnlessInteger($divisor, -255, 1000, "divisor");
+        $this->throwErrorUnlessInteger($offset, -1000, 1000, "divisor");
 
         $canvas = $this->createCanvas($image);
 
@@ -317,18 +274,8 @@ class ImageTransformer
      */
     public function gammaCorrection(ImageInterface $image, $input, $output)
     {
-        if (!is_int($input)) {
-            throw new ImageTransformerException("Input must be integer.");
-        }
-        if ($input < 0 || $input > 50) {
-            throw new ImageTransformerException("Input must be greater or equal than 0 and less than 51.");
-        }
-        if (!is_int($output)) {
-            throw new ImageTransformerException("Output must be integer.");
-        }
-        if ($output < 0 || $output > 50) {
-            throw new ImageTransformerException("Output must be greater or equal than 0 and less than 51.");
-        }
+        $this->throwErrorUnlessInteger($input, 0, 50, "input");
+        $this->throwErrorUnlessInteger($output, 0, 50, "output");
 
         $canvas = $this->createCanvas($image);
 
@@ -350,32 +297,23 @@ class ImageTransformer
      */
     public function colorize(ImageInterface $image, $red, $green, $blue, $alpha)
     {
-        if (!is_int($red)) {
-            throw new ImageTransformerException("Red must be integer.");
-        }
-        if ($red < 0 || $red > 255) {
-            throw new ImageTransformerException("Red must be greater or equal than 0 and less than 256.");
-        }
-        if (!is_int($green)) {
-            throw new ImageTransformerException("Green must be integer.");
-        }
-        if ($green < 0 || $green > 255) {
-            throw new ImageTransformerException("Green must be greater or equal than 0 and less than 256.");
-        }
-        if (!is_int($blue)) {
-            throw new ImageTransformerException("Blue must be integer.");
-        }
-        if ($blue < 0 || $blue > 255) {
-            throw new ImageTransformerException("Blue must be greater or equal than 0 and less than 256.");
-        }
-        if (!is_int($alpha)) {
-            throw new ImageTransformerException("Alpha must be integer.");
-        }
-        if ($alpha < 0 || $alpha > 127) {
-            throw new ImageTransformerException("Alpha must be greater or equal than 0 and less than 256.");
-        }
+        $this->throwErrorUnlessInteger($red, 0, 255, "red");
+        $this->throwErrorUnlessInteger($green, 0, 255, "green");
+        $this->throwErrorUnlessInteger($blue, 0, 255, "blue");
+        $this->throwErrorUnlessInteger($alpha, 0, 127, "alpha");
 
         return $this->applyFilter($image, IMG_FILTER_COLORIZE, $red, $green, $blue, $alpha);
+    }
+
+    protected function throwErrorUnlessInteger($value, $min, $max, $valueName)
+    {
+        $valueName = ucfirst($valueName);
+        if (!is_int($value)) {
+            throw new ImageTransformerException("$valueName must be integer.");
+        }
+        if ($value < $min || $value > $max) {
+            throw new ImageTransformerException("$valueName must be greater or equal than $min and less or equal than $max.");
+        }
     }
 
     protected function applyFilter(ImageInterface $image, $filterType, ...$args)
