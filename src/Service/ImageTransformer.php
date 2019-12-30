@@ -310,6 +310,7 @@ class ImageTransformer
 
     /**
      * @param $image ImageInterface
+     * @param $input integer
      * @param $output integer
      * @return ImageInterface
      * @throws ImageTransformerException
@@ -338,11 +339,50 @@ class ImageTransformer
         return $this->createAndSaveNewImage($image, $canvas);
     }
 
-    protected function applyFilter(ImageInterface $image, $filterType, $value = 0)
+    /**
+     * @param $image ImageInterface
+     * @param $red integer
+     * @param $green integer
+     * @param $blue integer
+     * @param $alpha integer
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function colorize(ImageInterface $image, $red, $green, $blue, $alpha)
+    {
+        if (!is_int($red)) {
+            throw new ImageTransformerException("Red must be integer.");
+        }
+        if ($red < 0 || $red > 255) {
+            throw new ImageTransformerException("Red must be greater or equal than 0 and less than 256.");
+        }
+        if (!is_int($green)) {
+            throw new ImageTransformerException("Green must be integer.");
+        }
+        if ($green < 0 || $green > 255) {
+            throw new ImageTransformerException("Green must be greater or equal than 0 and less than 256.");
+        }
+        if (!is_int($blue)) {
+            throw new ImageTransformerException("Blue must be integer.");
+        }
+        if ($blue < 0 || $blue > 255) {
+            throw new ImageTransformerException("Blue must be greater or equal than 0 and less than 256.");
+        }
+        if (!is_int($alpha)) {
+            throw new ImageTransformerException("Alpha must be integer.");
+        }
+        if ($alpha < 0 || $alpha > 127) {
+            throw new ImageTransformerException("Alpha must be greater or equal than 0 and less than 256.");
+        }
+
+        return $this->applyFilter($image, IMG_FILTER_COLORIZE, $red, $green, $blue, $alpha);
+    }
+
+    protected function applyFilter(ImageInterface $image, $filterType, ...$args)
     {
         $canvas = $this->createCanvas($image);
 
-        imagefilter($canvas, $filterType, $value);
+        imagefilter($canvas, $filterType, ...$args);
 
         return $this->createAndSaveNewImage($image, $canvas);
     }

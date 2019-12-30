@@ -37,6 +37,7 @@ class ImageTransformerTest extends WebTestCase
     const PIXELATE_NAME_WITH_EXTENSION = "pixelate1.png";
     const CONVOLUTION_NAME_WITH_EXTENSION = "convolution1.png";
     const GAMMA_CORRECTION_NAME_WITH_EXTENSION = "gammaCorrection1.png";
+    const COLORIZE_NAME_WITH_EXTENSION = "colorize1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -420,6 +421,32 @@ class ImageTransformerTest extends WebTestCase
         $this->imageTransformer->gammaCorrection($image, 51, 50);
     }
 
+    public function testColorize()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->colorize($image, 20, 10, 30, 25);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::COLORIZE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testColorizeWithNonNumericValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->colorize($image, "foo", 50, 20, 10);
+    }
+
+    public function testColorizeWithOutOfRangeValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->colorize($image, 256, 50, 10, 10);
+    }
     protected function createImage()
     {
         $image = new Image();

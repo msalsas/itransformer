@@ -167,23 +167,23 @@ Contact: manolez@gmail.com - http://msalsas.com
                         </div></div>
                 </form>
 
-                {#<form id="form_guardar" action="{{ path('msd_home_guardar') }}" method="post">#}
-                    {#<input class="guardar" type="submit" value="{% trans %}Guardar imagen{% endtrans %}">#}
-                {#</form>#}
+                <form id="form_guardar" action="{{ path('save') }}" method="post">
+                    <input class="guardar" type="submit" value="{% trans %}Guardar imagen{% endtrans %}">
+                </form>
             </div>
 
-            {#<div id="formulario_efectos" class="gradient">#}
+            <div id="formulario_efectos" class="gradient">
 
-                {#<form action="{{ path('msd_home_colorear') }}" method="post">#}
-                    {#<div id="cambiar_colorear" class="accion"><span class="titulo_accion">{% trans %}Colorear{% endtrans %}</span><input id="colorear" class="mostrar-ocultar" name="convertir_colorear" type="checkbox" value="check">#}
-                        {#<div id="val_colorear_r"><hr><span class="titulo_opcion"> {% trans %}Rojo{% endtrans %} </span><input id="num_colorear_r" name="colorear_r" type="number" min="0" max="255" value="0"></div>#}
-                        {#<div id="val_colorear_g"><span class="titulo_opcion"> {% trans %}Verde{% endtrans %} </span><input id="num_colorear_g" name="colorear_g" type="number" min="0" max="255" value="0"></div>#}
-                        {#<div id="val_colorear_b"><span class="titulo_opcion"> {% trans %}Azul{% endtrans %} </span><input id="num_colorear_b" name="colorear_b" type="number" min="0" max="255" value="0"></div>#}
-                        {#<div id="val_alfa"><span class="titulo_opcion"> {% trans %}Alfa (transparencia){% endtrans %} </span><input id="num_alfa" name="alfa" type="number" min="0" max="127" value="0"></div>#}
-                        {#<div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">#}
-                            {#<button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>#}
-                        {#</div></div>#}
-                {#</form>#}
+                <form action="{{ path('colorize') }}" method="post">
+                    <div id="cambiar_colorear" class="accion"><span class="titulo_accion">{% trans %}Colorear{% endtrans %}</span><input id="colorear" class="mostrar-ocultar" name="convertir_colorear" type="checkbox" value="check">
+                        <div id="val_colorear_r"><hr><span class="titulo_opcion"> {% trans %}Rojo{% endtrans %} </span><input id="num_colorear_r" name="colorear_r" type="number" min="0" max="255" value="0"></div>
+                        <div id="val_colorear_g"><span class="titulo_opcion"> {% trans %}Verde{% endtrans %} </span><input id="num_colorear_g" name="colorear_g" type="number" min="0" max="255" value="0"></div>
+                        <div id="val_colorear_b"><span class="titulo_opcion"> {% trans %}Azul{% endtrans %} </span><input id="num_colorear_b" name="colorear_b" type="number" min="0" max="255" value="0"></div>
+                        <div id="val_alfa"><span class="titulo_opcion"> {% trans %}Alfa (transparencia){% endtrans %} </span><input id="num_alfa" name="alfa" type="number" min="0" max="127" value="0"></div>
+                        <div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">
+                            <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
+                        </div></div>
+                </form>
 
                 {#<form action="{{ path('msd_home_resaltarcolores') }}" method="post">#}
                     {#<div id="cambiar_resaltar_colores" class="accion"><span class="titulo_accion">{% trans %}Resaltar colores{% endtrans %}</span><input id="resaltar_colores" class="mostrar-ocultar" name="convertir_resaltar_colores" type="checkbox" value="check">#}
@@ -251,10 +251,10 @@ Contact: manolez@gmail.com - http://msalsas.com
                     {#<div class="accion"><span class="titulo_accion">{% trans %}Enmarcar (imagen vertical){% endtrans %}</span><input class="directo" name="convertir_marco_vertical" type="checkbox" value="check"></div>#}
                 {#</form>#}
 
-                {#<form id="form_guardar" action="{{ path('msd_home_guardar') }}" method="post">#}
-                    {#<input class="guardar" type="submit" value="{% trans %}Guardar imagen{% endtrans %}">#}
-                {#</form>#}
-            {#</div>#}
+                <form id="form_guardar" action="{{ path('save') }}" method="post">
+                    <input class="guardar" type="submit" value="{% trans %}Guardar imagen{% endtrans %}">
+                </form>
+            </div>
             {#<form id="form_borrar" action="{{ path('msd_home_borrar') }}" method="post">#}
                 {#<input id="borrar" type="submit" value="{% trans %}Eliminar{% endtrans %}"><span class="titulo_opcion"> {% trans %}Volver a adjuntar imagen{% endtrans %} </span>#}
             {#</form>#}
