@@ -185,15 +185,15 @@ Contact: manolez@gmail.com - http://msalsas.com
                         </div></div>
                 </form>
 
-                {#<form action="{{ path('msd_home_resaltarcolores') }}" method="post">#}
-                    {#<div id="cambiar_resaltar_colores" class="accion"><span class="titulo_accion">{% trans %}Resaltar colores{% endtrans %}</span><input id="resaltar_colores" class="mostrar-ocultar" name="convertir_resaltar_colores" type="checkbox" value="check">#}
-                        {#<hr><span class="titulo_accion"> {% trans %}Resaltar rojo{% endtrans %} </span><input id="resaltar_r" name="resaltar_colores_r" type="checkbox" value="check"><br>#}
-                        {#<span class="titulo_accion"> {% trans %}Resaltar verde{% endtrans %} </span><input id="resaltar_g" name="resaltar_colores_g" type="checkbox" value="check"><br>#}
-                        {#<span class="titulo_accion"> {% trans %}Resaltar azul{% endtrans %} </span><input id="resaltar_b" name="resaltar_colores_b" type="checkbox" value="check">#}
-                        {#<div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">#}
-                            {#<button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>#}
-                        {#</div></div>#}
-                {#</form>#}
+                <form action="{{ path('highlightColors') }}" method="post">
+                    <div id="cambiar_resaltar_colores" class="accion"><span class="titulo_accion">{% trans %}Resaltar colores{% endtrans %}</span><input id="resaltar_colores" class="mostrar-ocultar" name="convertir_resaltar_colores" type="checkbox" value="check">
+                        <hr><span class="titulo_accion"> {% trans %}Resaltar rojo{% endtrans %} </span><input id="resaltar_r" name="resaltar_colores_r" type="checkbox" value="check"><br>
+                        <span class="titulo_accion"> {% trans %}Resaltar verde{% endtrans %} </span><input id="resaltar_g" name="resaltar_colores_g" type="checkbox" value="check"><br>
+                        <span class="titulo_accion"> {% trans %}Resaltar azul{% endtrans %} </span><input id="resaltar_b" name="resaltar_colores_b" type="checkbox" value="check">
+                        <div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">
+                            <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
+                        </div></div>
+                </form>
 
                 {#<form action="{{ path('msd_home_atenuarcolores') }}" method="post">#}
                     {#<div id="cambiar_atenuar_colores" class="accion"><span class="titulo_accion">{% trans %}Atenuar colores{% endtrans %}</span><input id="atenuar_colores" class="mostrar-ocultar" name="convertir_atenuar_colores" type="checkbox" value="check">#}

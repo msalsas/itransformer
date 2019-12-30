@@ -20,4 +20,22 @@ class EffectsController extends BaseImageController
             return $this->imageTransformer->colorize($image, $red, $green, $blue, $alpha);
         });
     }
+
+    /**
+     * @Route("highlight-colors", name="highlightColors", methods={"POST"})
+     */
+    public function highlightColors()
+    {
+        return $this->findAndRenderImage(function($image) {
+            $redInput = $this->request->request->get('resaltar_colores_r');
+            $greenInput = $this->request->request->get('resaltar_colores_g');
+            $blueInput = $this->request->request->get('resaltar_colores_b');
+
+            $redChecked = $redInput === "checked";
+            $greenChecked = $greenInput === "checked";
+            $blueChecked = $blueInput === "checked";
+
+            return $this->imageTransformer->highlightColors($image, $redChecked, $greenChecked, $blueChecked);
+        });
+    }
 }

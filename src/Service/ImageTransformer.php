@@ -305,6 +305,89 @@ class ImageTransformer
         return $this->applyFilter($image, IMG_FILTER_COLORIZE, $red, $green, $blue, $alpha);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @param $redChecked integer
+     * @param $greenChecked integer
+     * @param $blueChecked integer
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function highlightColors(ImageInterface $image, $redChecked, $greenChecked, $blueChecked)
+    {
+        $this->throwErrorUnlessBoolean($redChecked, "red");
+        $this->throwErrorUnlessBoolean($greenChecked, "green");
+        $this->throwErrorUnlessBoolean($blueChecked, "blue");
+
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        if ($redChecked) {
+            for($x = 0; $x < $image->getWidth(); $x++){
+                for($y = 0; $y < $image->getHeight(); $y++){
+
+                    $red = (ImageColorAt($canvas, $x, $y) >> 16) & 0xFF;
+                    $green = (ImageColorAt($canvas, $x, $y) >> 8) & 0xFF;
+                    $blue = ImageColorAt($canvas, $x, $y) & 0xFF;
+
+                    if ($red < 251 && $red > 240 && $blue + 20 < $red && $green + 20 < $red && $blue > 10 && $green > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red + 5, $green - 10, $blue - 10));
+                    }
+                    elseif ($red > 220 && $blue + 20 < $red && $green + 20 < $red && $red < 240 && $green > 10 && $blue > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red + 15, $green - 10, $blue - 10));
+                    }
+                    elseif ($blue + 20 < $red && $green + 20 < $red && $red < 220 && $green > 10 && $blue > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red + 30, $green - 10, $blue - 10));
+                    }
+                }
+
+            }
+        }
+        if ($greenChecked) {
+            for($x = 0; $x < $image->getWidth(); $x++) {
+                for ($y = 0; $y < $image->getHeight(); $y++) {
+                    $red = (ImageColorAt($canvas, $x, $y) >> 16) & 0xFF;
+                    $green = (ImageColorAt($canvas, $x, $y) >> 8) & 0xFF;
+                    $blue = ImageColorAt($canvas, $x, $y) & 0xFF;
+
+                    if ($green < 251 && $green > 240 && $blue + 20 < $green && $red + 20 < $green && $blue > 10 && $red > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red - 10, $green + 5, $blue - 10));
+                    }
+                    elseif ($green > 220 && $blue < $green && $red + 10 < $green && $green < 240 && $red > 10 && $blue > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red - 10, $green + 15, $blue - 10));
+                    }
+                    elseif ($blue < $green && $red + 10 < $green && $green < 220 && $red > 10 && $blue > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red - 10, $green + 30, $blue - 10));
+                    }
+
+                }
+            }
+        }
+        if ($blueChecked) {
+            for($x = 0; $x < $image->getWidth(); $x++) {
+                for ($y = 0; $y < $image->getHeight(); $y++) {
+                    $red = (ImageColorAt($canvas, $x, $y) >> 16) & 0xFF;
+                    $green = (ImageColorAt($canvas, $x, $y) >> 8) & 0xFF;
+                    $blue = ImageColorAt($canvas, $x, $y) & 0xFF;
+
+                    if ($blue < 251 && $blue > 240 && $green + 20 < $blue && $red + 20 < $blue && $blue > 10 && $red > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red - 10, $green - 10, $blue + 5));
+                    }
+                    elseif ($blue > 220 && $green < $blue && $red + 10 < $blue && $blue < 240 && $red > 10 && $green > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red - 10, $green - 10, $blue + 15));
+                    }
+                    elseif ($green < $blue && $red + 10 < $blue && $blue < 220 && $red > 10 && $green > 10) {
+                        imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $red - 10, $green - 10, $blue + 30));
+                    }
+
+                }
+            }
+        }
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
     protected function throwErrorUnlessInteger($value, $min, $max, $valueName)
     {
         $valueName = ucfirst($valueName);
@@ -313,6 +396,14 @@ class ImageTransformer
         }
         if ($value < $min || $value > $max) {
             throw new ImageTransformerException("$valueName must be greater or equal than $min and less or equal than $max.");
+        }
+    }
+
+    protected function throwErrorUnlessBoolean($value, $valueName)
+    {
+        $valueName = ucfirst($valueName);
+        if (!is_bool($value)) {
+            throw new ImageTransformerException("$valueName must be boolean.");
         }
     }
 

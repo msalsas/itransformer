@@ -38,6 +38,7 @@ class ImageTransformerTest extends WebTestCase
     const CONVOLUTION_NAME_WITH_EXTENSION = "convolution1.png";
     const GAMMA_CORRECTION_NAME_WITH_EXTENSION = "gammaCorrection1.png";
     const COLORIZE_NAME_WITH_EXTENSION = "colorize1.png";
+    const HIGHLIGHT_COLORS_NAME_WITH_EXTENSION = "highlightColors1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -447,6 +448,25 @@ class ImageTransformerTest extends WebTestCase
 
         $this->imageTransformer->colorize($image, 256, 50, 10, 10);
     }
+
+    public function testHighlightColors()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->highlightColors($image, true, true, true);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::HIGHLIGHT_COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testHighlightColorsWithNonBooleanValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->highlightColors($image, "foo", true, false);
+    }
+
     protected function createImage()
     {
         $image = new Image();
