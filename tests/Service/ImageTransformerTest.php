@@ -40,6 +40,21 @@ class ImageTransformerTest extends WebTestCase
     const COLORIZE_NAME_WITH_EXTENSION = "colorize1.png";
     const HIGHLIGHT_COLORS_NAME_WITH_EXTENSION = "highlightColors1.png";
     const ATTENUATE_COLORS_NAME_WITH_EXTENSION = "attenuateColors1.png";
+    const SUPER_THIN_PENCIL_NAME_WITH_EXTENSION = "superThinPencil.png";
+    const THIN_PENCIL_NAME_WITH_EXTENSION = "thinPencil.png";
+    const REGULAR_PENCIL_NAME_WITH_EXTENSION = "regularPencil.png";
+    const THICK_PENCIL_NAME_WITH_EXTENSION = "thickPencil.png";
+    const PAINT_NAME_WITH_EXTENSION = "paint.png";
+    const CHE_GUEVARA_NAME_WITH_EXTENSION = "cheGuevara.png";
+    const WRINKLED_PAPER_COLORS_NAME_WITH_EXTENSION = "wrinkledPaper.png";
+    const OLD_NAME_WITH_EXTENSION = "old.png";
+    const FIRE_NAME_WITH_EXTENSION = "fire.png";
+    const DROPS_NAME_WITH_EXTENSION = "drops.png";
+    const LIGHTS_NAME_WITH_EXTENSION = "lights.png";
+    const COLORS_NAME_WITH_EXTENSION = "colors.png";
+    const COOL_NAME_WITH_EXTENSION = "cool.png";
+    const HORIZONTAL_FRAME_NAME_WITH_EXTENSION = "horizontalFrame.png";
+    const VERTICAL_FRAME_NAME_WITH_EXTENSION = "verticalFrame.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
