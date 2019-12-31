@@ -56,4 +56,44 @@ class EffectsController extends BaseImageController
             return $this->imageTransformer->attenuateColors($image, $redChecked, $greenChecked, $blueChecked);
         });
     }
+
+    /**
+     * @Route("super-thin-pencil-effect", name="superThinPencilEffect", methods={"POST"})
+     */
+    public function superThinPencilEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->superThinPencilEffect($image);
+        });
+    }
+
+    /**
+     * @Route("thin-pencil-effect", name="thinPencilEffect", methods={"POST"})
+     */
+    public function thinPencilEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->thinPencilEffect($image);
+        });
+    }
+
+    /**
+     * @Route("regular-pencil-effect", name="regularPencilEffect", methods={"POST"})
+     */
+    public function regularPencilEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->regularPencilEffect($image);
+        });
+    }
+
+    /**
+     * @Route("thick-pencil-effect", name="thickPencilEffect", methods={"POST"})
+     */
+    public function thickPencilEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->thickPencilEffect($image);
+        });
+    }
 }

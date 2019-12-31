@@ -471,6 +471,142 @@ class ImageTransformer
         return $this->createAndSaveNewImage($image, $canvas);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function superThinPencilEffect(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        imagefilter($canvas, IMG_FILTER_EDGEDETECT);
+
+        $white = imagecolorallocate($canvas, 255, 255, 255);
+        $muchLighterGray = imagecolorallocate($canvas, 210, 210, 210);
+        $lighterGray = imagecolorallocate($canvas, 175, 175, 175);
+        $lightGray = imagecolorallocate($canvas, 140, 140, 140);
+        $darkGray = imagecolorallocate($canvas, 105, 105, 105);
+        $darkerGray = imagecolorallocate($canvas, 70, 70, 70);
+        $muchDarkerGray = imagecolorallocate($canvas, 35, 35, 35);
+        $black = imagecolorallocate($canvas, 0,0,0);
+        for ($x=0; $x < $image->getWidth(); $x++) {
+            for ($y=0; $y < $image->getHeight(); $y++) {
+                $color = ImageColorAt($canvas, $x, $y);
+
+                if (($color&0xFF) > 80) imagesetpixel($canvas, $x, $y, $white);
+                elseif (($color&0xFF) > 75) imagesetpixel($canvas, $x, $y, $muchLighterGray);
+                elseif (($color&0xFF) > 70) imagesetpixel($canvas, $x, $y, $lighterGray);
+                elseif (($color&0xFF) > 65) imagesetpixel($canvas, $x, $y, $lightGray);
+                elseif (($color&0xFF) > 60) imagesetpixel($canvas, $x, $y, $darkGray);
+                elseif (($color&0xFF) > 60) imagesetpixel($canvas, $x, $y, $darkerGray);
+                elseif (($color&0xFF) > 55) imagesetpixel($canvas, $x, $y, $muchDarkerGray);
+                else imagesetpixel($canvas, $x, $y, $black);
+
+            }
+        }
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function thinPencilEffect(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        imagefilter($canvas, IMG_FILTER_EDGEDETECT);
+
+        $white = imagecolorallocate($canvas, 255, 255, 255);
+        $lighterGray = imagecolorallocate($canvas, 200, 200, 200);
+        $lightGray = imagecolorallocate($canvas, 150, 150, 150);
+        $darkGray = imagecolorallocate($canvas, 120, 120, 120);
+        $darkerGray = imagecolorallocate($canvas, 80, 80, 80);
+        $black = imagecolorallocate($canvas, 0, 0, 0);
+        for ($x=0; $x < $image->getWidth(); $x++) {
+            for ($y=0; $y < $image->getHeight(); $y++) {
+                $color = ImageColorAt($canvas, $x, $y);
+
+                if (($color&0xFF) > 100) imagesetpixel($canvas, $x, $y, $white);
+                elseif (($color&0xFF) > 95) imagesetpixel($canvas, $x, $y, $lighterGray);
+                elseif (($color&0xFF) > 90) imagesetpixel($canvas, $x, $y, $lightGray);
+                elseif (($color&0xFF) > 85) imagesetpixel($canvas, $x, $y, $darkGray);
+                elseif (($color&0xFF) > 80) imagesetpixel($canvas, $x, $y, $darkerGray);
+                else imagesetpixel($canvas, $x, $y, $black);
+
+            }
+        }
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function regularPencilEffect(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        imagefilter($canvas, IMG_FILTER_EDGEDETECT);
+
+        $white = imagecolorallocate($canvas, 255, 255, 255);
+        $lightGray = imagecolorallocate($canvas, 230, 230, 230);
+        $darkGray = imagecolorallocate($canvas, 100, 100, 100);
+        $black = imagecolorallocate($canvas, 0, 0, 0);
+        for ($x=0; $x < $image->getWidth(); $x++) {
+            for ($y=0; $y < $image->getHeight(); $y++) {
+                $color = ImageColorAt($canvas, $x, $y);
+
+                if (($color&0xFF) > 120) imagesetpixel($canvas, $x, $y, $white);
+                elseif (($color&0xFF) > 110) imagesetpixel($canvas, $x, $y, $lightGray);
+                elseif (($color&0xFF) > 100) imagesetpixel($canvas, $x, $y, $darkGray);
+                else imagesetpixel($canvas, $x, $y, $black);
+
+            }
+        }
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function thickPencilEffect(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        imagefilter($canvas, IMG_FILTER_EDGEDETECT);
+
+        $white = imagecolorallocate($canvas, 255, 255, 255);
+        $black = imagecolorallocate($canvas, 0, 0, 0);
+        for ($x=0; $x < $image->getWidth(); $x++) {
+            for ($y=0; $y < $image->getHeight(); $y++) {
+                $color = ImageColorAt($canvas, $x, $y);
+
+                if (($color&0xFF) > 120) imagesetpixel($canvas, $x, $y, $white);
+                else imagesetpixel($canvas, $x, $y, $black);
+
+            }
+        }
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
     protected function throwErrorUnlessInteger($value, $min, $max, $valueName)
     {
         $valueName = ucfirst($valueName);

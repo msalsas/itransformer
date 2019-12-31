@@ -206,18 +206,18 @@ Contact: manolez@gmail.com - http://msalsas.com
                     </div>
                 </form>
 
-                {#<form action="{{ path('msd_home_lapizsuperfino') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz super fino{% endtrans %}</span><input class="directo" name="convertir_lapiz_super_fino" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_lapizfino') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz fino{% endtrans %}</span><input class="directo" name="convertir_lapiz_fino" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_lapiznormal') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz normal{% endtrans %}</span><input class="directo" name="convertir_lapiz_normal" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_lapizgrueso') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz grueso{% endtrans %}</span><input class="directo" name="convertir_lapiz_grueso" type="checkbox" value="check"></div>#}
-                {#</form>#}
+                <form action="{{ path('superThinPencilEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz super fino{% endtrans %}</span><input class="directo" name="convertir_lapiz_super_fino" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('thinPencilEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz fino{% endtrans %}</span><input class="directo" name="convertir_lapiz_fino" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('regularPencilEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz normal{% endtrans %}</span><input class="directo" name="convertir_lapiz_normal" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('thickPencilEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz grueso{% endtrans %}</span><input class="directo" name="convertir_lapiz_grueso" type="checkbox" value="check"></div>
+                </form>
                 {#<form action="{{ path('msd_home_efectopintura') }}" method="post">#}
                     {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto pintura{% endtrans %}</span><input class="directo" name="convertir_pintura" type="checkbox" value="check"></div>#}
                 {#</form>#}

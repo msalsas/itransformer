@@ -501,6 +501,42 @@ class ImageTransformerTest extends WebTestCase
         $this->imageTransformer->attenuateColors($image, "foo", true, false);
     }
 
+    public function testSuperThinPencilEffect()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->superThinPencilEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::SUPER_THIN_PENCIL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testThinPencilEffect()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->thinPencilEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::THIN_PENCIL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testRegularPencilEffect()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->regularPencilEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::REGULAR_PENCIL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testThickPencilEffect()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->thickPencilEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::THICK_PENCIL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
     protected function createImage()
     {
         $image = new Image();
