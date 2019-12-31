@@ -218,39 +218,39 @@ Contact: manolez@gmail.com - http://msalsas.com
                 <form action="{{ path('thickPencilEffect') }}" method="post">
                     <div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz grueso{% endtrans %}</span><input class="directo" name="convertir_lapiz_grueso" type="checkbox" value="check"></div>
                 </form>
-                {#<form action="{{ path('msd_home_efectopintura') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto pintura{% endtrans %}</span><input class="directo" name="convertir_pintura" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_efectoChe') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto Che Guevara{% endtrans %}</span><input class="directo" name="convertir_che" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_papelarrugado') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto papel arrugado{% endtrans %}</span><input class="directo" name="convertir_papel_arr" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_antiguo') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto antiguo{% endtrans %}</span><input class="directo" name="convertir_antiguo" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_fuego') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto fuego{% endtrans %}</span><input class="directo" name="convertir_fuego" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_gotas') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto gotas{% endtrans %}</span><input class="directo" name="convertir_gotas" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_luces') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto luces{% endtrans %}</span><input class="directo" name="convertir_luces" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_colores') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto colores{% endtrans %}</span><input class="directo" name="convertir_colores" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_molon') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto molón{% endtrans %}</span><input class="directo" name="convertir_molon" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_marcohorizontal') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Enmarcar (imagen horizontal){% endtrans %}</span><input class="directo" name="convertir_marco_horizontal" type="checkbox" value="check"></div>#}
-                {#</form>#}
-                {#<form action="{{ path('msd_home_marcovertical') }}" method="post">#}
-                    {#<div class="accion"><span class="titulo_accion">{% trans %}Enmarcar (imagen vertical){% endtrans %}</span><input class="directo" name="convertir_marco_vertical" type="checkbox" value="check"></div>#}
-                {#</form>#}
+                <form action="{{ path('paintEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto pintura{% endtrans %}</span><input class="directo" name="convertir_pintura" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('cheGuevaraEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto Che Guevara{% endtrans %}</span><input class="directo" name="convertir_che" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('wrinkledPaperEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto papel arrugado{% endtrans %}</span><input class="directo" name="convertir_papel_arr" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('oldEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto antiguo{% endtrans %}</span><input class="directo" name="convertir_antiguo" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('fireEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto fuego{% endtrans %}</span><input class="directo" name="convertir_fuego" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('dropsEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto gotas{% endtrans %}</span><input class="directo" name="convertir_gotas" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('lightsEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto luces{% endtrans %}</span><input class="directo" name="convertir_luces" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('colorsEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto colores{% endtrans %}</span><input class="directo" name="convertir_colores" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('coolEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Efecto molón{% endtrans %}</span><input class="directo" name="convertir_molon" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('horizontalFrameEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Enmarcar (imagen horizontal){% endtrans %}</span><input class="directo" name="convertir_marco_horizontal" type="checkbox" value="check"></div>
+                </form>
+                <form action="{{ path('verticalFrameEffect') }}" method="post">
+                    <div class="accion"><span class="titulo_accion">{% trans %}Enmarcar (imagen vertical){% endtrans %}</span><input class="directo" name="convertir_marco_vertical" type="checkbox" value="check"></div>
+                </form>
 
                 <form id="form_guardar" action="{{ path('save') }}" method="post">
                     <input class="guardar" type="submit" value="{% trans %}Guardar imagen{% endtrans %}">

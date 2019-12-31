@@ -96,4 +96,114 @@ class EffectsController extends BaseImageController
             return $this->imageTransformer->thickPencilEffect($image);
         });
     }
+
+    /**
+     * @Route("paint-effect", name="paintEffect", methods={"POST"})
+     */
+    public function paintEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->paintEffect($image);
+        });
+    }
+
+    /**
+     * @Route("che-guevara-effect", name="cheGuevaraEffect", methods={"POST"})
+     */
+    public function cheGuevaraEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->cheGuevaraEffect($image);
+        });
+    }
+
+    /**
+     * @Route("wrinkled-paper-effect", name="wrinkledPaperEffect", methods={"POST"})
+     */
+    public function wrinkledPaperEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->wrinkledPaperEffect($image);
+        });
+    }
+
+    /**
+     * @Route("old-effect", name="oldEffect", methods={"POST"})
+     */
+    public function oldEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->oldEffect($image);
+        });
+    }
+
+    /**
+     * @Route("fire-effect", name="fireEffect", methods={"POST"})
+     */
+    public function fireEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->fireEffect($image);
+        });
+    }
+
+    /**
+     * @Route("drops-effect", name="dropsEffect", methods={"POST"})
+     */
+    public function dropsEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->dropsEffect($image);
+        });
+    }
+
+    /**
+     * @Route("lights-effect", name="lightsEffect", methods={"POST"})
+     */
+    public function lightsEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->lightsEffect($image);
+        });
+    }
+
+    /**
+     * @Route("colors-effect", name="colorsEffect", methods={"POST"})
+     */
+    public function colorsEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->colorsEffect($image);
+        });
+    }
+
+    /**
+     * @Route("cool-effect", name="coolEffect", methods={"POST"})
+     */
+    public function coolEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->coolEffect($image);
+        });
+    }
+
+    /**
+     * @Route("horizontal-frame-effect", name="horizontalFrameEffect", methods={"POST"})
+     */
+    public function horizontalFrameEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->horizontalFrameEffect($image);
+        });
+    }
+
+    /**
+     * @Route("vertical-frame-effect", name="verticalFrameEffect", methods={"POST"})
+     */
+    public function verticalFrameEffect()
+    {
+        return $this->findAndRenderImage(function($image) {
+            return $this->imageTransformer->verticalFrameEffect($image);
+        });
+    }
 }
