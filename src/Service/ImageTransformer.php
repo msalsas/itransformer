@@ -13,6 +13,16 @@ class ImageTransformer
     const WBMP = "WBMP";
     const GIF = "GIF";
 
+    const WRINKLED_PAPER = __DIR__ . '/../../public/img/wrinkledPaper.png';
+    const OLD = __DIR__ . '/../../public/img/old.png';
+    const FIRE = __DIR__ . '/../../public/img/fire.png';
+    const DROPS = __DIR__ . '/../../public/img/drops.png';
+    const LIGHTS = __DIR__ . '/../../public/img/lights.png';
+    const COLORS = __DIR__ . '/../../public/img/colors.png';
+    const COOL = __DIR__ . '/../../public/img/cool.png';
+    const HORIZONTAL_FRAME = __DIR__ . '/../../public/img/horizontalFrame.png';
+    const VERTICAL_FRAME = __DIR__ . '/../../public/img/verticalFrame.png';
+
     private $imageUploader;
     private $nameGenerator;
 
@@ -607,6 +617,215 @@ class ImageTransformer
         return $this->createAndSaveNewImage($image, $canvas);
     }
 
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function paintEffect(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        for ($x=0; $x < $image->getWidth(); $x++) {
+            for ($y=0; $y < $image->getHeight(); $y++) {
+
+                $red = (ImageColorAt($canvas, $x, $y) >> 16) & 0xFF;
+                $green = (ImageColorAt($canvas, $x, $y) >> 8) & 0xFF;
+                $blue = ImageColorAt($canvas, $x, $y) & 0xFF;
+
+                if ($red > 200) $newRed = 230;
+                elseif ($red > 150) $newRed = 180;
+                elseif ($red > 100) $newRed = 130;
+                elseif ($red > 50) $newRed = 80;
+                else $newRed = 30;
+
+                if ($green > 200) $newGreen = 230;
+                elseif ($green > 150) $newGreen = 180;
+                elseif ($green > 100) $newGreen = 130;
+                elseif ($green > 50) $newGreen = 80;
+                else $newGreen = 30;
+
+                if ($blue > 200) $newBlue = 230;
+                elseif ($blue > 150) $newBlue = 180;
+                elseif ($blue > 100) $newBlue = 130;
+                elseif ($blue > 50) $newBlue = 80;
+                else $newBlue = 30;
+
+                imagesetpixel($canvas, $x, $y, imagecolorallocate($canvas, $newRed, $newGreen, $newBlue));
+            }
+        }
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function cheGuevaraEffect(ImageInterface $image)
+    {
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        imagefilter($canvas, IMG_FILTER_EDGEDETECT);
+        $red = imagecolorallocate($canvas, 255, 0, 0);
+        $black = imagecolorallocate($canvas, 0, 0, 0);
+        for ($x=0; $x < $image->getWidth(); $x++) {
+            for ($y=0; $y < $image->getHeight(); $y++) {
+                $color = ImageColorAt($canvas, $x, $y);
+
+                if ($color > 7900000) imagesetpixel($canvas, $x, $y,$red);
+                else imagesetpixel($canvas, $x, $y,$black);
+            }
+        }
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function wrinkledPaperEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'wrinkledPaper');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function oldEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'old');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function fireEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'fire');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function dropsEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'drops');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function lightsEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'lights');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function colorsEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'colors');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function coolEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'cool');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function horizontalFrameEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'horizontal_frame');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    public function verticalFrameEffect(ImageInterface $image)
+    {
+        return $this->overlapEffect($image, 'vertical_frame');
+    }
+
+    /**
+     * @param $image ImageInterface
+     * @param $overlapImageName string
+     * @return ImageInterface
+     * @throws ImageTransformerException
+     */
+    protected function overlapEffect(ImageInterface $image, $overlapImageName)
+    {
+        switch($overlapImageName)
+        {
+            case( 'wrinkledPaper' ):
+                $overlapImage = self::WRINKLED_PAPER;
+                break;
+            case( 'old' ):
+                $overlapImage = self::OLD;
+                break;
+            case( 'fire' ):
+                $overlapImage = self::FIRE;
+                break;
+            case( 'drops' ):
+                $overlapImage = self::DROPS;
+                break;
+            case( 'lights' ):
+                $overlapImage = self::LIGHTS;
+                break;
+            case( 'colors' ):
+                $overlapImage = self::COLORS;
+                break;
+            case( 'cool' ):
+                $overlapImage = self::COOL;
+                break;
+            case( 'horizontal_frame' ):
+                $overlapImage = self::HORIZONTAL_FRAME;
+                break;
+            case( 'vertical_frame' ):
+                $overlapImage = self::VERTICAL_FRAME;
+                break;
+            default:
+                throw new ImageTransformerException("Wrong overlap image name");
+        }
+
+        $canvas = $this->createCanvas($image);
+
+        $canvas = $this->preserveTransparencyIfPng($image, $canvas);
+
+        $canvas = $this->mergeImage($canvas, $image->getWidth(), $image->getHeight(), $overlapImage);
+
+        return $this->createAndSaveNewImage($image, $canvas);
+    }
+
     protected function throwErrorUnlessInteger($value, $min, $max, $valueName)
     {
         $valueName = ucfirst($valueName);
@@ -743,5 +962,22 @@ class ImageTransformer
     protected static function isPng(ImageInterface $image)
     {
         return strtoupper($image->getExtension()) === self::PNG;
+    }
+
+    protected function mergeImage($canvas, $width, $height, $path)
+    {
+        $newCanvas = imagecreatefrompng($path);
+
+        // Create blank canvas rescaled
+        $newCanvasRescaled = imagecreatetruecolor($width, $height);
+
+        $newCanvasRescaled = $this->preserveTransparency($newCanvasRescaled);
+
+        // Copy original over the new blank canvas ($tmp)
+        imagecopyresampled($newCanvasRescaled, $newCanvas, 0, 0, 0, 0, $width, $height, imagesx($newCanvas), imagesy($newCanvas));
+
+        imagecopy($canvas, $newCanvasRescaled, 0, 0, 0, 0, $width, $height);
+
+        return $canvas;
     }
 }

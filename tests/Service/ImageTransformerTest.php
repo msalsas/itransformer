@@ -537,6 +537,105 @@ class ImageTransformerTest extends WebTestCase
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::THICK_PENCIL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
+    public function testPaintEffect()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->paintEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::PAINT_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testCheGuevaraEffect()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->cheGuevaraEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::CHE_GUEVARA_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectWrinkledPaper()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->wrinkledPaperEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::WRINKLED_PAPER_COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectOld()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->oldEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::OLD_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectFire()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->fireEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::FIRE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectDrops()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->dropsEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::DROPS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectLights()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->lightsEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::LIGHTS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectColors()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->colorsEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectCool()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->coolEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::COOL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectHorizontalFrame()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->horizontalFrameEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::HORIZONTAL_FRAME_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testOverlapEffectVerticalFrame()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->verticalFrameEffect($image);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::VERTICAL_FRAME_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
     protected function createImage()
     {
         $image = new Image();
