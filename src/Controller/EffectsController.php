@@ -31,11 +31,29 @@ class EffectsController extends BaseImageController
             $greenInput = $this->request->request->get('resaltar_colores_g');
             $blueInput = $this->request->request->get('resaltar_colores_b');
 
-            $redChecked = $redInput === "checked";
-            $greenChecked = $greenInput === "checked";
-            $blueChecked = $blueInput === "checked";
+            $redChecked = $redInput === "check";
+            $greenChecked = $greenInput === "check";
+            $blueChecked = $blueInput === "check";
 
             return $this->imageTransformer->highlightColors($image, $redChecked, $greenChecked, $blueChecked);
+        });
+    }
+
+    /**
+     * @Route("attenuate-colors", name="attenuateColors", methods={"POST"})
+     */
+    public function attenuateColors()
+    {
+        return $this->findAndRenderImage(function($image) {
+            $redInput = $this->request->request->get('atenuar_colores_r');
+            $greenInput = $this->request->request->get('atenuar_colores_g');
+            $blueInput = $this->request->request->get('atenuar_colores_b');
+
+            $redChecked = $redInput === "check";
+            $greenChecked = $greenInput === "check";
+            $blueChecked = $blueInput === "check";
+
+            return $this->imageTransformer->attenuateColors($image, $redChecked, $greenChecked, $blueChecked);
         });
     }
 }

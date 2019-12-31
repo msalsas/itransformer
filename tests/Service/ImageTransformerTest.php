@@ -39,6 +39,7 @@ class ImageTransformerTest extends WebTestCase
     const GAMMA_CORRECTION_NAME_WITH_EXTENSION = "gammaCorrection1.png";
     const COLORIZE_NAME_WITH_EXTENSION = "colorize1.png";
     const HIGHLIGHT_COLORS_NAME_WITH_EXTENSION = "highlightColors1.png";
+    const ATTENUATE_COLORS_NAME_WITH_EXTENSION = "attenuateColors1.png";
 
     const ORIGINAL_NAME = "image0";
     const ORIGINAL_EXTENSION = "png";
@@ -465,6 +466,24 @@ class ImageTransformerTest extends WebTestCase
         $this->expectException(ImageTransformerException::class);
 
         $this->imageTransformer->highlightColors($image, "foo", true, false);
+    }
+
+    public function testAttenuateColors()
+    {
+        $image = $this->createImage();
+
+        $imageTransformed = $this->imageTransformer->attenuateColors($image, true, true, true);
+
+        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::ATTENUATE_COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public function testAttenuateColorsWithNonBooleanValueShouldThrowError()
+    {
+        $image = $this->createImage();
+
+        $this->expectException(ImageTransformerException::class);
+
+        $this->imageTransformer->attenuateColors($image, "foo", true, false);
     }
 
     protected function createImage()

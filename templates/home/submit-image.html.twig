@@ -195,15 +195,16 @@ Contact: manolez@gmail.com - http://msalsas.com
                         </div></div>
                 </form>
 
-                {#<form action="{{ path('msd_home_atenuarcolores') }}" method="post">#}
-                    {#<div id="cambiar_atenuar_colores" class="accion"><span class="titulo_accion">{% trans %}Atenuar colores{% endtrans %}</span><input id="atenuar_colores" class="mostrar-ocultar" name="convertir_atenuar_colores" type="checkbox" value="check">#}
-                        {#<hr><span class="titulo_accion"> {% trans %}Atenuar rojo{% endtrans %} </span><input id="atenuar_r" name="atenuar_colores_r" type="checkbox" value="check"><br>#}
-                        {#<span class="titulo_accion"> {% trans %}Atenuar verde{% endtrans %} </span><input id="atenuar_g" name="atenuar_colores_g" type="checkbox" value="check"><br>#}
-                        {#<span class="titulo_accion"> {% trans %}Atenuar azul{% endtrans %} </span><input id="atenuar_b" name="atenuar_colores_b" type="checkbox" value="check">#}
-                        {#<div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">#}
-                            {#<button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>#}
-                        {#</div></div>#}
-                {#</form>#}
+                <form action="{{ path('attenuateColors') }}" method="post">
+                    <div id="cambiar_atenuar_colores" class="accion"><span class="titulo_accion">{% trans %}Atenuar colores{% endtrans %}</span><input id="atenuar_colores" class="mostrar-ocultar" name="convertir_atenuar_colores" type="checkbox" value="check">
+                        <hr><span class="titulo_accion"> {% trans %}Atenuar rojo{% endtrans %} </span><input id="atenuar_r" name="atenuar_colores_r" type="checkbox" value="check"><br>
+                        <span class="titulo_accion"> {% trans %}Atenuar verde{% endtrans %} </span><input id="atenuar_g" name="atenuar_colores_g" type="checkbox" value="check"><br>
+                        <span class="titulo_accion"> {% trans %}Atenuar azul{% endtrans %} </span><input id="atenuar_b" name="atenuar_colores_b" type="checkbox" value="check">
+                        <div class="apl_cambios"><input class="aplicar" type="submit" value="{% trans %}Aplicar{% endtrans %}">
+                            <button class="atras" formaction="{{ path('back') }}">{% trans %}Atras{% endtrans %}</button>
+                        </div>
+                    </div>
+                </form>
 
                 {#<form action="{{ path('msd_home_lapizsuperfino') }}" method="post">#}
                     {#<div class="accion"><span class="titulo_accion">{% trans %}Efecto dibujo a lápiz super fino{% endtrans %}</span><input class="directo" name="convertir_lapiz_super_fino" type="checkbox" value="check"></div>#}
