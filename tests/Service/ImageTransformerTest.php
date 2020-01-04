@@ -561,7 +561,6 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->wrinkledPaperEffect($image);
 
-        $this->markTestSkipped('This test has not been completed yet.');
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::WRINKLED_PAPER_COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
@@ -571,7 +570,6 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->oldEffect($image);
 
-        $this->markTestSkipped('This test has not been completed yet.');
         $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::OLD_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
