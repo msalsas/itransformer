@@ -561,7 +561,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->wrinkledPaperEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::WRINKLED_PAPER_COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::WRINKLED_PAPER_COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectOld()
@@ -570,7 +570,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->oldEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::OLD_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::OLD_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectFire()
@@ -579,7 +579,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->fireEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::FIRE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::FIRE_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectDrops()
@@ -588,7 +588,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->dropsEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::DROPS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::DROPS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectLights()
@@ -597,7 +597,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->lightsEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::LIGHTS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::LIGHTS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectColors()
@@ -606,7 +606,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->colorsEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::COLORS_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectCool()
@@ -615,7 +615,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->coolEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::COOL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::COOL_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectHorizontalFrame()
@@ -624,7 +624,7 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->horizontalFrameEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::HORIZONTAL_FRAME_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::HORIZONTAL_FRAME_NAME_WITH_EXTENSION, $imageTransformed->getPath());
     }
 
     public function testOverlapEffectVerticalFrame()
@@ -633,7 +633,21 @@ class ImageTransformerTest extends WebTestCase
 
         $imageTransformed = $this->imageTransformer->verticalFrameEffect($image);
 
-        $this->assertFileEquals(self::ORIGINAL_PATH . '/' . self::VERTICAL_FRAME_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+        $this->assertFileAlmostEquals(self::ORIGINAL_PATH . '/' . self::VERTICAL_FRAME_NAME_WITH_EXTENSION, $imageTransformed->getPath());
+    }
+
+    public static function assertFileAlmostEquals($expected, $actual, $message = '')
+    {
+        static::assertFileExists($expected, $message);
+        static::assertFileExists($actual, $message);
+
+        static::assertEquals(
+            substr(current(unpack("h*", \file_get_contents($expected))), 0, 100),
+            substr(current(unpack("h*", \file_get_contents($actual))), 0, 100),
+            $message,
+            0,
+            10
+        );
     }
 
     protected function createImage()
