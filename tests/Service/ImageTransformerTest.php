@@ -642,8 +642,8 @@ class ImageTransformerTest extends WebTestCase
         static::assertFileExists($actual, $message);
 
         static::assertEquals(
-            substr(current(unpack("h*", \file_get_contents($expected))), 0, 100),
-            substr(current(unpack("h*", \file_get_contents($actual))), 0, 100),
+            substr(current(unpack("h*", \file_get_contents($expected))), 0, 115),
+            substr(current(unpack("h*", \file_get_contents($actual))), 0, 115),
             $message,
             0,
             10
