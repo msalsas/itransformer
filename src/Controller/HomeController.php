@@ -92,18 +92,19 @@ class HomeController extends BaseImageController
     {
         if($id = $this->session->getId()) {
             /** @var Image $image */
-            $image = $this->entityManager->getRepository(Image::class)->find($id);
+            if ($image = $this->entityManager->getRepository(Image::class)->find($id)) {
 
-            return $this->render('home/submit-image.html.twig', array(
-                'image' => $image,
-                'ruta_imagen' => $image->getPath(),
-                'ancho' => $image->getHeight(),
-                'alto' => $image->getWidth(),
-                'error' => $image->getError(),
-            ));
-        } else {
-            return $this->render('home/index.html.twig');
+                return $this->render('home/submit-image.html.twig', array(
+                    'image' => $image,
+                    'ruta_imagen' => $image->getPath(),
+                    'ancho' => $image->getHeight(),
+                    'alto' => $image->getWidth(),
+                    'error' => $image->getError(),
+                ));
+            }
         }
+
+        return $this->redirect('/');
     }
 
     /**
@@ -152,5 +153,30 @@ class HomeController extends BaseImageController
         }
 
         return $this->renderTemplateViewChanges(0, 0, 'tu sesión ha caducado. Vuelve a probar');
+    }
+
+    /**
+     * @Route("delete", name="delete", methods={"POST"})
+     * @param $imageUploader ImageUploader
+     */
+    public function delete(ImageUploader $imageUploader)
+    {
+        if($sessionId = $this->session->getId()) {
+            try {
+                /** @var ImageRepositoryInterface $repository */
+                $repository = $this->entityManager->getRepository(Image::class);
+
+                if ($this->request->getMethod() == 'POST') {
+                    /** @var Image $image */
+                    while ($image = $repository->find($sessionId)) {
+                        $imageUploader->delete($image);
+                    }
+                }
+            } catch(\Exception $e) {
+                return $this->renderTemplateViewChanges(0, 0, 'Unexpected error');
+            }
+        }
+
+        return $this->redirect('/');
     }
 }
