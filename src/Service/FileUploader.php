@@ -45,6 +45,11 @@ class FileUploader
         return $this->getTargetDirectory() . '/' . $fileNameWithExtension;
     }
 
+    public function delete($path)
+    {
+        unlink($path);
+    }
+
     public function getTargetDirectory()
     {
         return $this->targetDirectory;

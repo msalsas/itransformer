@@ -56,6 +56,13 @@ class ImageUploader
         return $image;
     }
 
+    public function delete(ImageInterface $image)
+    {
+        $this->fileUploader->delete($image->getPath());
+        $this->entityManager->remove($image);
+        $this->entityManager->flush();
+    }
+
     public function save(ImageInterface $image)
     {
         $this->entityManager->persist($image);

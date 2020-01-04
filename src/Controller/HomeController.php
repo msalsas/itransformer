@@ -4,27 +4,23 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Form\ImageType;
+use App\Repository\ImageRepositoryInterface;
 use App\Service\ImageReader;
 use App\Service\ImageUploader;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomeController extends AbstractController
+class HomeController extends BaseImageController
 {
     /**
      * @Route("/", name="index", methods={"GET"})
      */
-	public function indexAction(Session $session)
+	public function indexAction()
 	{
-        $session->start();
+        $this->session->start();
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
 
@@ -33,12 +29,13 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/upload", name="upload", methods={"POST"})
+     * @param $imageUploader ImageUploader
      */
-    public function upload(Request $request, ImageUploader $imageUploader)
+    public function upload(ImageUploader $imageUploader)
     {
         $image = new Image();
         $form = $this->createForm(ImageType::class, $image);
-        $form->handleRequest($request);
+        $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
@@ -73,16 +70,14 @@ class HomeController extends AbstractController
 
     /**
      * @Route("view-image-sample", name="viewImageSample", methods={"GET"})
-     * @param $session Session
-     * @param $entityManager EntityManagerInterface
      * @param $imageReader ImageReader
      * @return Response
      */
-    public function viewImageSample(Session $session, EntityManagerInterface $entityManager, ImageReader $imageReader)
+    public function viewImageSample(ImageReader $imageReader)
     {
-		if($id = $session->getId()) {
+		if($id = $this->session->getId()) {
             /** @var Image $image */
-			if ($image = $entityManager->getRepository(Image::class)->find($id)) {
+			if ($image = $this->entityManager->getRepository(Image::class)->find($id)) {
                 return $imageReader->read($image->getPath());
             }
 		}
@@ -92,14 +87,12 @@ class HomeController extends AbstractController
 
     /**
      * @Route("submit-image", name="submitImage", methods={"POST"})
-     * @param $session Session
-     * @param $entityManager EntityManagerInterface
      */
-    public function submitImage(Session $session, EntityManagerInterface $entityManager)
+    public function submitImage()
     {
-        if($id = $session->getId()) {
+        if($id = $this->session->getId()) {
             /** @var Image $image */
-            $image = $entityManager->getRepository(Image::class)->find($id);
+            $image = $this->entityManager->getRepository(Image::class)->find($id);
 
             return $this->render('home/submit-image.html.twig', array(
                 'image' => $image,
@@ -115,14 +108,12 @@ class HomeController extends AbstractController
 
     /**
      * @Route("save", name="save", methods={"POST"})
-     * @param $session SessionInterface
-     * @param $entityManager EntityManagerInterface
      */
-    public function save(SessionInterface $session, EntityManagerInterface $entityManager)
+    public function save()
     {
-        if($session->getId()) {
+        if($this->session->getId()) {
             /** @var Image $image */
-            $image = $entityManager->getRepository(Image::class)->find($session->getId());
+            $image = $this->entityManager->getRepository(Image::class)->find($this->session->getId());
             // open the file in a binary mode
             $fp = fopen($image->getPath(), 'rb');
             header("Content-Type: image/".$image->getExtension());
@@ -135,10 +126,31 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("back", name="back", methods={"GET"})
+     * @Route("back", name="back", methods={"POST"})
+     * @param $imageUploader ImageUploader
      */
-    public function back()
+    public function back(ImageUploader $imageUploader)
     {
-        //TODO
+        if($sessionId = $this->session->getId()) {
+            try {
+                /** @var ImageRepositoryInterface $repository */
+                $repository = $this->entityManager->getRepository(Image::class);
+                /** @var Image $image */
+                $image = $repository->find($sessionId);
+                if ($this->request->getMethod() == 'POST') {
+
+                    if ($image->getNumber() > 0) {
+                        $imageUploader->delete($image);
+                        $image = $repository->find($sessionId);
+                    }
+                    return $this->renderTemplateViewChanges($image->getWidth(), $image->getHeight(), $image->getError());
+
+                }
+            } catch(\Exception $e) {
+                return $this->renderTemplateViewChanges(0, 0, 'Unexpected error');
+            }
+        }
+
+        return $this->renderTemplateViewChanges(0, 0, 'tu sesión ha caducado. Vuelve a probar');
     }
 }
