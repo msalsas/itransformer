@@ -17,33 +17,27 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
     <title>{% block title %}{% trans %}Aplicación de filtros para procesamiento y transformación de imágenes{% endtrans %}{% endblock %}</title>
-    <meta name="description" content="{% trans %}Itransformer.es es una aplicación on-line gratuita de procesamiento y transformación de imagenes. Aplica filtros y transforma imágenes subidas por el usuario.{% endtrans %}
-">
+    <meta name="description" content="{% trans %}Itransformer.es es una aplicación on-line gratuita de procesamiento y transformación de imagenes. Aplica filtros y transforma imágenes subidas por el usuario.{% endtrans %}">
     <meta name="keywords" content="{% trans %}procesamiento de imágenes, procesar imagen, filtros, transformar imágenes, transformar imagen, transformer, convolución, software, itransformer, ES{% endtrans %}">
     <meta name="viewport" content="width=device-width">
     <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 
-{% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
-{% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    {#<script type="text/javascript">#}
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-42495006-1']);
+        _gaq.push(['_trackPageview']);
 
-        {#var _gaq = _gaq || [];#}
-        {#_gaq.push(['_setAccount', 'UA-42495006-1']);#}
-        {#_gaq.push(['_trackPageview']);#}
-
-        {#(function() {#}
-            {#var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;#}
-            {#ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';#}
-            {#var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);#}
-        {#})();#}
-
-    {#</script>#}
-
-
-
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 {% endblock %}
 	</head>
     <body itemscope itemtype="http://schema.org/WebApplication">
@@ -61,27 +55,25 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        {#<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>#}
-		{#<!-- blooque header -->#}
-		{#<ins class="adsbygoogle"#}
-		     {#style="display:block"#}
-		     {#data-ad-client="ca-pub-8567439655295235"#}
-		     {#data-ad-slot="4262717108"#}
-		     {#data-ad-format="auto"></ins>#}
-		{#<script>#}
-{#(adsbygoogle = window.adsbygoogle || []).push({});#}
-{#</script>#}
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- blooque header -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-8567439655295235"
+		     data-ad-slot="4262717108"
+		     data-ad-format="auto"></ins>
+		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 		{% block message %}{% endblock %}
         {% block body %}
 
-    {#<div id="fb-root"></div>#}
-    {#<script>(function(d, s, id) {#}
-            {#var js, fjs = d.getElementsByTagName(s)[0];#}
-            {#if (d.getElementById(id)) return;#}
-            {#js = d.createElement(s); js.id = id;#}
-            {#js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1&appId=507578676003931";#}
-            {#fjs.parentNode.insertBefore(js, fjs);#}
-        {#}(document, 'script', 'facebook-jssdk'));</script>#}
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_EN/all.js#xfbml=1&appId=507578676003931";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
 
     <div id="agrupar">
         <div id="cabecera" class="gradient">
@@ -94,17 +86,10 @@
                             {% if app.request.get('_route_params') %} <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale' : locale})) }}">{{ locale }}</a>{% endif %}
                         </li>
                     {% endfor %}</ul></div>
-            {#<div id="menu_auth"><nav>#}
-                    {#<ul>#}
-                        {#<li><a href="{{ path('fos_user_profile_show') }}">{% trans %}Mi cuenta{% endtrans %}</a></li>#}
-                        {#<li><a href="{{ path('fos_user_registration_register') }}">{% trans %}Regístrate{% endtrans %}</a></li>#}
-                    {#</ul>#}
-                {#</nav></div>#}
             <div id="menu"><nav>
                     <ul>
-                        {#<li><a href="{{ path('msd_home_homepage') }}">{% trans %}Inicio{% endtrans %}</a></li>#}
-                        {#<li><a href="{{ path('herzult_forum_index') }}">{% trans %}Foro{% endtrans %}</a></li>#}
-                        {#<li><a href="{{ path('msd_home_acercade') }}">{% trans %}Acerca de{% endtrans %}</a></li>#}
+                        <li><a href="{{ path('index') }}">{% trans %}Inicio{% endtrans %}</a></li>
+                        <li><a href="{{ path('index') }}">{% trans %}Acerca de{% endtrans %}</a></li>
                     </ul>
                 </nav></div>
         </div>
@@ -125,25 +110,9 @@
                 {% block aside %}
                 {% endblock %}
             </aside></div>
-        {#<div id="dibujo">#}
-            {#<img src="{{ asset('public/img/carrete2.png') }}" alt="logo">#}
-        {#</div>#}
-
-        {#<div id="iconos-social">#}
-            {#<div id="FLink"><a target="_blank" href="https://www.facebook.com/Itransformer.es"><img src="{{ asset('public/img/fb.png') }}" alt="facebook" width="35"></a></div>#}
-            {#<div id="TLink"><a target="_blank" href="https://twitter.com/itransformer_es"><img src="{{ asset('public/img/tw.png') }}" alt="twitter" width="35"></a></div>#}
-            {#<div id="GLink"><a target="_blank" href="https://plus.google.com/105898534671325004845?rel=author"><img src="{{ asset('public/img/gplus.png') }}" alt="google" width="35"></a></div>#}
-        {#</div>#}
-
-
-        <!-- Place this tag after the last +1 button tag. -->
-        {#<script type="text/javascript">#}
-            {#(function() {#}
-                {#var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;#}
-                {#po.src = 'https://apis.google.com/js/platform.js';#}
-                {#var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);#}
-            {#})();#}
-        {#</script>#}
+        <div id="dibujo">
+            <img src="{{ asset('img/carrete2.png') }}" alt="logo">
+        </div>
 
         <div id="pie"><footer>
                 {% block footer %}
@@ -156,13 +125,7 @@
 {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-    {#<script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js') }}"></script>#}
 
-    {#<script>#}
-        {#if (typeof jQuery == 'undefined') {#}
-            {#document.write('{% javascripts "../app/Resources/public/js/vendor/jquery-1.9.1.min.js" %} <script src="{{ asset_url }}"><\/script> {% endjavascripts %}');#}
-        {#}#}
-    {#</script>#}
     {#{% javascripts '@MSDHomeBundle/Resources/public/js/jquery-ui-1.10.3.custom.js' filter='yui_js'#}
     {#'@MSDHomeBundle/Resources/public/js/jquery.easing.min.js'#}
     {#'../app/Resources/public/js/vendor/prefixfree.min.js'#}
