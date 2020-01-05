@@ -6,12 +6,6 @@
         //window.scrollTo(0,document.getElementsByClassName("seccion")[0].offset().top);
     </script>
 {% endblock %}
-{#{% block stylesheets %}#}
-    {#{{ parent() }}#}
-    {#{% stylesheets '@MSDHomeBundle/Resources/public/css/options.css' filter='yui_css'%}#}
-    {#<link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>#}
-    {#{% endstylesheets %}#}
-{#{% endblock %}#}
 {% block sections %}
     <div class="articulo"><article>
 
@@ -247,7 +241,7 @@
     <div id="imagen">
         <div id="img"><img id="img_cargada" src="{{ path('viewImageSample') }}" width="{{ image.width }}" height="{{ image.height }}" data-alto_orig="{{ image.height }}" data-ancho_orig="{{ image.width }}" ></div>
         <canvas id="lienzo"></canvas>
-        <img id="img_cargando" src="{{ asset('public/img/ajax-loader.gif') }}">
+        <img id="img_cargando" src="{{ asset('img/ajax-loader.gif') }}">
         <figcaption>
             {% trans %}ancho{% endtrans %}: {{ image.width }} {% trans %}alto{% endtrans %}: {{ image.height }}
         </figcaption>

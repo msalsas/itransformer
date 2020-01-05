@@ -221,7 +221,7 @@ figcaption {
     font-size: 1.3em;
 }
 .cargando {
-    background:url(/public/img/ajax-loader.gif);
+    background:url(/img/ajax-loader.gif);
 }
 .form {
     border: 1px solid #999999;
@@ -469,7 +469,7 @@ input[type=number] {
 /************** Addsense background **************/
 
 .adsbygoogle {
-    background: url(/public/img/raya.png);
+    background: url(/img/raya.png);
 }
 
 
