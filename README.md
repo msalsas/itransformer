@@ -56,6 +56,10 @@ The following are instructions working on Apache2 systems.
 
     DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 
+### 7. Install yarn dependencies.
+
+    yarn install
+
 ### 7. Run Symfony server.
 
     php bin/console server:run
