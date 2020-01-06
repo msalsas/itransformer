@@ -19,7 +19,6 @@ console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 require('./jquery-ui-1.10.3.custom.min.js');
 require('./jquery.easing.min.js');
 require('./plugins.js');
-require('./imageUpload.js');
 require('./efectos_inicio.js');
 require('./adj_img.js');
 require('./procesar_img.js');

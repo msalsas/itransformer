@@ -1,23 +1,3 @@
-/*
- * Itransformer.es is an online application to transform images
-Copyright (C) 2013  Manolo Salsas
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Affero General Public License as
-published by the Free Software Foundation, either version 3 of the
-License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Affero General Public License for more details.
-
-You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Contact: manolez@gmail.com - http://msalsas.com
-* */
-
 const $ = require('jquery');
 
 $(function() {
@@ -42,13 +22,15 @@ $(function() {
 
         });
 
-
         file.bind('change', function (e) {
             e.preventDefault();
+            var fileOk;
             if (typeof this.files === "undefined") fileOk = file;
             else fileOk = this.files[0];
-
-            if (fileOk.size > tam_max | file.val().match('.+\.(jpe?g|png|wbmp|gif|JPE?G|PNG|WBMP|GIF)$') == null) {
+            if (!fileOk) {
+                return;
+            }
+            if (fileOk.size > tam_max || file.val().match('.+\.(jpe?g|png|wbmp|gif|JPE?G|PNG|WBMP|GIF)$') == null) {
                 var alerta = '';
 
 
@@ -62,7 +44,7 @@ $(function() {
 
 
                 window.scrollTo(0, 0);
-                var respuesta = '<div id="todo"></div><div id="botones"><div id="error">' + alerta + '</div><input value="OK" id="volver" style="width: 20%" onclick="$(\'#todo\').remove(); $(\'#botones\').remove();"></div>';
+                var respuesta = '<div id="todo"></div><div id="botones"><div id="error">' + alerta + '</div><input value="OK" id="volver" style="width: 20%" onclick="jQuery(\'#todo\').remove(); jQuery(\'#botones\').remove();"></div>';
 
                 $('#agrupar').after(respuesta);
                 $("input").button();

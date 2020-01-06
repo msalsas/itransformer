@@ -37,7 +37,7 @@ class ImageType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '3145728',
                         'mimeTypes' => [
                             'application/jpg',
                             'application/jpeg',

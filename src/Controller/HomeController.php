@@ -53,17 +53,21 @@ class HomeController extends BaseImageController
                     throw $e;
                 }
 
+                return $this->render('home/view-image.html.twig', [
+                    'form' => $form->createView(),
+                    'imagen'=> array(
+                        'nombre_imagen' => $image->getName(),
+                        'ancho'	        => $image->getWidth(),
+                        'alto'          => $image->getHeight(),
+                        'error'	        => $image->getError()
+                    ),
+                ]);
             }
-
-            // TODO: Handle error
         }
 
         return $this->render('home/view-image.html.twig', [
             'form' => $form->createView(),
-            'imagen'=> array('nombre_imagen'=>$image->getName(),
-                'ancho'	  =>$image->getWidth(),
-                'alto'       =>$image->getHeight(),
-                'error'	  =>$image->getError()
+            'imagen'=> array('error' => $image->getError()
             ),
         ]);
     }
@@ -86,7 +90,7 @@ class HomeController extends BaseImageController
 	}
 
     /**
-     * @Route("submit-image", name="submitImage", methods={"POST"})
+     * @Route("submit-image", name="submitImage", methods={"POST", "GET"})
      */
     public function submitImage()
     {

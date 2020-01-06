@@ -16,16 +16,11 @@
                 <h2>{% trans %}Adjunta una imagen para transformarla{% endtrans %}</h2>
             </header>
             <div id="form" class="gradient">
-                {#<form id="fileupload" class="form" action="{{ path('msd_home_verimagen') }}" method="post" enctype="multipart/form-data" >#}
-                    {#<input type="hidden" name="MAX_FILE_SIZE" value="3145728">#}
-                    {#<input class="in_file" type="file" name="userfile">#}
-                {#</form>#}
 
                 {{ form_start(form, { 'attr' : { 'id': 'fileupload' } }) }}
+                <input type="hidden" name="MAX_FILE_SIZE" value="3145728">
                 {{ form_widget(form.file) }}
                 {{ form_end(form) }}
-
-
 
                 <div class="progress">
                     <div class="bar"></div >
@@ -33,7 +28,6 @@
                 </div>
 
                 <div id="status"></div>
-
 
                 <br>
             </div>
