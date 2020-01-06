@@ -49,6 +49,10 @@ class ImageType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid Image',
                     ])
                 ],
+
+                'attr' => array(
+                    'class' => 'in_file'
+                )
             ])
             // ...
         ;

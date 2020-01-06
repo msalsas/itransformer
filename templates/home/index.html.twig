@@ -21,7 +21,7 @@
                     {#<input class="in_file" type="file" name="userfile">#}
                 {#</form>#}
 
-                {{ form_start(form) }}
+                {{ form_start(form, { 'attr' : { 'id': 'fileupload' } }) }}
                 {{ form_widget(form.file) }}
                 {{ form_end(form) }}
 
