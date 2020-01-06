@@ -3,7 +3,10 @@
     {{ parent() }}
 
     <script>
-        //window.scrollTo(0,document.getElementsByClassName("seccion")[0].offset().top);
+        setTimeout(function () {
+            var top = document.getElementsByClassName("seccion")[0].offsetTop;
+            window.scrollTo(0, top);
+        }, 100);
     </script>
 {% endblock %}
 {% block sections %}
