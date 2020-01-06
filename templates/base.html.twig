@@ -89,7 +89,7 @@
             <div id="menu"><nav>
                     <ul>
                         <li><a href="{{ path('index') }}">{% trans %}Inicio{% endtrans %}</a></li>
-                        <li><a href="{{ path('index') }}">{% trans %}Acerca de{% endtrans %}</a></li>
+                        <li><a href="{{ path('about') }}">{% trans %}Acerca de{% endtrans %}</a></li>
                     </ul>
                 </nav></div>
         </div>
@@ -123,8 +123,8 @@
 
     </div>
 {% endblock %}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
 
     {#{% javascripts '@MSDHomeBundle/Resources/public/js/jquery-ui-1.10.3.custom.js' filter='yui_js'#}
     {#'@MSDHomeBundle/Resources/public/js/jquery.easing.min.js'#}

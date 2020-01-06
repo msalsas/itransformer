@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Acerca de{% endtrans %} itransformer.es{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <link rel="microformats.org/profile/hcard" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>jQuery(function(){animar()});function animar(){var a=jQuery(".articulo").children().animate({"color":"black"},2500).animate({"color":"#1040F0"},2500).animate({"color":"#FF1000"},2500).queue(function(d){animar();d()})};</script>
+{% endblock %}
+
+{% block sections %}
+	<div class="articulo gradient"><article>
+		<header>
+			<h1>Manolo Salsas Durán</h1>
+		</header>
+
+		<div id="me" class="vcard">
+			<!--<img alt="" class="photo" src="../../web/public/img/manolo.jpg" />-->
+			<br><a class="url fn" href="http://msalsas.com" target="_blank"><span>Manolo Salsas</span></a><br><br>
+			<span class="title">{% trans %}Desarrollador web{% endtrans %}</span><br><br>
+			<span class="email">manolez@gmail.com</span><br><br>
+		</div>
+			<span class="source"><a class="url fn" href="https://github.com/msalsas/itransformer" target="_blank"><span>{% trans %}Código fuente{% endtrans %}</span></a></span>
+	</article></div>
+{% endblock %}
+
+{% block aside %}
+
+
+    <p class="tituloCond">{% trans %}INSTRUCCIONES DE USO{% endtrans %}</p><br>
+
+    <p>{% trans %}Mediante esta aplicación web serás capaz de realizar transformaciones sobre tus imágenes. Primero, ves a la página de inicio <a href="http://itransformer.es" target="_blank">Página de inicio</a> y adjunta una imagen. Después de que se halla cargado la imagen aparecerá un mensaje para que aceptes la imagen que acabas de adjuntar.{% endtrans %}</p>
+
+    <p>{% trans %}Después de adjuntar la imagen elige el tipo de transformación que quieres realizar (<i>básico, filtros o efectos</i>). Selecciona las transformaciones que quieras y haz clic en <i>Aplicar</i>.{% endtrans %}</p>
+
+    <p>{% trans %}Si quieres guardar la imagen modificada, simplemente haz clic en <i>Guardar</i>.{% endtrans %}</p>
+
+    <p>{% trans %}Para volver a la imagen anterior a la última transformación haz clic en <i>Atrás</i>. Podrás volver atrás hasta cuatro veces.{% endtrans %}</p>
+
+    <p>{% trans %}Para volver a adjuntar otra imagen, tienes que eliminar la imagen que estés utilizando haciendo clic en <i>Eliminar</i>. Volverás de nuevo a la página de inicio.{% endtrans %}</p>
+    <br>
+    <p class="tituloCond">{% trans %}PRIVACIDAD DE LAS IMÁGENES{% endtrans %}</p><br>
+
+    <p>{% trans %}Cuando adjuntas una imágen, ésta es guardada temporalmente en el servidor para su tratamiento. Cuando haces clic en <i>Eliminar</i>, la imagen es borrada del servidor.{% endtrans %}</p>
+
+    <p>{% trans %}Si cierras el navegador sin eliminar la imagen no te preocupes, la imagen se borrará automáticamente del servidor en media hora aproximadamente.{% endtrans %}</p>
+
+    <p>{% trans %}Aún así, no adjuntes imágenes con datos confidenciales, personales o que puedan dañar la integridad de cualquier persona.{% endtrans %}</p>
+
+    <p>{% trans %}Si quieres ponerte en contacto conmigo puedes hacerlo a través de las redes sociales, el formulario de <a href="http://msalsas.com">msalsas.com</a>, o a través de correo electrónico.{% endtrans %}</p>
+{% endblock %}
