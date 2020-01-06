@@ -52,22 +52,21 @@ The following are instructions working on Apache2 systems.
 
     DATABASE_URL=mysql://db_user:db_password@127.0.0.1:3306/db_name
 
-
 ### 6. Create the database with Doctrine.
 
     php bin/console doctrine:database:create
     php bin/console doctrine:migrations:migrate
 
-### 7. Install yarn dependencies.
+### 7. Install yarn dependencies and build assets.
 
     yarn install
     yarn encore prod
 
-### 7. Run Symfony server.
+### 8. Run Symfony server.
 
     php bin/console server:run
 
-### 8. And that's all. Go to `localhost:8000` to see the web application running.
+### 9. And that's all. Go to `localhost:8000` to see the web application running.
 
 Testing
 ----
